@@ -1,13 +1,61 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Brain Signal Quest</title><link rel="stylesheet" href="style.css"><script src="game.js" defer></script></head>
-<body><a class="skip" href="#main">Skip to activities</a><header><div class="wrap"><p class="brand">Brain Signal Quest</p><h1>Meet the brain behind you.</h1><p id="intro">Explore your brain, send a signal, and put your memory to work.</p><a class="start" href="#brain">Start exploring ↓</a></div></header>
-<nav aria-label="Activities"><div class="wrap"><a href="#brain">Brain map</a><a href="#neuron">Signal trail</a><a href="#reaction">Reaction game</a><a href="#memory">Memory match</a><a href="#quiz">Quiz</a></div></nav>
-<main id="main" class="wrap">
-<section id="brain"><div class="copy"><h2>Meet your brain</h2><p id="brain-intro"></p><div class="controls" id="regions"></div><p class="feedback" id="region-info" role="status"></p></div><div class="diagram" aria-hidden="true"><div class="cerebrum">Cerebrum</div><div class="cerebellum">Cerebellum</div><div class="brainstem">Brainstem</div></div></section>
-<section id="neuron"><h2>Follow a neuron’s signal</h2><p id="neuron-intro"></p><ol id="trail" aria-label="Signal stages"></ol><button id="signal">Start signal</button><p class="feedback" id="signal-feedback" role="status">Start a signal, then step through each part.</p><p class="note">This model slows down one common path. Real neurons can receive many messages at once, and some connections pass signals electrically.</p></section>
-<section id="reaction"><h2>Reaction time challenge</h2><p id="reaction-intro"></p><button id="react">Start round</button><p class="feedback" id="reaction-feedback" role="status">Press Start round, then wait for GO.</p><p class="note">Your eyes detect the cue, your brain processes it, and signals tell your muscles to move. Device delay, distractions, and practice can affect this score. It cannot measure intelligence or brain health.</p></section>
-<section id="memory"><h2>Memory match</h2><p id="memory-intro"></p><button id="shuffle">Shuffle cards</button><div id="cards" aria-label="Memory cards"></div><p class="feedback" id="memory-feedback" role="status"></p><p class="note">Attention helps you notice a card. Working memory helps you hold its location in mind for a short time. Forgetting is normal, and practice can help you remember.</p></section>
-<section id="quiz"><h2>Brain check</h2><p id="quiz-intro"></p><div id="question"></div><p class="feedback" id="quiz-feedback" role="status"></p><button id="next" hidden>Next question</button></section>
-<section id="references"><h2>Glossary and sources</h2><dl id="glossary"></dl><ul id="sources"></ul><p id="credits"></p></section>
-<p id="load-error" role="alert" hidden>The activities could not load. Refresh the page, or start a local web server if opening from a source download.</p><noscript>Turn on JavaScript to play the activities.</noscript>
-</main></body></html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#19264a">
+<title>Brain Signal Quest</title>
+<link rel="icon" href="art.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script src="game.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to game</a>
+<header class="masthead">
+  <div class="wrap mast">
+    <a class="brand" href="#map"><span aria-hidden="true">✦</span> Brain Signal Quest</a>
+    <div class="meter" aria-label="Quest progress"><span id="progress-label">0 / 5 discoveries</span><progress id="progress" value="0" max="5" aria-labelledby="progress-label"></progress></div>
+  </div>
+</header>
+<main id="main" class="wrap" tabindex="-1">
+  <section id="map" aria-labelledby="map-title">
+    <div class="hero">
+      <div class="hero-copy">
+        <h1 id="map-title" tabindex="-1">Small signals.<br><em>Big adventure.</em></h1>
+        <p id="intro">Follow a signal through the brain. Collect five discoveries to light up the station.</p>
+        <div class="actions">
+          <button id="start" class="primary" disabled>Launch mission <span aria-hidden="true">↗</span></button>
+          <a class="map-jump" href="#missions">See the map ↓</a>
+        </div>
+        <p id="load-error" role="alert" hidden>We couldn’t load the missions. <button id="retry">Try again</button></p>
+      </div>
+      <img class="hero-art" src="art.svg" width="640" height="480" alt="">
+    </div>
+    <section class="mission-map" aria-labelledby="missions">
+      <div class="map-heading"><h2 id="missions" tabindex="-1">Mission map</h2><p>Pick any stop. Follow the trail or explore in your own order.</p></div>
+      <nav id="map-stops" aria-label="Choose a mission"></nav>
+    </section>
+  </section>
+  <section id="mission" hidden aria-labelledby="mission-title">
+    <div class="mission-nav"><a href="#map">← Mission map</a><span id="mission-number"></span></div>
+    <header class="mission-head">
+      <div><h1 id="mission-title" tabindex="-1"></h1><p id="mission-intro"></p></div>
+      <span class="mission-stamp" id="mission-stamp" aria-hidden="true"></span>
+    </header>
+    <div id="play"></div>
+    <div id="reward" class="reward" hidden>
+      <div><strong id="reward-title"></strong><p id="reward-copy"></p></div>
+      <button id="continue" class="primary">Continue</button>
+    </div>
+  </section>
+  <section id="finish" class="finish" hidden aria-labelledby="finish-title">
+    <img src="art.svg" width="640" height="480" alt="">
+    <div><h1 id="finish-title" tabindex="-1">Station lit!</h1><p>You mapped the brain, sent a signal, answered a beacon, matched memories, and put what you learned to work.</p><button id="finish-map" class="primary">Explore the map again</button></div>
+  </section>
+  <noscript><p>Turn on JavaScript to play the missions.</p></noscript>
+</main>
+<footer class="wrap">
+  <details id="field-notes"><summary>Field notes, glossary &amp; sources</summary><dl id="glossary"></dl><ul id="sources"></ul><p id="credits"></p></details>
+</footer>
+</body>
+</html>

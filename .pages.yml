@@ -130,6 +130,11 @@
               "label": "Explanation",
               "type": "text",
               "required": true
+            },
+            {
+              "name": "icon",
+              "label": "Illustration key (brain, balance, neuron, reaction, memory, synapse, quiz)",
+              "type": "string"
             }
           ]
         },
