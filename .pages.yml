@@ -1,0 +1,179 @@
+{
+  "content": [
+    {
+      "name": "learning_content",
+      "label": "Learning content",
+      "type": "file",
+      "path": "content.json",
+      "format": "json",
+      "fields": [
+        {
+          "name": "intro",
+          "label": "Homepage introduction",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "brainIntro",
+          "label": "Brain map introduction",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "neuronIntro",
+          "label": "Signal trail introduction",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "reactionIntro",
+          "label": "Reaction game introduction",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "memoryIntro",
+          "label": "Memory game introduction",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "quizIntro",
+          "label": "Quiz introduction",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "credits",
+          "label": "Credits",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "regions",
+          "label": "Regions",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "name",
+              "label": "Name",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "key",
+              "label": "Key",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "description",
+              "label": "Description",
+              "type": "text",
+              "required": true
+            }
+          ]
+        },
+        {
+          "name": "stages",
+          "label": "Stages",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "name",
+              "label": "Name",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "description",
+              "label": "Description",
+              "type": "text",
+              "required": true
+            }
+          ]
+        },
+        {
+          "name": "quiz",
+          "label": "Quiz",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "prompt",
+              "label": "Prompt",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "correct",
+              "label": "Correct",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "other1",
+              "label": "Other1",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "other2",
+              "label": "Other2",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "explanation",
+              "label": "Explanation",
+              "type": "text",
+              "required": true
+            }
+          ]
+        },
+        {
+          "name": "glossary",
+          "label": "Glossary",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "name",
+              "label": "Name",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "description",
+              "label": "Description",
+              "type": "text",
+              "required": true
+            }
+          ]
+        },
+        {
+          "name": "sources",
+          "label": "Sources",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "name",
+              "label": "Name",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "url",
+              "label": "Url",
+              "type": "string",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
