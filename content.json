@@ -1,0 +1,29 @@
+{
+ "intro":"Explore your brain, send a signal, and put your memory to work.",
+ "brainIntro":"Your brain works with your spinal cord and nerves to help your body sense, think, and move. Explore three parts that work together.",
+ "neuronIntro":"A neuron is a nerve cell. Trace what can happen when a neuron receives a strong enough set of messages to send a signal.",
+ "reactionIntro":"Wait for the button to say GO, then tap it or press Enter or Space while it has focus. Try a few rounds.",
+ "memoryIntro":"Turn over two cards at a time. Remember where each word was, then find its twin.",
+ "quizIntro":"Try a few questions and read the explanation after each answer.",
+ "regions":[
+  {"name":"Cerebrum","key":"cerebrum","description":"The large, wrinkled part helps you think, sense your surroundings, remember, and move on purpose. Many areas work together."},
+  {"name":"Cerebellum","key":"cerebellum","description":"The rounded part near the back helps fine-tune movements and balance, such as when you ride a bike."},
+  {"name":"Brainstem","key":"brainstem","description":"This part connects the brain and spinal cord. It helps control automatic jobs such as breathing."}
+ ],
+ "stages":[
+  {"name":"Dendrites","description":"Branchlike dendrites receive messages from other cells."},
+  {"name":"Cell body","description":"Incoming messages can make the neuron more or less likely to fire."},
+  {"name":"Axon","description":"If the neuron fires, an electrical pulse travels along its axon."},
+  {"name":"Synaptic terminals","description":"The pulse reaches axon endings, which can release chemical messengers."},
+  {"name":"Synapse","description":"Chemical messengers cross a tiny gap and can change the activity of the next cell."}
+ ],
+ "quiz":[
+  {"prompt":"Which part helps you balance on a bike?","correct":"Cerebellum","other1":"Dendrite","other2":"Synapse","explanation":"The cerebellum helps fine-tune movement and balance."},
+  {"prompt":"Where does an electrical pulse travel after a neuron fires?","correct":"Along the axon","other1":"Around the skull","other2":"Across a chemical synapse","explanation":"The electrical pulse travels along the axon. Chemical messengers can then cross a gap."},
+  {"prompt":"What helps you hold a card’s location in mind for a few seconds?","correct":"Working memory","other1":"An axon terminal","other2":"The reaction timer","explanation":"Working memory holds and uses information briefly, such as a location you just saw."},
+  {"prompt":"What might change your reaction game score?","correct":"Distractions and device delay","other1":"The size of the cards","other2":"The name of the brainstem","explanation":"Attention and device timing can affect the result. This game is a demonstration."}
+ ],
+ "glossary":[{"name":"Neuron","description":"A cell that receives and sends signals."},{"name":"Synapse","description":"A junction where a neuron passes a message to another cell."},{"name":"Working memory","description":"Holding and using information for a short time."}],
+ "sources":[{"name":"Society for Neuroscience · Brain Facts","url":"https://www.brainfacts.org/-/media/Brainfacts2/BrainFacts-Book/Brain-Facts-PDF-with-links.pdf"},{"name":"BrainFacts · Synapses and neurotransmission","url":"https://www.brainfacts.org/brain-anatomy-and-function/cells-and-circuits/2022/synapses-and-neurotransmission-113022"},{"name":"BrainFacts · How does the brain learn?","url":"https://www.brainfacts.org/thinking-sensing-and-behaving/learning-and-memory/2023/how-does-the-brain-learn-101923"}],
+ "credits":"Built with AI assistance. The activities run in your browser with no accounts, analytics, or saved scores."
+}
