@@ -21,3 +21,13 @@ Open **Learning content** for `content.json`. You can edit introductions, explan
 ## Sources and credits
 
 The game links to the Society for Neuroscience’s Brain Facts primer and BrainFacts explainers on anatomy, synapses, and memory. Graphics are project-original schematic artwork. Code, curriculum and artwork were developed with AI assistance.
+
+## Signal Relay and curriculum validation
+
+The relay uses an illustrative input meter with excitation and inhibition. Its steps describe a representative myelinated multipolar neuron and a chemical synapse. The membrane highlights mark changes in electrical state. The coral molecules are neurotransmitters in the separate close-up. For the physiology, see OpenStax's [Neural Communication](https://openstax.org/books/introduction-behavioral-neuroscience/pages/2-1-neural-communication) and [Mechanisms of Neural Signaling](https://openstax.org/books/introduction-behavioral-neuroscience/pages/2-4-mechanisms-of-neural-signaling).
+
+Run `node --test rules.test.mjs` after editing content or game rules. The game checks stage order, stable anatomy IDs, distinct answers, illustration keys and HTTPS reference URLs at startup. Keep the relay's five stage IDs and eight anatomy IDs in their current order when editing their descriptions in Pages CMS. Invalid content triggers a retry screen.
+
+## Review and rollback
+
+Preview the development branch locally before release. A future release can merge the reviewed commit into the existing GitHub Pages publishing branch. To roll it back, revert that merge on the publishing branch. This static project needs no build step and does not use persistent player storage.

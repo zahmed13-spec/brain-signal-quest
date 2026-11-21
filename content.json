@@ -1,8 +1,8 @@
 {
   "intro": "Follow a signal through the brain. Collect five discoveries to light up the station.",
   "brainIntro": "Scan three brain regions. Then use what you learned to solve three everyday clues.",
-  "neuronIntro": "Help a neuron fire and find out how its message reaches the next cell.",
-  "reactionIntro": "Wait for GO, then tap the beacon or press Space or Enter. See how three tries compare.",
+  "neuronIntro": "Explore a neuron, change its inputs, and predict whether it fires. Then zoom in on a chemical synapse.",
+  "reactionIntro": "Catch three GO cues and compare your times, or try a cue pattern without a stopwatch.",
   "memoryIntro": "Flip two specimen cards. Remember where each picture is hiding and match its twin.",
   "quizIntro": "Use clues from your missions to complete the final debrief.",
   "regions": [
@@ -24,66 +24,71 @@
   ],
   "stages": [
     {
-      "name": "Dendrites",
-      "description": "Branchlike dendrites receive messages from other cells."
+      "id": "arrival",
+      "name": "Signal arrives",
+      "description": "The action potential changes the terminal’s membrane voltage. Calcium enters the terminal."
     },
     {
-      "name": "Cell body",
-      "description": "Incoming messages can make the neuron more or less likely to fire."
+      "id": "release",
+      "name": "Vesicle release",
+      "description": "A vesicle joins the sending membrane and releases its chemical messengers."
     },
     {
-      "name": "Axon",
-      "description": "If the neuron fires, an electrical pulse travels along its axon."
+      "id": "crossing",
+      "name": "Across the cleft",
+      "description": "Neurotransmitter molecules spread across the tiny space between the cells."
     },
     {
-      "name": "Synaptic terminals",
-      "description": "The pulse reaches axon endings, which can release chemical messengers."
+      "id": "binding",
+      "name": "Receptor binding",
+      "description": "Some messengers attach to compatible receptors on the receiving cell."
     },
     {
-      "name": "Synapse",
-      "description": "Chemical messengers cross a tiny gap and can change the activity of the next cell."
+      "id": "response",
+      "name": "Receiving cell responds",
+      "description": "Receptors can change the receiving cell’s electrical state. That can make firing more or less likely. Binding alone does not guarantee firing."
     }
   ],
   "quiz": [
     {
-      "prompt": "Which part helps you balance on a bike?",
+      "prompt": "You ride over a bump and adjust your balance. Which region is especially important for fine-tuning that movement?",
       "correct": "Cerebellum",
-      "other1": "Dendrite",
-      "other2": "Synapse",
-      "explanation": "The cerebellum helps fine-tune movement and balance.",
+      "other1": "Cerebrum",
+      "other2": "Brainstem",
+      "explanation": "The cerebellum helps coordinate adjustments with other brain regions.",
       "icon": "balance"
     },
     {
-      "prompt": "Where does an electrical pulse travel after a neuron fires?",
-      "correct": "Along the axon",
-      "other1": "Around the skull",
-      "other2": "Across a chemical synapse",
-      "explanation": "The electrical pulse travels along the axon. Chemical messengers can then cross a gap.",
+      "prompt": "A neuron’s axon has a gap between two myelin wraps. What happens at that gap?",
+      "correct": "The electrical signal can be renewed",
+      "other1": "A vesicle releases chemicals into the gap",
+      "other2": "The next neuron receives the signal at the gap",
+      "explanation": "A node is a bare spot on one axon. A synaptic cleft is a gap between cells.",
       "icon": "neuron"
     },
     {
-      "prompt": "What helps you hold a card’s location in mind for a few seconds?",
+      "prompt": "An electrical signal reaches a terminal next to another cell. What can carry the message across a chemical synapse?",
+      "correct": "Neurotransmitters",
+      "other1": "The same electrical wave",
+      "other2": "Calcium passing directly into the next cell",
+      "explanation": "Calcium entering the sending terminal can trigger release. The messengers then cross the cleft.",
+      "icon": "synapse"
+    },
+    {
+      "prompt": "You remember where a card was while deciding what to flip next. Which skill helps keep the location available?",
       "correct": "Working memory",
-      "other1": "An axon terminal",
-      "other2": "The reaction timer",
-      "explanation": "Working memory holds and uses information briefly, such as a location you just saw.",
+      "other1": "Long-term knowledge of the word",
+      "other2": "Automatic control of breathing",
+      "explanation": "Working memory keeps information available while you use it. Recognizing a familiar picture also draws on memory.",
       "icon": "memory"
     },
     {
-      "prompt": "What might change your reaction game score?",
-      "correct": "Distractions and device delay",
-      "other1": "The size of the cards",
-      "other2": "The name of the brainstem",
-      "explanation": "Attention and device timing can affect the result. This game is a demonstration.",
+      "prompt": "Two players use different devices and get different reaction times. Which conclusion is supported?",
+      "correct": "The timings reflect both the person and the device",
+      "other1": "The faster player is better at every attention task",
+      "other2": "The device with a smaller screen always gives slower times",
+      "explanation": "What you notice, what you expect, display delay and input delay can all affect browser timings.",
       "icon": "reaction"
-    },
-    {
-      "prompt": "You’re asleep. Which region helps keep you breathing?",
-      "correct": "Brainstem",
-      "other1": "Cerebellum",
-      "other2": "Synapse",
-      "explanation": "The brainstem helps control automatic jobs such as breathing.",
-      "icon": "brain"
     }
   ],
   "glossary": [
@@ -132,7 +137,57 @@
     {
       "name": "BrainFacts · Making memories",
       "url": "https://www.brainfacts.org/thinking-sensing-and-behaving/learning-and-memory/2018/making-memories-092718"
+    },
+    {
+      "name": "OpenStax · Neural communication",
+      "url": "https://openstax.org/books/introduction-behavioral-neuroscience/pages/2-1-neural-communication"
+    },
+    {
+      "name": "OpenStax · Mechanisms of neural signaling",
+      "url": "https://openstax.org/books/introduction-behavioral-neuroscience/pages/2-4-mechanisms-of-neural-signaling"
     }
   ],
-  "credits": "The game was built with AI assistance. Progress and reaction times stay in this tab until you reload or close it."
+  "credits": "The game was built with AI assistance. Progress and reaction times stay in this tab until you reload or close it.",
+  "anatomy": [
+    {
+      "id": "dendrites",
+      "name": "Dendrites",
+      "description": "These tapering branches receive many messages from other cells."
+    },
+    {
+      "id": "soma",
+      "name": "Cell body",
+      "description": "Also called the soma. It keeps the cell working and contains the nucleus."
+    },
+    {
+      "id": "nucleus",
+      "name": "Nucleus",
+      "description": "The nucleus holds most of the cell’s DNA, its instructions for making and running the cell."
+    },
+    {
+      "id": "hillock",
+      "name": "Axon hillock",
+      "description": "The cell body tapers into the axon here. A signal usually starts just beyond this transition, at the axon initial segment."
+    },
+    {
+      "id": "axon",
+      "name": "Axon",
+      "description": "This long extension carries an electrical change away from the cell body."
+    },
+    {
+      "id": "myelin",
+      "name": "Myelin",
+      "description": "Layers of insulation wrap parts of some axons and help signals travel faster."
+    },
+    {
+      "id": "nodes",
+      "name": "Nodes of Ranvier",
+      "description": "Gaps between the wraps are places where the electrical signal is renewed."
+    },
+    {
+      "id": "terminals",
+      "name": "Axon terminals",
+      "description": "These branch endings can send a message to another cell at a synapse."
+    }
+  ]
 }

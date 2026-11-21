@@ -82,6 +82,13 @@
           "list": true,
           "fields": [
             {
+              "name": "id",
+              "label": "Stable ID (do not reorder stages)",
+              "type": "string",
+              "required": true,
+              "readonly": true
+            },
+            {
               "name": "name",
               "label": "Name",
               "type": "string",
@@ -174,6 +181,33 @@
               "name": "url",
               "label": "Url",
               "type": "string",
+              "required": true
+            }
+          ]
+        },
+        {
+          "name": "anatomy",
+          "label": "Neuron anatomy",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "id",
+              "label": "Stable ID (do not reorder stages)",
+              "type": "string",
+              "required": true,
+              "readonly": true
+            },
+            {
+              "name": "name",
+              "label": "Name",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "description",
+              "label": "Description",
+              "type": "text",
               "required": true
             }
           ]

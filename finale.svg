@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340">
+<defs><pattern id="d" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="#556b9c"/></pattern></defs>
+<rect width="480" height="340" rx="24" fill="#263664"/><rect width="480" height="340" rx="24" fill="url(#d)"/>
+<g stroke="#ffd476" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="5 8"><path d="M240 185 100 99m140 86V62m0 123 140-86m-140 86L120 267m120-82 120 82"/></g>
+<g stroke="#182749" stroke-width="5"><circle cx="100" cy="99" r="35" fill="#d9caff"/><circle cx="240" cy="62" r="35" fill="#ffc2a5"/><circle cx="380" cy="99" r="35" fill="#ffcf68"/><circle cx="120" cy="267" r="35" fill="#a6ecdc"/><circle cx="360" cy="267" r="35" fill="#c0d7ff"/><circle cx="240" cy="185" r="55" fill="#ffcf68"/></g>
+<g stroke="#19264a" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M86 102q-6-15 6-15 5-8 10-2 9-4 13 5 7 12-3 16-11 9-26-4zm12-11 5 9m-8 1 6-3"/>
+<path d="m244 46-17 20h12l-3 12 17-21h-12z"/>
+<path d="M374 105q-11-12 4-20 15 1 10 15l-5 5v5h-9m2 5h6"/>
+<path d="M109 260h17v21h-17zm5-5 12-4 7 20-5 2"/>
+<path d="m360 251 5 10 11 2-8 8 2 11-10-5-10 5 2-11-8-8 11-2z"/>
+</g>
+<rect x="205" y="163" width="70" height="44" rx="16" fill="#19264a"/>
+<path d="m220 180 4-3 4 3m24 0 4-3 4 3m-29 7q9 13 18 0" fill="none" stroke="#eaf7ec" stroke-width="3.5" stroke-linecap="round"/>
+</svg>

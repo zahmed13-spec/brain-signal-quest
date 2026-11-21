@@ -142,3 +142,79 @@ dd { margin:0 0 .45rem; }
   *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; scroll-behavior:auto !important; }
   .firing .pulse { transform: translateX(270px); }
 }
+
+/* Shared station controls and motion */
+:root {
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px;
+  --display: ui-rounded, 'Arial Rounded MT Bold', system-ui, sans-serif;
+  --body: system-ui, sans-serif; --width: 1120px;
+  --radius: 8px; --stroke: 2px solid var(--ink);
+  --focus: #7344aa; --quick: 160ms; --ease: cubic-bezier(.2,.65,.25,1);
+}
+.wrap { width: min(100% - 2rem, var(--width)); }
+h1,h2,h3 { font-family: var(--display); }
+.hero p,.mission-head p,.feedback,.lesson { font-size: clamp(1.0625rem, 1.8vw, 1.1875rem); }
+button { border-radius: var(--radius); transition: background-color var(--quick) var(--ease), box-shadow var(--quick) var(--ease); }
+button:not(:disabled):hover { box-shadow: inset 0 0 0 2px #8d78ae; }
+button:active { translate: 0 1px; }
+:focus-visible { outline-color: var(--focus); }
+.mission-head { border-radius: var(--radius) var(--radius) 0 0; }
+.stop { padding: var(--space-3); border-top-width: 1px; overflow: hidden; gap: var(--space-1); }
+.stop-art { width: 100%; height: 82px; display: grid; place-items: center; color: var(--ink); background-color: var(--zone); background-image: radial-gradient(#19264a35 1px, transparent 1px); background-size: 11px 11px; border-radius: var(--radius); margin-block-end: var(--space-2); }
+.stop-art .icon { width: 46px; height: 46px; }
+.stop:nth-child(2) .icon { transform: rotate(-13deg); }
+.stop:nth-child(4) .icon { transform: rotate(9deg); }
+.stop[data-lit] .stop-art { animation: station-light 620ms var(--ease) both; }
+@keyframes station-light { 50% { box-shadow: inset 0 0 0 4px var(--white); } }
+.station-button { background: transparent; color: inherit; border-color: #7788b7; font-size: .925rem; }
+.relay { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: var(--space-6); align-items: start; }
+.relay h2 { font-size: clamp(1.35rem, 2vw, 1.85rem); }
+.relay-diagram { align-self: center; }
+.neuron-figure,.synapse-figure { width: 100%; display:block; border-radius: var(--radius); }
+.structure { transition: filter var(--quick) var(--ease); }
+.structure.highlight { filter: drop-shadow(0 0 4px #ffd375) drop-shadow(0 0 2px #ffd375); }
+.neuron-figure[data-input=excite] [data-part=dendrites] { fill: #a6ecdc; }
+.neuron-figure[data-input=inhibit] [data-part=dendrites] { fill: #ffc2a5; }
+.activation path { opacity: 0; }
+.propagating .activation path { animation: membrane 300ms var(--ease) both; }
+.propagating .activation path:nth-child(2) { animation-delay: 170ms; }
+.propagating .activation path:nth-child(3) { animation-delay: 340ms; }
+.propagating .activation path:nth-child(4) { animation-delay: 510ms; }
+.propagating .activation path:nth-child(5) { animation-delay: 700ms; }
+@keyframes membrane { 35% { opacity: 1; } 100% { opacity: .75; } }
+.relay .experiment,.synapse-lab { grid-column: 1 / -1; border-top: var(--stroke); padding-top: var(--space-4); }
+.experiment meter { width: min(100%,24rem); height: 24px; }
+.synapse-figure { max-width: 34rem; }
+.transmitters,.post-effect { opacity: 0; }
+[data-step=arrival] .terminal { stroke: var(--gold); }
+[data-step=release] .vesicle { transform: translateY(19px); transition: transform 500ms var(--ease); }
+[data-step=release] .transmitters { opacity:1; transform: translateY(-56px); }
+[data-step=crossing] .transmitters { opacity:1; animation: diffuse 620ms var(--ease) both; }
+[data-step=binding] .transmitters,[data-step=response] .transmitters,[data-step=response] .post-effect { opacity:1; }
+[data-step=binding] .receptors,[data-step=response] .receptors { stroke: var(--gold); }
+@keyframes diffuse { from { transform: translateY(-54px); } to { transform: translateY(-12px); } }
+.quiz-layout [data-correct] { background: var(--mint); border-style: double; }
+.quiz-layout [data-incorrect] { background: var(--salmon); }
+.beacon-stage { background-image: radial-gradient(#7288ba66 1px, transparent 1px); background-size: 14px 14px; }
+.beacon[data-go] { box-shadow: 0 0 0 6px #ffcf6850; }
+.card { font-size: clamp(.95rem,2.3vw,1.1rem); }
+.card[data-match] { border-style: double; border-width: 4px; }
+.journal { padding-inline-start: 1.25rem; }
+.journal li { padding-block: var(--space-1); }
+.journal a { font-weight: 800; }
+#finish .finish-copy { padding: var(--space-4); }
+@media(max-width: 760px) {
+  .relay { grid-template-columns: 1fr; gap: var(--space-4); }
+}
+@media(max-width: 480px) {
+  .wrap { width: calc(100% - 1.25rem); }
+  .deck { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .card { aspect-ratio: 1.5; }
+  .anatomy-keys button { flex: 1 1 42%; }
+  .stop-art { height: 62px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after { animation-delay:0ms !important; animation-duration:.01ms !important; transition-duration:.01ms !important; }
+  .propagating .activation path { opacity: .8; animation: none; }
+}
