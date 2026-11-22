@@ -1,205 +1,114 @@
-'use strict';
+// Brain Signal Quest: entry module. Loads content.json, builds the quest map and routes between screens.
+import { $, el, icon, rich, store, sound, guide, scaffold, sparky, activityIcon, init as initCore, setGlossary } from './js/core.js';
+import { initBrain } from './js/brain.js';
+import { initNeuron } from './js/neuron.js';
+import { initReaction } from './js/reaction.js';
+import { initMemory } from './js/memory.js';
+import { initQuiz } from './js/quiz.js';
 
-const get = (id) => document.getElementById(id);
-function add(parent, tag, text) {
-  const element = document.createElement(tag);
-  element.textContent = text;
-  parent.append(element);
-  return element;
-}
+const hooks = {}; // per-screen show/hide hooks
+let content; let current = null;
 
-function brain(regions) {
-  const buttons = regions.map((region, index) => {
-    const button = add(get('regions'), 'button', region.name);
-    button.onclick = () => {
-      buttons.forEach((item, i) => item.setAttribute('aria-pressed', String(i === index)));
-      document.querySelectorAll('.diagram > div').forEach((part) => {
-        part.classList.toggle('active', part.classList.contains(region.key));
-      });
-      get('region-info').textContent = region.description;
-    };
-    return button;
+function buildMap() {
+  const map = $('#quest-map'); map.replaceChildren(); $('.map-end').hidden = false;
+  content.activities.forEach((a, i) => {
+    const done = store.isDone(a.key);
+    const tile = el('a', { class: 'tile' + (done ? ' done' : ''), href: '#' + a.key, style: { '--c': `var(--a-${a.key})` } },
+      el('div', { class: 'tile-top' }, el('span', { class: 'tile-icon' }, icon(activityIcon(a.key))), el('span', { class: 'tile-step', text: `Stop ${i + 1}` })),
+      el('h3', { text: a.title }), el('p', { text: a.tile }),
+      el('span', { class: 'tile-star' }, icon('star'), el('span', { text: done ? `Star earned: ${a.badge}` : 'Earn a star' })));
+    map.append(el('li', {}, tile));
   });
-  buttons[0].click();
+  const n = content.activities.filter((a) => store.isDone(a.key)).length; const total = content.activities.length;
+  $('#progress-fill').style.width = (n / total) * 100 + '%';
+  const bar = $('.progress'); bar.setAttribute('aria-valuenow', n); bar.setAttribute('aria-valuemax', total);
+  $('#progress-label').textContent = `${n} of ${total} stars${n === total ? ' · Certificate unlocked!' : ''}`;
 }
 
-function neuron(stages) {
-  const items = stages.map((stage) => add(get('trail'), 'li', stage.name));
-  let index = -1;
-  get('signal').onclick = () => {
-    index = (index + 1) % stages.length;
-    items.forEach((item, i) => {
-      item.setAttribute('aria-current', i === index ? 'step' : 'false');
-    });
-    get('signal-feedback').textContent = stages[index].description;
-    get('signal').textContent = index === stages.length - 1 ? 'Send another signal' : 'Next signal step';
-  };
-}
-
-function reaction() {
-  const control = get('react');
-  const feedback = get('reaction-feedback');
-  let phase = 'idle';
-  let cueTime;
-  let timer;
-  control.onclick = () => {
-    if (phase === 'idle') {
-      phase = 'waiting';
-      control.textContent = 'Wait…';
-      feedback.textContent = 'Wait for GO.';
-      timer = setTimeout(() => {
-        control.textContent = 'GO!';
-        control.classList.add('go');
-        feedback.textContent = 'GO!';
-        phase = 'ready';
-        cueTime = performance.now();
-      }, 1100 + Math.random() * 2300);
-      return;
-    }
-    if (phase === 'waiting') {
-      clearTimeout(timer);
-      feedback.textContent = 'Too early. Try again and wait for GO.';
-    } else {
-      const elapsed = Math.round(performance.now() - cueTime);
-      feedback.textContent = 'You responded in ' + elapsed + ' milliseconds.';
-    }
-    phase = 'idle';
-    control.classList.remove('go');
-    control.textContent = 'Play again';
-  };
-}
-
-function shuffled(values) {
-  const result = [...values];
-  for (let i = result.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]];
+function buildCertificate() {
+  const total = content.activities.length; const n = content.activities.filter((a) => store.isDone(a.key)).length;
+  $('#cert-status').textContent = n === total ? 'You earned every star. Congratulations, Junior Neuroscientist!' : `You have ${n} of ${total} stars. Finish every stop on the quest map to complete your certificate. You can still print it now!`;
+  $('#cert-title').textContent = content.certificate.title;
+  rich($('#cert-text'), content.certificate.text);
+  const list = $('#cert-badges'); list.replaceChildren();
+  for (const a of content.activities) {
+    const done = store.isDone(a.key);
+    list.append(el('li', { class: done ? 'earned' : '' }, icon('star'), el('span', { text: a.badge + (done ? '' : ' (not yet)') })));
   }
-  return result;
+  $('#cert-date').textContent = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
-function memory() {
-  const board = get('cards');
-  const status = get('memory-feedback');
-  const words = ['Brain', 'Nerve', 'Signal', 'Memory'];
-  let timer;
-  function reset() {
-    clearTimeout(timer);
-    board.replaceChildren();
-    status.textContent = 'Find four pairs.';
-    let open;
-    let pairs = 0;
-    let locked = false;
-    const cards = shuffled([...words, ...words]).map((word, index) => {
-      const button = add(board, 'button', '?');
-      const label = 'Card ' + (index + 1);
-      button.setAttribute('aria-label', label + ', face down');
-      function reveal(visible, matched = false) {
-        button.textContent = visible ? word : '?';
-        button.setAttribute('aria-label', label + ', ' + (visible ? word : 'face down') + (matched ? ', matched' : ''));
-      }
-      const card = { button, word, reveal };
-      button.onclick = () => {
-        if (locked || open === card || button.classList.contains('matched')) return;
-        reveal(true);
-        if (!open) {
-          open = card;
-          status.textContent = word + '. Pick another card.';
-          return;
-        }
-        const first = open;
-        open = undefined;
-        if (first.word === word) {
-          for (const match of [first, card]) {
-            match.reveal(true, true);
-            match.button.classList.add('matched');
-            match.button.setAttribute('aria-disabled', 'true');
-          }
-          pairs++;
-          status.textContent = pairs === 4 ? 'You found all four pairs!' : 'Match! ' + pairs + ' of 4 pairs.';
-          return;
-        }
-        locked = true;
-        status.textContent = first.word + ' and ' + word + '. Remember where they were.';
-        timer = setTimeout(() => {
-          first.reveal(false);
-          reveal(false);
-          locked = false;
-          status.textContent = 'Try another pair.';
-        }, 1800);
-      };
-      return card;
-    });
-    return cards;
+function buildReferences() {
+  const dl = $('#glossary'); dl.replaceChildren();
+  [...content.glossary].sort((a, b) => a.name.localeCompare(b.name)).forEach(({ name, description }) => dl.append(el('div', {}, el('dt', { text: name }), el('dd', { text: description }))));
+  const ul = $('#sources'); ul.replaceChildren();
+  for (const { name, url } of content.sources) {
+    try { const u = new URL(url); if (u.protocol === 'https:') ul.append(el('li', {}, el('a', { href: u.href, rel: 'noopener noreferrer', text: name }))); } catch { /* skip bad URL */ }
   }
-  get('shuffle').onclick = reset;
-  reset();
+  $('#credits').textContent = content.credits;
 }
 
-function quiz(questions) {
-  let index = 0;
-  let score = 0;
-  const stage = get('question');
-  const feedback = get('quiz-feedback');
-  const next = get('next');
-  function render(moveFocus) {
-    stage.replaceChildren();
-    next.hidden = true;
-    feedback.textContent = '';
-    if (index === questions.length) {
-      const result = add(stage, 'h3', 'You got ' + score + ' of ' + questions.length + ' correct.');
-      result.tabIndex = -1;
-      result.focus();
-      const again = add(stage, 'button', 'Play quiz again');
-      again.onclick = () => { index = 0; score = 0; render(true); };
-      return;
-    }
-    const question = questions[index];
-    const heading = add(stage, 'h3', (index + 1) + ' / ' + questions.length + ' · ' + question.prompt);
-    heading.tabIndex = -1;
-    if (moveFocus) heading.focus();
-    let answered = false;
-    shuffled([question.correct, question.other1, question.other2]).forEach((answer) => {
-      const button = add(stage, 'button', answer);
-      button.onclick = () => {
-        if (answered) return;
-        answered = true;
-        const correct = answer === question.correct;
-        if (correct) score++;
-        stage.querySelectorAll('button').forEach((item) => item.setAttribute('aria-disabled', 'true'));
-        feedback.textContent = (correct ? 'Correct! ' : 'Good try. ') + question.explanation;
-        next.textContent = index === questions.length - 1 ? 'See score' : 'Next question';
-        next.hidden = false;
-      };
-    });
+async function loadPlayhouse() {
+  if (hooks.playhouse) return;
+  hooks.playhouse = { show() {}, hide() {} };
+  try {
+    const mod = await import('./js/playhouse/playhouse.js');
+    hooks.playhouse = mod.initPlayhouse(content, $('#playhouse-root'));
+    if (current === 'playhouse') hooks.playhouse.show();
+  } catch (err) {
+    console.error(err);
+    $('#playhouse-root').replaceChildren(el('p', { class: 'load-error', text: 'The Brain Playhouse could not load. Try refreshing the page.' }));
   }
-  next.onclick = () => { index++; render(true); };
-  render(false);
 }
 
-async function initialize() {
-  const response = await fetch('content.json');
-  if (!response.ok) throw new Error('Content unavailable');
-  const content = await response.json();
-  const copy = {
-    intro: 'intro', 'brain-intro': 'brainIntro', 'neuron-intro': 'neuronIntro',
-    'reaction-intro': 'reactionIntro', 'memory-intro': 'memoryIntro', 'quiz-intro': 'quizIntro',
-    credits: 'credits'
-  };
-  Object.entries(copy).forEach(([id, key]) => { get(id).textContent = content[key]; });
-  brain(content.regions);
-  neuron(content.stages);
-  reaction();
-  memory();
-  quiz(content.quiz);
-  content.glossary.forEach(({ name, description }) => {
-    add(get('glossary'), 'dt', name);
-    add(get('glossary'), 'dd', description);
+function route(initial = false) {
+  const id = decodeURIComponent(location.hash.slice(1)) || 'home';
+  const target = document.getElementById(id);
+  const screen = target && target.classList.contains('screen') ? target : $('#home');
+  const name = screen.id;
+  if (current && current !== name) hooks[current]?.hide?.();
+  document.querySelectorAll('.screen').forEach((s) => { s.hidden = s !== screen; });
+  current = name;
+  if (name === 'home') buildMap();
+  if (name === 'certificate') buildCertificate();
+  if (name === 'playhouse') loadPlayhouse();
+  hooks[name]?.show?.();
+  document.title = name === 'home' ? 'Brain Signal Quest' : `${screen.querySelector('h2')?.textContent || name} · Brain Signal Quest`;
+  if (!initial) {
+    window.scrollTo(0, 0);
+    const h = screen.querySelector('h1, h2'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+  }
+}
+
+async function start() {
+  const res = await fetch('content.json');
+  if (!res.ok) throw new Error('Content unavailable');
+  content = await res.json();
+  initCore(); setGlossary(content.glossary);
+  rich($('#intro'), content.intro);
+  guide($('#home-guide'), content.mascot.hello);
+  for (const a of content.activities) scaffold(a);
+  initBrain(content);
+  hooks.neuron = initNeuron(content);
+  hooks.reaction = initReaction(content);
+  initMemory(content);
+  initQuiz(content);
+  buildReferences();
+  $('#cert-guide').append(sparky());
+  $('#cert-name').addEventListener('input', (e) => { $('#cert-name-out').textContent = e.target.value.trim() || 'A Brilliant Brain Explorer'; });
+  $('#print-cert').addEventListener('click', () => window.print());
+  $('#reset-progress').addEventListener('click', () => {
+    if (window.confirm('Clear all your stars and badges on this device?')) { store.reset(); for (const a of content.activities) scaffold(a); buildMap(); }
   });
-  content.sources.forEach(({ name, url }) => {
-    const parsed = new URL(url);
-    if (parsed.protocol === 'https:') add(add(get('sources'), 'li', ''), 'a', name).href = parsed.href;
+  const soundBtn = $('#sound-toggle');
+  soundBtn.addEventListener('click', () => {
+    const on = sound.toggle(); soundBtn.setAttribute('aria-pressed', String(on));
+    soundBtn.querySelector('use').setAttribute('href', on ? '#i-sound-on' : '#i-sound-off');
+    soundBtn.querySelector('span').textContent = on ? 'Sound on' : 'Sound off';
   });
+  store.subscribe(() => { if (current === 'home') buildMap(); });
+  window.addEventListener('hashchange', () => route(false));
+  route(true);
 }
 
-initialize().catch(() => { get('load-error').hidden = false; });
+start().catch((err) => { console.error(err); $('#load-error').hidden = false; });

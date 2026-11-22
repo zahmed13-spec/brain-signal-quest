@@ -1,29 +1,3327 @@
 {
- "intro":"Explore your brain, send a signal, and put your memory to work.",
- "brainIntro":"Your brain works with your spinal cord and nerves to help your body sense, think, and move. Explore three parts that work together.",
- "neuronIntro":"A neuron is a nerve cell. Trace what can happen when a neuron receives a strong enough set of messages to send a signal.",
- "reactionIntro":"Wait for the button to say GO, then tap it or press Enter or Space while it has focus. Try a few rounds.",
- "memoryIntro":"Turn over two cards at a time. Remember where each word was, then find its twin.",
- "quizIntro":"Try a few questions and read the explanation after each answer.",
- "regions":[
-  {"name":"Cerebrum","key":"cerebrum","description":"The large, wrinkled part helps you think, sense your surroundings, remember, and move on purpose. Many areas work together."},
-  {"name":"Cerebellum","key":"cerebellum","description":"The rounded part near the back helps fine-tune movements and balance, such as when you ride a bike."},
-  {"name":"Brainstem","key":"brainstem","description":"This part connects the brain and spinal cord. It helps control automatic jobs such as breathing."}
+ "intro": "Follow the glowing path, play six brain games, and earn your Junior Neuroscientist certificate!",
+ "mascot": {
+  "name": "Sparky",
+  "hello": "Hi! I'm Sparky, a neuron. I send signals all day long. Pick a stop on the map and let's explore your brain together!",
+  "cheers": [
+   "Brain power!",
+   "You're on fire, in a good way!",
+   "Signal received. Nice work!",
+   "Neurons high-five! That was great.",
+   "Awesome thinking!"
+  ],
+  "tryAgain": [
+   "Almost! Brains learn by trying again.",
+   "Good try. Mistakes help your synapses get stronger!",
+   "Not quite. Let's look at why."
+  ],
+  "finish": "You finished every stop on the quest. Your neurons are wiring together like pros!"
+ },
+ "activities": [
+  {
+   "key": "brain",
+   "title": "Brain Explorer",
+   "tile": "Click the parts of a brain and find out their jobs.",
+   "goal": "In this activity you'll find out what the main parts of your brain do. Click or tap each part. Then peek inside!",
+   "hint": "Try the Peek inside switch to see three hidden parts deep in the middle.",
+   "whatHappened": "Each part of your brain has special jobs, but no part works alone. Parts send signals to each other all the time.",
+   "realLife": "Riding a bike uses lots of parts at once: the occipital lobe sees the road, the cerebellum keeps balance, and the frontal lobe decides where to turn.",
+   "badge": "Brain Mapper"
+  },
+  {
+   "key": "neuron",
+   "title": "Neuron Relay",
+   "tile": "Fire a neuron and watch its signal race to the next cell.",
+   "goal": "In this activity you'll find out how one nerve cell passes a message to the next. Send enough messages to the dendrites to make the neuron fire!",
+   "hint": "One message is not enough. Keep sending until the cell body fills up past the dashed line.",
+   "whatHappened": "When the cell body got enough messages, it fired an electrical signal called an action potential. The wave raced down the axon. At the end, chemical messengers crossed the synapse and woke up the next neuron.",
+   "realLife": "Right now, billions of neurons are doing this relay so you can read these words.",
+   "badge": "Signal Sender"
+  },
+  {
+   "key": "reaction",
+   "title": "Reaction Lab",
+   "tile": "How fast can your eyes, brain and muscles team up?",
+   "goal": "In this activity you'll find out how long a signal takes to go from your eyes, through your brain, to your finger. Wait for the light to turn on, then press as fast as you can.",
+   "hint": "Keep your eyes on the light and your finger ready. Pressing before it turns on doesn't count!",
+   "whatHappened": "Your eyes saw the light and sent signals to the back of your brain. Your brain decided to move, and your motor cortex sent signals down your spinal cord and nerves to your finger muscles. All of that took only a fraction of a second.",
+   "realLife": "Catching a ball, braking on your bike or swatting a fly all use this same see → decide → move loop.",
+   "badge": "Quick Reactor"
+  },
+  {
+   "key": "memory",
+   "title": "Memory Match",
+   "tile": "Flip cards and find the matching brain pictures.",
+   "goal": "In this activity you'll use your working memory, your brain's sticky note. Flip two cards at a time and find all six pairs.",
+   "hint": "Say the picture names quietly to yourself. Saying things out loud or in your head helps working memory.",
+   "whatHappened": "Your frontal and parietal lobes held each card's spot in mind for a few seconds. That is working memory. When you found a pair, you used what you remembered.",
+   "realLife": "You use working memory when you remember a phone number long enough to dial it, or keep track of a story while you read.",
+   "badge": "Memory Keeper"
+  },
+  {
+   "key": "playhouse",
+   "title": "Brain Playhouse",
+   "tile": "Watch the brain see, hear, smell, touch and learn in 3D.",
+   "goal": "In this activity you'll pick an everyday moment and watch signals travel through the brain, step by step.",
+   "hint": "Use Step to go one stop at a time. Drag the brain to turn it around.",
+   "whatHappened": "Every sense uses a path: a sense organ turns the world into electrical signals, nerves carry them, relay stations pass them on, and the cortex makes sense of them.",
+   "realLife": "Every time you see, hear, touch, smell or learn, signals take paths like these, in less time than a blink.",
+   "badge": "Pathway Pro"
+  },
+  {
+   "key": "quiz",
+   "title": "Quiz Boss",
+   "tile": "Four surprise questions. Can you beat the Quiz Boss?",
+   "goal": "In this activity you'll check what you learned. Four questions are picked at random each time, so every game is different!",
+   "hint": "If you're not sure, think about which part of the brain sits closest to that sense or job.",
+   "whatHappened": "Remembering an answer makes your brain fetch a memory. Each time you fetch it, that memory gets easier to find again.",
+   "realLife": "Testing yourself, like flashcards or quizzing a friend, is one of the best ways to study. Scientists call it retrieval practice.",
+   "badge": "Quiz Champion"
+  }
  ],
- "stages":[
-  {"name":"Dendrites","description":"Branchlike dendrites receive messages from other cells."},
-  {"name":"Cell body","description":"Incoming messages can make the neuron more or less likely to fire."},
-  {"name":"Axon","description":"If the neuron fires, an electrical pulse travels along its axon."},
-  {"name":"Synaptic terminals","description":"The pulse reaches axon endings, which can release chemical messengers."},
-  {"name":"Synapse","description":"Chemical messengers cross a tiny gap and can change the activity of the next cell."}
+ "regions": [
+  {
+   "name": "Cerebrum",
+   "key": "cerebrum",
+   "inside": false,
+   "description": "The cerebrum is the biggest part of your brain. Its wrinkly outer layer, the cortex, has four lobes on each side. Together they help you think, sense, remember and move on purpose.",
+   "funFact": "The wrinkles let a big sheet of cortex fold up and fit inside your skull, like a crumpled-up piece of paper in a ball."
+  },
+  {
+   "name": "Frontal lobe",
+   "key": "frontal",
+   "inside": false,
+   "description": "The frontal lobe sits behind your forehead. It helps you plan, make choices, focus and control your actions. At its back edge is the motor cortex, which starts movements you choose to make.",
+   "funFact": "The front part of the frontal lobe is one of the last brain areas to finish growing. It keeps developing into your twenties."
+  },
+  {
+   "name": "Parietal lobe",
+   "key": "parietal",
+   "inside": false,
+   "description": "The parietal lobe is at the top and toward the back. It feels touch, temperature and pain from your body. It also keeps track of where things are around you.",
+   "funFact": "Close your eyes and touch your nose. Your parietal lobe helps you know where your hand is without looking."
+  },
+  {
+   "name": "Temporal lobe",
+   "key": "temporal",
+   "inside": false,
+   "description": "The temporal lobes are on the sides of your head, near your ears. They help you hear, understand words and recognize faces and objects.",
+   "funFact": "For most people, the part that understands words, called Wernicke's area, is in the left temporal lobe."
+  },
+  {
+   "name": "Occipital lobe",
+   "key": "occipital",
+   "inside": false,
+   "description": "The occipital lobe is at the very back of your head. It is your brain's main vision center. It figures out edges, colors and movement from what your eyes send.",
+   "funFact": "Your eyes are at the front of your head, but seeing starts to make sense at the back!"
+  },
+  {
+   "name": "Cerebellum",
+   "key": "cerebellum",
+   "inside": false,
+   "description": "The cerebellum, or little brain, sits under the back of the cerebrum. It helps with balance, timing and smooth movements, like riding a bike.",
+   "funFact": "The cerebellum is only about one tenth of your brain's weight, but it holds more than half of all its neurons."
+  },
+  {
+   "name": "Brainstem",
+   "key": "brainstem",
+   "inside": false,
+   "description": "The brainstem connects your brain to your spinal cord. It runs automatic jobs such as breathing, heartbeat and swallowing. Messages between your brain and body travel through it.",
+   "funFact": "Your brainstem keeps you breathing even while you're fast asleep."
+  },
+  {
+   "name": "Thalamus",
+   "key": "thalamus",
+   "inside": true,
+   "description": "The thalamus is deep in the middle of your brain. It is a relay station: signals for sight, hearing, touch and taste stop here before going on to the cortex.",
+   "funFact": "Smell is the one sense whose signals don't need to stop at the thalamus before they reach the cortex."
+  },
+  {
+   "name": "Hippocampus",
+   "key": "hippocampus",
+   "inside": true,
+   "description": "The hippocampus is tucked inside each temporal lobe. It helps you make new memories and remember places and routes.",
+   "funFact": "Its name comes from the Greek word for seahorse, because of its curly shape."
+  },
+  {
+   "name": "Amygdala",
+   "key": "amygdala",
+   "inside": true,
+   "description": "The amygdala is a small almond-shaped part in front of the hippocampus. It helps you notice danger and feel emotions like fear. It also helps emotional moments stick in your memory.",
+   "funFact": "Amygdala comes from the Greek word for almond. You have one on each side of your brain."
+  }
  ],
- "quiz":[
-  {"prompt":"Which part helps you balance on a bike?","correct":"Cerebellum","other1":"Dendrite","other2":"Synapse","explanation":"The cerebellum helps fine-tune movement and balance."},
-  {"prompt":"Where does an electrical pulse travel after a neuron fires?","correct":"Along the axon","other1":"Around the skull","other2":"Across a chemical synapse","explanation":"The electrical pulse travels along the axon. Chemical messengers can then cross a gap."},
-  {"prompt":"What helps you hold a card’s location in mind for a few seconds?","correct":"Working memory","other1":"An axon terminal","other2":"The reaction timer","explanation":"Working memory holds and uses information briefly, such as a location you just saw."},
-  {"prompt":"What might change your reaction game score?","correct":"Distractions and device delay","other1":"The size of the cards","other2":"The name of the brainstem","explanation":"Attention and device timing can affect the result. This game is a demonstration."}
+ "stages": [
+  {
+   "name": "Dendrites",
+   "part": "dendrites",
+   "description": "Branchy dendrites catch chemical messages from other neurons. Each message gives the cell a small nudge."
+  },
+  {
+   "name": "Cell body",
+   "part": "soma",
+   "description": "The cell body adds up all the nudges. If they add up past a tipping point, called the threshold, the neuron fires."
+  },
+  {
+   "name": "Axon",
+   "part": "axon",
+   "description": "An electrical wave called an action potential travels down the long axon. A fatty coat called myelin helps it jump along quickly."
+  },
+  {
+   "name": "Axon terminals",
+   "part": "terminals",
+   "description": "At the axon's tips, the signal makes tiny packets release chemical messengers called neurotransmitters."
+  },
+  {
+   "name": "Synapse",
+   "part": "synapse",
+   "description": "The neurotransmitters cross a super-tiny gap called the synapse and attach to the next neuron's dendrites."
+  },
+  {
+   "name": "Next neuron",
+   "part": "next",
+   "description": "The next neuron gets a nudge. If it gets enough nudges, it fires too, and the relay keeps going!"
+  }
  ],
- "glossary":[{"name":"Neuron","description":"A cell that receives and sends signals."},{"name":"Synapse","description":"A junction where a neuron passes a message to another cell."},{"name":"Working memory","description":"Holding and using information for a short time."}],
- "sources":[{"name":"Society for Neuroscience · Brain Facts","url":"https://www.brainfacts.org/-/media/Brainfacts2/BrainFacts-Book/Brain-Facts-PDF-with-links.pdf"},{"name":"BrainFacts · Synapses and neurotransmission","url":"https://www.brainfacts.org/brain-anatomy-and-function/cells-and-circuits/2022/synapses-and-neurotransmission-113022"},{"name":"BrainFacts · How does the brain learn?","url":"https://www.brainfacts.org/thinking-sensing-and-behaving/learning-and-memory/2023/how-does-the-brain-learn-101923"}],
- "credits":"Built with AI assistance. The activities run in your browser with no accounts, analytics, or saved scores."
+ "neuronNote": "This model slows down one common kind of signal. Real neurons get thousands of messages at once, and some messages make a neuron less likely to fire.",
+ "reaction": {
+  "rounds": 5,
+  "loop": [
+   {
+    "name": "Eyes",
+    "text": "Light from the lamp hits the retina. Rods and cones turn it into electrical signals."
+   },
+   {
+    "name": "Visual cortex",
+    "text": "Signals reach the occipital lobe at the back of your brain, which spots the light."
+   },
+   {
+    "name": "Decision",
+    "text": "Your frontal lobe connects \"light is on\" to the plan you made: press now!"
+   },
+   {
+    "name": "Motor cortex",
+    "text": "The motor cortex sends a command to move your finger."
+   },
+   {
+    "name": "Spinal cord and nerves",
+    "text": "The command zooms down your spinal cord and along nerves to your finger muscles."
+   },
+   {
+    "name": "Muscles",
+    "text": "Your muscles squeeze, and your finger presses. Done!"
+   }
+  ],
+  "note": "Many people score somewhere around 200–300 milliseconds on a test like this. Your device, distractions, tiredness and practice all change the score. It doesn't measure how smart you are."
+ },
+ "memoryCards": [
+  {
+   "key": "neuron",
+   "name": "Neuron",
+   "fact": "A neuron is a nerve cell that sends signals. Your brain has about 86 billion of them."
+  },
+  {
+   "key": "brain",
+   "name": "Cerebrum",
+   "fact": "The cerebrum is the largest part of your brain, split into a left and a right side."
+  },
+  {
+   "key": "cerebellum",
+   "name": "Cerebellum",
+   "fact": "The cerebellum helps you balance and move smoothly."
+  },
+  {
+   "key": "eye",
+   "name": "Eye",
+   "fact": "Your retina has rods for dim light and cones for color."
+  },
+  {
+   "key": "ear",
+   "name": "Ear",
+   "fact": "The snail-shaped cochlea in your inner ear turns sound into nerve signals."
+  },
+  {
+   "key": "spinal",
+   "name": "Spinal cord",
+   "fact": "The spinal cord carries messages between your brain and body, and handles some reflexes all by itself."
+  }
+ ],
+ "quizPerRound": 4,
+ "quiz": [
+  {
+   "prompt": "Which part helps you balance on a bike?",
+   "correct": "Cerebellum",
+   "other1": "Occipital lobe",
+   "other2": "Hippocampus",
+   "explanation": "The cerebellum fine-tunes movement, timing and balance.",
+   "other1Why": "The occipital lobe is mostly for vision.",
+   "other2Why": "The hippocampus helps make new memories."
+  },
+  {
+   "prompt": "Where does the electrical signal travel after a neuron fires?",
+   "correct": "Along the axon",
+   "other1": "Around the skull",
+   "other2": "Back into the dendrites",
+   "explanation": "The action potential travels down the axon to the axon terminals.",
+   "other1Why": "The skull is bone that protects the brain. It doesn't carry signals.",
+   "other2Why": "Dendrites receive messages. The outgoing signal goes down the axon."
+  },
+  {
+   "prompt": "What helps you hold a card's location in mind for a few seconds?",
+   "correct": "Working memory",
+   "other1": "An axon terminal",
+   "other2": "The brainstem's breathing center",
+   "explanation": "Working memory holds and uses information for a short time, like a mental sticky note.",
+   "other1Why": "An axon terminal releases chemical messengers. It doesn't store a memory by itself.",
+   "other2Why": "The brainstem keeps you breathing. It doesn't hold card locations."
+  },
+  {
+   "prompt": "Which lobe is the main vision center?",
+   "correct": "Occipital lobe",
+   "other1": "Frontal lobe",
+   "other2": "Temporal lobe",
+   "explanation": "The occipital lobe, at the back of the head, is where vision signals first reach the cortex.",
+   "other1Why": "The frontal lobe plans and makes choices.",
+   "other2Why": "The temporal lobe helps recognize what things are, but it isn't the first stop for vision."
+  },
+  {
+   "prompt": "At the optic chiasm, what happens to some of the optic nerve fibers?",
+   "correct": "They cross to the other side of the brain",
+   "other1": "They turn into muscles",
+   "other2": "They stop and send nothing on",
+   "explanation": "Fibers from the inner (nose) half of each retina cross over. That way each side of the brain sees the opposite side of the world.",
+   "other1Why": "Nerve fibers stay nerve fibers. Muscles are a different kind of tissue.",
+   "other2Why": "The signals keep going to the thalamus and then to the visual cortex."
+  },
+  {
+   "prompt": "Which part is the brain's relay station for most senses?",
+   "correct": "Thalamus",
+   "other1": "Cerebellum",
+   "other2": "Amygdala",
+   "explanation": "Signals for sight, hearing, touch and taste stop at the thalamus before reaching the cortex.",
+   "other1Why": "The cerebellum helps with balance and smooth movement.",
+   "other2Why": "The amygdala helps with emotions like fear."
+  },
+  {
+   "prompt": "Which sense's signals don't need to stop at the thalamus before reaching the cortex?",
+   "correct": "Smell",
+   "other1": "Hearing",
+   "other2": "Sight",
+   "explanation": "Smell signals go from the olfactory bulb straight to smell areas of the cortex, close to the amygdala and hippocampus.",
+   "other1Why": "Hearing signals stop at a part of the thalamus called the MGN.",
+   "other2Why": "Vision signals stop at a part of the thalamus called the LGN."
+  },
+  {
+   "prompt": "Why can a smell suddenly remind you of a person or place?",
+   "correct": "Smell signals reach memory and emotion areas very quickly",
+   "other1": "Your nose stores memories",
+   "other2": "Smells travel through the cerebellum",
+   "explanation": "Smell signals reach the amygdala and areas right next to the hippocampus in just a step or two.",
+   "other1Why": "Your nose detects smells, but memories are made and stored in the brain.",
+   "other2Why": "The cerebellum helps with movement and balance, not smell."
+  },
+  {
+   "prompt": "You touch a hot pan. What pulls your hand away so fast?",
+   "correct": "A reflex in your spinal cord",
+   "other1": "Your occipital lobe",
+   "other2": "Your hippocampus",
+   "explanation": "The spinal cord sends a 'pull away!' signal back to your arm muscles right away, often before your brain feels the pain.",
+   "other1Why": "The occipital lobe handles vision.",
+   "other2Why": "The hippocampus helps form memories, which might help you remember to be careful next time!"
+  },
+  {
+   "prompt": "What is myelin?",
+   "correct": "A fatty coating that speeds up signals on an axon",
+   "other1": "A kind of brain wrinkle",
+   "other2": "A chemical messenger",
+   "explanation": "Myelin wraps around many axons so signals can jump along much faster.",
+   "other1Why": "Brain wrinkles are folds of cortex, not myelin.",
+   "other2Why": "Chemical messengers are called neurotransmitters."
+  },
+  {
+   "prompt": "What crosses the tiny gap at a chemical synapse?",
+   "correct": "Neurotransmitters",
+   "other1": "Blood cells",
+   "other2": "Light",
+   "explanation": "Neurotransmitters are chemical messengers. They cross the gap and attach to the next cell.",
+   "other1Why": "Blood cells travel in blood vessels, not across synapses.",
+   "other2Why": "Light is detected by the eyes, but the messages between neurons are chemical."
+  },
+  {
+   "prompt": "In the ear, what turns sound vibrations into nerve signals?",
+   "correct": "The cochlea",
+   "other1": "The eardrum alone",
+   "other2": "The thalamus",
+   "explanation": "Tiny hair cells in the snail-shaped cochlea turn vibrations into electrical signals.",
+   "other1Why": "The eardrum vibrates, but the cochlea's hair cells make the nerve signals.",
+   "other2Why": "The thalamus relays hearing signals later. It doesn't detect sound."
+  },
+  {
+   "prompt": "Which area helps you understand the words you hear?",
+   "correct": "Wernicke's area",
+   "other1": "The brainstem",
+   "other2": "The olfactory bulb",
+   "explanation": "Wernicke's area, usually in the left temporal lobe, helps you understand language.",
+   "other1Why": "The brainstem passes hearing signals along, but understanding words happens in the cortex.",
+   "other2Why": "The olfactory bulb handles smell."
+  },
+  {
+   "prompt": "Which part of the cortex starts movements you choose to make?",
+   "correct": "Motor cortex",
+   "other1": "Visual cortex",
+   "other2": "Olfactory cortex",
+   "explanation": "The motor cortex, at the back of the frontal lobe, sends commands to your muscles.",
+   "other1Why": "The visual cortex handles what you see.",
+   "other2Why": "The olfactory cortex handles smell."
+  },
+  {
+   "prompt": "The left side of your brain mostly controls which side of your body?",
+   "correct": "The right side",
+   "other1": "The left side",
+   "other2": "Only your face",
+   "explanation": "Most movement and touch pathways cross over, so each side of the brain works with the opposite side of the body.",
+   "other1Why": "Most pathways cross, so it's the opposite side.",
+   "other2Why": "It works with the whole opposite side of the body, including the arm and leg."
+  },
+  {
+   "prompt": "What happens to the connections between neurons when you practice something?",
+   "correct": "They get stronger",
+   "other1": "They disappear",
+   "other2": "They turn into bone",
+   "explanation": "Neurons that fire together wire together. Practice strengthens the synapses you use.",
+   "other1Why": "Connections you use a lot tend to get stronger, not disappear.",
+   "other2Why": "Neurons and synapses are living cells, not bone."
+  },
+  {
+   "prompt": "Which part runs breathing and heartbeat automatically?",
+   "correct": "Brainstem",
+   "other1": "Frontal lobe",
+   "other2": "Occipital lobe",
+   "explanation": "The brainstem keeps automatic jobs running, even while you sleep.",
+   "other1Why": "The frontal lobe plans and decides. You don't have to think to breathe!",
+   "other2Why": "The occipital lobe is for vision."
+  },
+  {
+   "prompt": "Which parts of your eye work best in dim light?",
+   "correct": "Rods",
+   "other1": "Cones",
+   "other2": "The lens",
+   "explanation": "Rods are very sensitive to light, so they help you see in the dark (mostly in shades of gray).",
+   "other1Why": "Cones need brighter light and let you see color.",
+   "other2Why": "The lens helps focus light, but it doesn't turn light into signals."
+  },
+  {
+   "prompt": "Why do your pupils get smaller in bright light?",
+   "correct": "A reflex through the midbrain",
+   "other1": "Your eyes get tired",
+   "other2": "The cerebellum decides to squint",
+   "explanation": "Light signals go to the midbrain, which sends a signal back to both eyes to shrink the pupils. It happens automatically.",
+   "other1Why": "It's a fast automatic reflex, not tiredness.",
+   "other2Why": "The pupil reflex runs through the midbrain, not the cerebellum."
+  },
+  {
+   "prompt": "After visual signals reach the occipital lobe, where does the 'what is it?' pathway go?",
+   "correct": "Toward the temporal lobe",
+   "other1": "Toward the spinal cord",
+   "other2": "Toward the nose",
+   "explanation": "The 'what' pathway flows down into the temporal lobe to recognize objects and faces. The 'where' pathway flows up into the parietal lobe.",
+   "other1Why": "The spinal cord carries body signals, not object recognition.",
+   "other2Why": "The nose detects smells. Vision pathways stay inside the brain."
+  }
+ ],
+ "glossary": [
+  {
+   "name": "Neuron",
+   "aliases": [
+    "neurons",
+    "nerve cell",
+    "nerve cells"
+   ],
+   "description": "A nerve cell. Neurons send and receive signals."
+  },
+  {
+   "name": "Dendrite",
+   "aliases": [
+    "dendrites"
+   ],
+   "description": "A branch of a neuron that receives messages from other cells."
+  },
+  {
+   "name": "Cell body",
+   "aliases": [],
+   "description": "The main part of a neuron. It holds the nucleus and adds up incoming messages."
+  },
+  {
+   "name": "Axon",
+   "aliases": [
+    "axons"
+   ],
+   "description": "The long cable of a neuron that carries its electrical signal away from the cell body."
+  },
+  {
+   "name": "Axon terminal",
+   "aliases": [
+    "axon terminals",
+    "axon's tips"
+   ],
+   "description": "The tips at the end of an axon that release chemical messengers."
+  },
+  {
+   "name": "Myelin",
+   "aliases": [],
+   "description": "A fatty coating around many axons that makes signals travel faster."
+  },
+  {
+   "name": "Synapse",
+   "aliases": [
+    "synapses"
+   ],
+   "description": "The tiny gap where one neuron passes a message to another cell."
+  },
+  {
+   "name": "Neurotransmitter",
+   "aliases": [
+    "neurotransmitters",
+    "chemical messengers",
+    "chemical messenger"
+   ],
+   "description": "A chemical messenger that carries a signal across a synapse."
+  },
+  {
+   "name": "Action potential",
+   "aliases": [],
+   "description": "The quick electrical signal that travels down an axon when a neuron fires."
+  },
+  {
+   "name": "Threshold",
+   "aliases": [
+    "tipping point"
+   ],
+   "description": "The amount of input a neuron needs before it fires."
+  },
+  {
+   "name": "Cortex",
+   "aliases": [
+    "cerebral cortex"
+   ],
+   "description": "The wrinkly outer layer of the cerebrum, where a lot of thinking and sensing happens."
+  },
+  {
+   "name": "Cerebrum",
+   "aliases": [],
+   "description": "The biggest part of the brain, with a left and a right side."
+  },
+  {
+   "name": "Lobe",
+   "aliases": [
+    "lobes"
+   ],
+   "description": "One of four main areas of each side of the cerebrum: frontal, parietal, temporal and occipital."
+  },
+  {
+   "name": "Frontal lobe",
+   "aliases": [],
+   "description": "The lobe behind your forehead that plans, decides and controls movement."
+  },
+  {
+   "name": "Parietal lobe",
+   "aliases": [],
+   "description": "The lobe at the top-back that handles touch and where things are."
+  },
+  {
+   "name": "Temporal lobe",
+   "aliases": [
+    "temporal lobes"
+   ],
+   "description": "The lobe near your ears that handles hearing, language and recognizing things."
+  },
+  {
+   "name": "Occipital lobe",
+   "aliases": [],
+   "description": "The lobe at the back of your head that handles vision."
+  },
+  {
+   "name": "Cerebellum",
+   "aliases": [],
+   "description": "The 'little brain' at the back that helps with balance and smooth, well-timed movement."
+  },
+  {
+   "name": "Brainstem",
+   "aliases": [],
+   "description": "The stalk connecting the brain to the spinal cord. It runs automatic jobs like breathing."
+  },
+  {
+   "name": "Midbrain",
+   "aliases": [],
+   "description": "The top part of the brainstem. It helps with reflexes like shrinking your pupils."
+  },
+  {
+   "name": "Spinal cord",
+   "aliases": [],
+   "description": "A thick bundle of nerves inside your backbone that carries messages between brain and body."
+  },
+  {
+   "name": "Nerve",
+   "aliases": [
+    "nerves"
+   ],
+   "description": "A bundle of axons that carries signals between your body and your brain or spinal cord."
+  },
+  {
+   "name": "Thalamus",
+   "aliases": [],
+   "description": "A relay station deep in the brain that passes most sense signals on to the cortex."
+  },
+  {
+   "name": "Hippocampus",
+   "aliases": [],
+   "description": "A curved part inside the temporal lobe that helps make new memories."
+  },
+  {
+   "name": "Amygdala",
+   "aliases": [],
+   "description": "An almond-shaped part that helps with emotions like fear."
+  },
+  {
+   "name": "Retina",
+   "aliases": [
+    "retinas"
+   ],
+   "description": "The layer at the back of the eye that senses light."
+  },
+  {
+   "name": "Photoreceptor",
+   "aliases": [
+    "photoreceptors"
+   ],
+   "description": "A light-sensing cell in the retina. Rods and cones are photoreceptors."
+  },
+  {
+   "name": "Rods",
+   "aliases": [
+    "rod"
+   ],
+   "description": "Photoreceptors that work in dim light and see in shades of gray."
+  },
+  {
+   "name": "Cones",
+   "aliases": [
+    "cone"
+   ],
+   "description": "Photoreceptors that work in bright light and let you see color."
+  },
+  {
+   "name": "Cornea",
+   "aliases": [],
+   "description": "The clear dome at the front of the eye. It does most of the bending (focusing) of light."
+  },
+  {
+   "name": "Lens",
+   "aliases": [],
+   "description": "The clear, bendy part inside the eye that fine-tunes the focus so the picture on the retina is sharp."
+  },
+  {
+   "name": "Pupil",
+   "aliases": [
+    "pupils"
+   ],
+   "description": "The dark opening in the middle of your eye that lets light in."
+  },
+  {
+   "name": "Optic nerve",
+   "aliases": [
+    "optic nerves"
+   ],
+   "description": "The nerve that carries signals from the eye to the brain."
+  },
+  {
+   "name": "Optic chiasm",
+   "aliases": [
+    "chiasm"
+   ],
+   "description": "The X-shaped spot where some optic nerve fibers cross to the other side of the brain."
+  },
+  {
+   "name": "Optic tract",
+   "aliases": [
+    "optic tracts"
+   ],
+   "description": "The bundle of fibers that carries vision signals from the optic chiasm to the thalamus."
+  },
+  {
+   "name": "LGN",
+   "aliases": [
+    "lateral geniculate nucleus"
+   ],
+   "description": "The vision relay part of the thalamus."
+  },
+  {
+   "name": "Optic radiations",
+   "aliases": [
+    "optic radiation"
+   ],
+   "description": "Fibers that fan out from the LGN to the visual cortex."
+  },
+  {
+   "name": "Visual cortex",
+   "aliases": [
+    "V1",
+    "primary visual cortex"
+   ],
+   "description": "The area in the occipital lobe that first processes vision."
+  },
+  {
+   "name": "Cochlea",
+   "aliases": [],
+   "description": "The snail-shaped part of the inner ear that turns sound into nerve signals."
+  },
+  {
+   "name": "Auditory nerve",
+   "aliases": [],
+   "description": "The nerve that carries sound signals from the cochlea to the brainstem."
+  },
+  {
+   "name": "MGN",
+   "aliases": [
+    "medial geniculate nucleus"
+   ],
+   "description": "The hearing relay part of the thalamus."
+  },
+  {
+   "name": "Auditory cortex",
+   "aliases": [],
+   "description": "The area in the temporal lobe that processes sounds."
+  },
+  {
+   "name": "Wernicke's area",
+   "aliases": [],
+   "description": "An area, usually in the left temporal lobe, that helps you understand language."
+  },
+  {
+   "name": "Olfactory bulb",
+   "aliases": [
+    "olfactory bulbs"
+   ],
+   "description": "The first brain stop for smell signals, just above your nose."
+  },
+  {
+   "name": "Olfactory cortex",
+   "aliases": [],
+   "description": "The part of the cortex that processes smells."
+  },
+  {
+   "name": "Motor cortex",
+   "aliases": [],
+   "description": "A strip at the back of the frontal lobe that starts voluntary movements."
+  },
+  {
+   "name": "Somatosensory cortex",
+   "aliases": [
+    "touch strip"
+   ],
+   "description": "A strip at the front of the parietal lobe that feels touch, temperature and pain."
+  },
+  {
+   "name": "Receptor",
+   "aliases": [
+    "receptors"
+   ],
+   "description": "A cell or part of a cell that detects something, like heat, light or a chemical."
+  },
+  {
+   "name": "Reflex",
+   "aliases": [
+    "reflexes",
+    "reflex arc"
+   ],
+   "description": "A fast, automatic response that happens without you deciding to do it."
+  },
+  {
+   "name": "Interneuron",
+   "aliases": [
+    "interneurons"
+   ],
+   "description": "A neuron that connects other neurons, for example inside the spinal cord."
+  },
+  {
+   "name": "Working memory",
+   "aliases": [],
+   "description": "Holding and using information for a short time, like a mental sticky note."
+  },
+  {
+   "name": "Neuroscientist",
+   "aliases": [
+    "neuroscientists",
+    "Junior Neuroscientist"
+   ],
+   "description": "A scientist who studies the brain and nervous system."
+  }
+ ],
+ "sources": [
+  {
+   "name": "Society for Neuroscience · Brain Facts book (PDF)",
+   "url": "https://www.brainfacts.org/-/media/Brainfacts2/BrainFacts-Book/Brain-Facts-PDF-with-links.pdf"
+  },
+  {
+   "name": "BrainFacts · The brain and nervous system",
+   "url": "https://www.brainfacts.org/brain-anatomy-and-function/anatomy/2012/the-brain-and-nervous-system"
+  },
+  {
+   "name": "BrainFacts · Synapses and neurotransmission",
+   "url": "https://www.brainfacts.org/brain-anatomy-and-function/cells-and-circuits/2022/synapses-and-neurotransmission-113022"
+  },
+  {
+   "name": "BrainFacts · How does the brain learn?",
+   "url": "https://www.brainfacts.org/thinking-sensing-and-behaving/learning-and-memory/2023/how-does-the-brain-learn-101923"
+  },
+  {
+   "name": "BrainFacts · Vision: it all starts with light",
+   "url": "https://www.brainfacts.org/thinking-sensing-and-behaving/vision/2012/vision-it-all-starts-with-light"
+  },
+  {
+   "name": "BrainFacts · Smell",
+   "url": "https://www.brainfacts.org/thinking-sensing-and-behaving/smell/2012/smell"
+  },
+  {
+   "name": "BrainFacts · 3D Brain",
+   "url": "https://www.brainfacts.org/3d-brain"
+  },
+  {
+   "name": "NIH NINDS · Brain basics: know your brain",
+   "url": "https://www.ninds.nih.gov/health-information/public-education/brain-basics/brain-basics-know-your-brain"
+  },
+  {
+   "name": "NIH NINDS · Brain basics: the life and death of a neuron",
+   "url": "https://www.ninds.nih.gov/health-information/public-education/brain-basics/brain-basics-life-and-death-neuron"
+  },
+  {
+   "name": "Neuroscience for Kids (Eric Chudler, University of Washington)",
+   "url": "https://faculty.washington.edu/chudler/neurok.html"
+  },
+  {
+   "name": "Neuroscience for Kids · Brain lobes",
+   "url": "https://faculty.washington.edu/chudler/lobe.html"
+  },
+  {
+   "name": "Neuroscience for Kids · Neurons",
+   "url": "https://faculty.washington.edu/chudler/cells.html"
+  },
+  {
+   "name": "Neuroscience for Kids · The action potential",
+   "url": "https://faculty.washington.edu/chudler/ap.html"
+  },
+  {
+   "name": "Neuroscience for Kids · Brain plasticity",
+   "url": "https://faculty.washington.edu/chudler/plast.html"
+  },
+  {
+   "name": "OpenStax Anatomy & Physiology 2e · 14.1 Sensory perception",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/14-1-sensory-perception"
+  },
+  {
+   "name": "OpenStax Anatomy & Physiology 2e · 14.2 Central processing",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/14-2-central-processing"
+  },
+  {
+   "name": "OpenStax Anatomy & Physiology 2e · 12.4 The action potential",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-4-the-action-potential"
+  },
+  {
+   "name": "OpenStax Anatomy & Physiology 2e · 12.5 Communication between neurons",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-5-communication-between-neurons"
+  },
+  {
+   "name": "Kenhub · Optic chiasm",
+   "url": "https://www.kenhub.com/en/library/anatomy/optic-chiasm"
+  },
+  {
+   "name": "Kenhub · Thalamus",
+   "url": "https://www.kenhub.com/en/library/anatomy/thalamus"
+  },
+  {
+   "name": "Kenhub · Auditory pathway",
+   "url": "https://www.kenhub.com/en/library/anatomy/auditory-pathway"
+  },
+  {
+   "name": "Kenhub · Cerebellum",
+   "url": "https://www.kenhub.com/en/library/anatomy/cerebellum-gross-anatomy"
+  }
+ ],
+ "credits": "Made with AI assistance (Claude by Anthropic) for curious kids. All illustrations, the Sparky character and the 3D brain are original and drawn with code. Three.js (MIT license) powers the 3D view. Fonts: Fredoka and Atkinson Hyperlegible (SIL Open Font License). No accounts, ads, analytics or cookies. Only your badges are saved, on this device.",
+ "certificate": {
+  "title": "Junior Neuroscientist",
+  "text": "has explored the brain, fired a neuron, tested their reactions, trained their working memory, followed signals through the Brain Playhouse and beaten the Quiz Boss."
+ },
+ "playhouse": {
+  "intro": "Pick a moment and watch your brain do it! Drag to turn the brain, and use the buttons to play or step through.",
+  "structures": [
+   {
+    "id": "eyeL",
+    "name": "Left eye",
+    "about": "Light comes in through the cornea and pupil, and gets focused onto the retina.",
+    "position": {
+     "x": -0.32,
+     "y": -0.05,
+     "z": 1.25
+    },
+    "color": "#e8f4ff",
+    "size": 0.14,
+    "region": ""
+   },
+   {
+    "id": "eyeR",
+    "name": "Right eye",
+    "about": "Light comes in through the cornea and pupil, and gets focused onto the retina.",
+    "position": {
+     "x": 0.32,
+     "y": -0.05,
+     "z": 1.25
+    },
+    "color": "#e8f4ff",
+    "size": 0.14,
+    "region": ""
+   },
+   {
+    "id": "retina",
+    "name": "Retina",
+    "about": "The light-sensing layer at the back of the eye.",
+    "position": {
+     "x": 0.32,
+     "y": -0.05,
+     "z": 1.12
+    },
+    "color": "#ff9e7a",
+    "size": 0.06,
+    "region": ""
+   },
+   {
+    "id": "opticNerve",
+    "name": "Optic nerve",
+    "about": "Carries signals from the eye toward the brain.",
+    "position": {
+     "x": 0.2,
+     "y": -0.11,
+     "z": 0.9
+    },
+    "color": "#7cf7ff",
+    "size": 0.05,
+    "region": ""
+   },
+   {
+    "id": "chiasm",
+    "name": "Optic chiasm",
+    "about": "The X where fibers from the inner half of each retina cross.",
+    "position": {
+     "x": 0,
+     "y": -0.15,
+     "z": 0.6
+    },
+    "color": "#ffe066",
+    "size": 0.035,
+    "region": ""
+   },
+   {
+    "id": "opticTract",
+    "name": "Optic tract",
+    "about": "Carries vision signals from the chiasm to the thalamus.",
+    "position": {
+     "x": 0.18,
+     "y": -0.06,
+     "z": 0.26
+    },
+    "color": "#7cf7ff",
+    "size": 0.05,
+    "region": ""
+   },
+   {
+    "id": "lgn",
+    "name": "LGN (thalamus)",
+    "about": "The vision relay station in the thalamus.",
+    "position": {
+     "x": 0.22,
+     "y": 0.08,
+     "z": 0.0
+    },
+    "color": "#ff8fcf",
+    "size": 0.07,
+    "region": "thalamus"
+   },
+   {
+    "id": "v1",
+    "name": "Primary visual cortex (V1)",
+    "about": "Finds edges, lines and contrast.",
+    "position": {
+     "x": 0.0,
+     "y": 0.22,
+     "z": -0.93
+    },
+    "color": "#5fb4ff",
+    "size": 0.09,
+    "region": "occipital"
+   },
+   {
+    "id": "v2",
+    "name": "V2 and beyond",
+    "about": "Builds edges into shapes and patterns.",
+    "position": {
+     "x": 0.3,
+     "y": 0.34,
+     "z": -0.74
+    },
+    "color": "#5fb4ff",
+    "size": 0.07,
+    "region": "occipital"
+   },
+   {
+    "id": "temporal",
+    "name": "Temporal lobe (what)",
+    "about": "Recognizes objects and faces: 'It's a lamp!'",
+    "position": {
+     "x": 0.6,
+     "y": -0.06,
+     "z": 0.1
+    },
+    "color": "#69d68c",
+    "size": 0.09,
+    "region": "temporal"
+   },
+   {
+    "id": "parietal",
+    "name": "Parietal lobe (where)",
+    "about": "Works out where things are: 'It's on my left!'",
+    "position": {
+     "x": 0.4,
+     "y": 0.7,
+     "z": -0.38
+    },
+    "color": "#ffcf4a",
+    "size": 0.09,
+    "region": "parietal"
+   },
+   {
+    "id": "midbrain",
+    "name": "Midbrain",
+    "about": "Top of the brainstem. Runs fast reflexes like the pupil reflex.",
+    "position": {
+     "x": 0,
+     "y": -0.08,
+     "z": -0.18
+    },
+    "color": "#3fd0d4",
+    "size": 0.07,
+    "region": "brainstem"
+   },
+   {
+    "id": "pupil",
+    "name": "Pupils",
+    "about": "The openings that let light into your eyes.",
+    "position": {
+     "x": -0.32,
+     "y": -0.05,
+     "z": 1.39
+    },
+    "color": "#1b2440",
+    "size": 0.05,
+    "region": ""
+   },
+   {
+    "id": "skin",
+    "name": "Skin receptors",
+    "about": "Heat sensors in the skin of your fingertip.",
+    "position": {
+     "x": 0.95,
+     "y": -2.02,
+     "z": 0.58
+    },
+    "color": "#ffa94d",
+    "size": 0.07,
+    "region": ""
+   },
+   {
+    "id": "spinalCord",
+    "name": "Spinal cord",
+    "about": "The nerve highway inside your backbone. It can run reflexes by itself.",
+    "position": {
+     "x": 0.0,
+     "y": -1.5,
+     "z": -0.42
+    },
+    "color": "#3fd0d4",
+    "size": 0.08,
+    "region": ""
+   },
+   {
+    "id": "muscle",
+    "name": "Arm muscle",
+    "about": "Muscles pull on bones to move your arm.",
+    "position": {
+     "x": 0.7,
+     "y": -1.55,
+     "z": 0.15
+    },
+    "color": "#ff6f91",
+    "size": 0.08,
+    "region": ""
+   },
+   {
+    "id": "thalamus",
+    "name": "Thalamus",
+    "about": "The brain's relay station for most senses.",
+    "position": {
+     "x": -0.18,
+     "y": 0.12,
+     "z": -0.02
+    },
+    "color": "#ff8fcf",
+    "size": 0.08,
+    "region": "thalamus"
+   },
+   {
+    "id": "somatosensory",
+    "name": "Somatosensory cortex",
+    "about": "The touch strip in the parietal lobe that feels where and what.",
+    "position": {
+     "x": -0.42,
+     "y": 0.7,
+     "z": -0.12
+    },
+    "color": "#ffcf4a",
+    "size": 0.08,
+    "region": "parietal"
+   },
+   {
+    "id": "ear",
+    "name": "Outer ear",
+    "about": "Funnels sound waves into your ear canal.",
+    "position": {
+     "x": 0.88,
+     "y": -0.05,
+     "z": 0.05
+    },
+    "color": "#ffd6b0",
+    "size": 0.09,
+    "region": ""
+   },
+   {
+    "id": "cochlea",
+    "name": "Cochlea",
+    "about": "Snail-shaped inner ear part whose hair cells turn vibrations into signals.",
+    "position": {
+     "x": 0.7,
+     "y": -0.12,
+     "z": 0.05
+    },
+    "color": "#ffa94d",
+    "size": 0.06,
+    "region": ""
+   },
+   {
+    "id": "brainstem",
+    "name": "Brainstem",
+    "about": "Hearing signals pass through several brainstem stops.",
+    "position": {
+     "x": 0.1,
+     "y": -0.42,
+     "z": -0.28
+    },
+    "color": "#3fd0d4",
+    "size": 0.08,
+    "region": "brainstem"
+   },
+   {
+    "id": "mgn",
+    "name": "MGN (thalamus)",
+    "about": "The hearing relay station in the thalamus.",
+    "position": {
+     "x": -0.24,
+     "y": 0.06,
+     "z": -0.1
+    },
+    "color": "#ff8fcf",
+    "size": 0.07,
+    "region": "thalamus"
+   },
+   {
+    "id": "auditoryCortex",
+    "name": "Auditory cortex",
+    "about": "Sorts out pitch, loudness and patterns of sound.",
+    "position": {
+     "x": -0.6,
+     "y": 0.15,
+     "z": 0.0
+    },
+    "color": "#69d68c",
+    "size": 0.08,
+    "region": "temporal"
+   },
+   {
+    "id": "wernicke",
+    "name": "Wernicke's area",
+    "about": "Understands words, usually on the left side.",
+    "position": {
+     "x": -0.62,
+     "y": 0.2,
+     "z": -0.3
+    },
+    "color": "#69d68c",
+    "size": 0.08,
+    "region": "temporal"
+   },
+   {
+    "id": "ball",
+    "name": "Ball",
+    "about": "Here it comes!",
+    "position": {
+     "x": 0.75,
+     "y": 0.25,
+     "z": 2.3
+    },
+    "color": "#ff8a5b",
+    "size": 0.12,
+    "region": ""
+   },
+   {
+    "id": "motorCortex",
+    "name": "Motor cortex",
+    "about": "Plans and starts movements you choose.",
+    "position": {
+     "x": -0.4,
+     "y": 0.72,
+     "z": 0.08
+    },
+    "color": "#ff8a5b",
+    "size": 0.08,
+    "region": "frontal"
+   },
+   {
+    "id": "cerebellum",
+    "name": "Cerebellum",
+    "about": "Times and smooths movements.",
+    "position": {
+     "x": 0.25,
+     "y": -0.28,
+     "z": -0.72
+    },
+    "color": "#c08cff",
+    "size": 0.1,
+    "region": "cerebellum"
+   },
+   {
+    "id": "hand",
+    "name": "Hand muscles",
+    "about": "Muscles in your arm and hand close your fingers.",
+    "position": {
+     "x": 0.95,
+     "y": -2.02,
+     "z": 0.58
+    },
+    "color": "#ff6f91",
+    "size": 0.08,
+    "region": ""
+   },
+   {
+    "id": "nose",
+    "name": "Nose",
+    "about": "Smell receptors high up inside your nose catch smell molecules.",
+    "position": {
+     "x": 0,
+     "y": -0.32,
+     "z": 1.32
+    },
+    "color": "#ffd6b0",
+    "size": 0.08,
+    "region": ""
+   },
+   {
+    "id": "olfactoryBulb",
+    "name": "Olfactory bulb",
+    "about": "The first brain stop for smell.",
+    "position": {
+     "x": 0,
+     "y": -0.2,
+     "z": 0.78
+    },
+    "color": "#b9f26a",
+    "size": 0.07,
+    "region": ""
+   },
+   {
+    "id": "olfactoryCortex",
+    "name": "Olfactory cortex",
+    "about": "Smell area of the cortex that recognizes 'cookies!'",
+    "position": {
+     "x": -0.28,
+     "y": -0.18,
+     "z": 0.32
+    },
+    "color": "#69d68c",
+    "size": 0.07,
+    "region": "temporal"
+   },
+   {
+    "id": "amygdala",
+    "name": "Amygdala",
+    "about": "Adds feelings to the smell: happy, cozy!",
+    "position": {
+     "x": -0.32,
+     "y": -0.15,
+     "z": 0.18
+    },
+    "color": "#ff5c7a",
+    "size": 0.07,
+    "region": "amygdala"
+   },
+   {
+    "id": "hippocampus",
+    "name": "Hippocampus",
+    "about": "Connects the smell to memories: Grandma's kitchen!",
+    "position": {
+     "x": -0.33,
+     "y": -0.1,
+     "z": -0.16
+    },
+    "color": "#b9f26a",
+    "size": 0.08,
+    "region": "hippocampus"
+   },
+   {
+    "id": "frontal",
+    "name": "Frontal lobe",
+    "about": "Thinks about the memory and decides what to do.",
+    "position": {
+     "x": -0.15,
+     "y": 0.55,
+     "z": 0.62
+    },
+    "color": "#ff8a5b",
+    "size": 0.09,
+    "region": "frontal"
+   },
+   {
+    "id": "occipital",
+    "name": "Occipital lobe",
+    "about": "Watches what you're learning to do.",
+    "position": {
+     "x": -0.2,
+     "y": 0.25,
+     "z": -0.88
+    },
+    "color": "#5fb4ff",
+    "size": 0.08,
+    "region": "occipital"
+   }
+  ],
+  "pathways": [
+   {
+    "id": "nerveL",
+    "color": "#7cf7ff",
+    "points": [
+     {
+      "x": -0.32,
+      "y": -0.05,
+      "z": 1.12
+     },
+     {
+      "x": -0.26,
+      "y": -0.1,
+      "z": 0.95
+     },
+     {
+      "x": -0.12,
+      "y": -0.14,
+      "z": 0.72
+     }
+    ]
+   },
+   {
+    "id": "nerveR",
+    "color": "#7cf7ff",
+    "points": [
+     {
+      "x": 0.32,
+      "y": -0.05,
+      "z": 1.12
+     },
+     {
+      "x": 0.26,
+      "y": -0.1,
+      "z": 0.95
+     },
+     {
+      "x": 0.12,
+      "y": -0.14,
+      "z": 0.72
+     }
+    ]
+   },
+   {
+    "id": "crossL2R",
+    "color": "#ffe066",
+    "points": [
+     {
+      "x": -0.12,
+      "y": -0.14,
+      "z": 0.72
+     },
+     {
+      "x": 0,
+      "y": -0.15,
+      "z": 0.6
+     },
+     {
+      "x": 0.13,
+      "y": -0.12,
+      "z": 0.46
+     }
+    ]
+   },
+   {
+    "id": "crossR2L",
+    "color": "#ffe066",
+    "points": [
+     {
+      "x": 0.12,
+      "y": -0.14,
+      "z": 0.72
+     },
+     {
+      "x": 0,
+      "y": -0.15,
+      "z": 0.6
+     },
+     {
+      "x": -0.13,
+      "y": -0.12,
+      "z": 0.46
+     }
+    ]
+   },
+   {
+    "id": "stayL",
+    "color": "#7cf7ff",
+    "points": [
+     {
+      "x": -0.12,
+      "y": -0.14,
+      "z": 0.72
+     },
+     {
+      "x": -0.08,
+      "y": -0.15,
+      "z": 0.6
+     },
+     {
+      "x": -0.13,
+      "y": -0.12,
+      "z": 0.46
+     }
+    ]
+   },
+   {
+    "id": "stayR",
+    "color": "#7cf7ff",
+    "points": [
+     {
+      "x": 0.12,
+      "y": -0.14,
+      "z": 0.72
+     },
+     {
+      "x": 0.08,
+      "y": -0.15,
+      "z": 0.6
+     },
+     {
+      "x": 0.13,
+      "y": -0.12,
+      "z": 0.46
+     }
+    ]
+   },
+   {
+    "id": "tractL",
+    "color": "#7cf7ff",
+    "points": [
+     {
+      "x": -0.13,
+      "y": -0.12,
+      "z": 0.46
+     },
+     {
+      "x": -0.2,
+      "y": -0.04,
+      "z": 0.22
+     },
+     {
+      "x": -0.22,
+      "y": 0.08,
+      "z": 0.02
+     }
+    ]
+   },
+   {
+    "id": "tractR",
+    "color": "#7cf7ff",
+    "points": [
+     {
+      "x": 0.13,
+      "y": -0.12,
+      "z": 0.46
+     },
+     {
+      "x": 0.2,
+      "y": -0.04,
+      "z": 0.22
+     },
+     {
+      "x": 0.22,
+      "y": 0.08,
+      "z": 0.02
+     }
+    ]
+   },
+   {
+    "id": "radiationL",
+    "color": "#7cf7ff",
+    "points": [
+     {
+      "x": -0.22,
+      "y": 0.08,
+      "z": 0.0
+     },
+     {
+      "x": -0.34,
+      "y": 0.1,
+      "z": -0.35
+     },
+     {
+      "x": -0.22,
+      "y": 0.18,
+      "z": -0.72
+     },
+     {
+      "x": -0.08,
+      "y": 0.22,
+      "z": -0.92
+     }
+    ]
+   },
+   {
+    "id": "radiationR",
+    "color": "#7cf7ff",
+    "points": [
+     {
+      "x": 0.22,
+      "y": 0.08,
+      "z": 0.0
+     },
+     {
+      "x": 0.34,
+      "y": 0.1,
+      "z": -0.35
+     },
+     {
+      "x": 0.22,
+      "y": 0.18,
+      "z": -0.72
+     },
+     {
+      "x": 0.08,
+      "y": 0.22,
+      "z": -0.92
+     }
+    ]
+   },
+   {
+    "id": "v1v2L",
+    "color": "#5fb4ff",
+    "points": [
+     {
+      "x": -0.08,
+      "y": 0.22,
+      "z": -0.92
+     },
+     {
+      "x": -0.22,
+      "y": 0.3,
+      "z": -0.84
+     },
+     {
+      "x": -0.3,
+      "y": 0.34,
+      "z": -0.74
+     }
+    ]
+   },
+   {
+    "id": "v1v2R",
+    "color": "#5fb4ff",
+    "points": [
+     {
+      "x": 0.08,
+      "y": 0.22,
+      "z": -0.92
+     },
+     {
+      "x": 0.22,
+      "y": 0.3,
+      "z": -0.84
+     },
+     {
+      "x": 0.3,
+      "y": 0.34,
+      "z": -0.74
+     }
+    ]
+   },
+   {
+    "id": "whatL",
+    "color": "#69d68c",
+    "points": [
+     {
+      "x": -0.3,
+      "y": 0.32,
+      "z": -0.74
+     },
+     {
+      "x": -0.5,
+      "y": 0.06,
+      "z": -0.5
+     },
+     {
+      "x": -0.6,
+      "y": -0.05,
+      "z": -0.15
+     },
+     {
+      "x": -0.6,
+      "y": -0.06,
+      "z": 0.1
+     }
+    ]
+   },
+   {
+    "id": "whatR",
+    "color": "#69d68c",
+    "points": [
+     {
+      "x": 0.3,
+      "y": 0.32,
+      "z": -0.74
+     },
+     {
+      "x": 0.5,
+      "y": 0.06,
+      "z": -0.5
+     },
+     {
+      "x": 0.6,
+      "y": -0.05,
+      "z": -0.15
+     },
+     {
+      "x": 0.6,
+      "y": -0.06,
+      "z": 0.1
+     }
+    ]
+   },
+   {
+    "id": "whereL",
+    "color": "#ffcf4a",
+    "points": [
+     {
+      "x": -0.3,
+      "y": 0.36,
+      "z": -0.74
+     },
+     {
+      "x": -0.36,
+      "y": 0.6,
+      "z": -0.6
+     },
+     {
+      "x": -0.4,
+      "y": 0.7,
+      "z": -0.38
+     }
+    ]
+   },
+   {
+    "id": "whereR",
+    "color": "#ffcf4a",
+    "points": [
+     {
+      "x": 0.3,
+      "y": 0.36,
+      "z": -0.74
+     },
+     {
+      "x": 0.36,
+      "y": 0.6,
+      "z": -0.6
+     },
+     {
+      "x": 0.4,
+      "y": 0.7,
+      "z": -0.38
+     }
+    ]
+   },
+   {
+    "id": "pupilIn",
+    "color": "#7cf7ff",
+    "points": [
+     {
+      "x": 0.2,
+      "y": -0.04,
+      "z": 0.22
+     },
+     {
+      "x": 0.08,
+      "y": -0.06,
+      "z": -0.05
+     },
+     {
+      "x": 0,
+      "y": -0.08,
+      "z": -0.18
+     }
+    ]
+   },
+   {
+    "id": "pupilOutL",
+    "color": "#3fd0d4",
+    "points": [
+     {
+      "x": 0,
+      "y": -0.1,
+      "z": -0.16
+     },
+     {
+      "x": -0.1,
+      "y": -0.2,
+      "z": 0.3
+     },
+     {
+      "x": -0.25,
+      "y": -0.12,
+      "z": 0.95
+     },
+     {
+      "x": -0.32,
+      "y": -0.05,
+      "z": 1.32
+     }
+    ]
+   },
+   {
+    "id": "pupilOutR",
+    "color": "#3fd0d4",
+    "points": [
+     {
+      "x": 0,
+      "y": -0.1,
+      "z": -0.16
+     },
+     {
+      "x": 0.1,
+      "y": -0.2,
+      "z": 0.3
+     },
+     {
+      "x": 0.25,
+      "y": -0.12,
+      "z": 0.95
+     },
+     {
+      "x": 0.32,
+      "y": -0.05,
+      "z": 1.32
+     }
+    ]
+   },
+   {
+    "id": "armSensory",
+    "color": "#ffa94d",
+    "points": [
+     {
+      "x": 0.95,
+      "y": -2.02,
+      "z": 0.58
+     },
+     {
+      "x": 0.8,
+      "y": -1.75,
+      "z": 0.25
+     },
+     {
+      "x": 0.5,
+      "y": -1.45,
+      "z": -0.1
+     },
+     {
+      "x": 0.06,
+      "y": -1.48,
+      "z": -0.4
+     }
+    ]
+   },
+   {
+    "id": "reflexLoop",
+    "color": "#3fd0d4",
+    "points": [
+     {
+      "x": 0.06,
+      "y": -1.48,
+      "z": -0.4
+     },
+     {
+      "x": 0.0,
+      "y": -1.53,
+      "z": -0.44
+     },
+     {
+      "x": 0.06,
+      "y": -1.58,
+      "z": -0.4
+     }
+    ]
+   },
+   {
+    "id": "armMotor",
+    "color": "#ff6f91",
+    "points": [
+     {
+      "x": 0.06,
+      "y": -1.58,
+      "z": -0.4
+     },
+     {
+      "x": 0.45,
+      "y": -1.56,
+      "z": -0.15
+     },
+     {
+      "x": 0.7,
+      "y": -1.55,
+      "z": 0.15
+     }
+    ]
+   },
+   {
+    "id": "painUp",
+    "color": "#ffa94d",
+    "points": [
+     {
+      "x": 0.04,
+      "y": -1.5,
+      "z": -0.41
+     },
+     {
+      "x": -0.05,
+      "y": -1.42,
+      "z": -0.42
+     },
+     {
+      "x": -0.06,
+      "y": -0.85,
+      "z": -0.39
+     },
+     {
+      "x": -0.08,
+      "y": -0.4,
+      "z": -0.3
+     },
+     {
+      "x": -0.15,
+      "y": 0.06,
+      "z": -0.06
+     },
+     {
+      "x": -0.18,
+      "y": 0.12,
+      "z": -0.02
+     }
+    ]
+   },
+   {
+    "id": "thalToTouch",
+    "color": "#ffa94d",
+    "points": [
+     {
+      "x": -0.18,
+      "y": 0.12,
+      "z": -0.02
+     },
+     {
+      "x": -0.3,
+      "y": 0.42,
+      "z": -0.08
+     },
+     {
+      "x": -0.42,
+      "y": 0.7,
+      "z": -0.12
+     }
+    ]
+   },
+   {
+    "id": "soundIn",
+    "color": "#ffd6b0",
+    "points": [
+     {
+      "x": 1.3,
+      "y": 0.05,
+      "z": 0.25
+     },
+     {
+      "x": 0.88,
+      "y": -0.05,
+      "z": 0.05
+     },
+     {
+      "x": 0.7,
+      "y": -0.12,
+      "z": 0.05
+     }
+    ]
+   },
+   {
+    "id": "auditoryNerve",
+    "color": "#ffa94d",
+    "points": [
+     {
+      "x": 0.7,
+      "y": -0.12,
+      "z": 0.05
+     },
+     {
+      "x": 0.4,
+      "y": -0.3,
+      "z": -0.1
+     },
+     {
+      "x": 0.1,
+      "y": -0.42,
+      "z": -0.28
+     }
+    ]
+   },
+   {
+    "id": "audUpL",
+    "color": "#ffa94d",
+    "points": [
+     {
+      "x": 0.1,
+      "y": -0.42,
+      "z": -0.28
+     },
+     {
+      "x": 0.02,
+      "y": -0.3,
+      "z": -0.3
+     },
+     {
+      "x": -0.08,
+      "y": -0.1,
+      "z": -0.25
+     }
+    ]
+   },
+   {
+    "id": "audUpR",
+    "color": "#ffa94d",
+    "points": [
+     {
+      "x": 0.1,
+      "y": -0.42,
+      "z": -0.28
+     },
+     {
+      "x": 0.1,
+      "y": -0.3,
+      "z": -0.3
+     },
+     {
+      "x": 0.08,
+      "y": -0.1,
+      "z": -0.25
+     }
+    ]
+   },
+   {
+    "id": "icMgnL",
+    "color": "#ffa94d",
+    "points": [
+     {
+      "x": -0.08,
+      "y": -0.1,
+      "z": -0.25
+     },
+     {
+      "x": -0.2,
+      "y": 0.0,
+      "z": -0.15
+     },
+     {
+      "x": -0.24,
+      "y": 0.06,
+      "z": -0.1
+     }
+    ]
+   },
+   {
+    "id": "icMgnR",
+    "color": "#ffa94d",
+    "points": [
+     {
+      "x": 0.08,
+      "y": -0.1,
+      "z": -0.25
+     },
+     {
+      "x": 0.2,
+      "y": 0.0,
+      "z": -0.15
+     },
+     {
+      "x": 0.24,
+      "y": 0.06,
+      "z": -0.1
+     }
+    ]
+   },
+   {
+    "id": "mgnA1L",
+    "color": "#ffa94d",
+    "points": [
+     {
+      "x": -0.24,
+      "y": 0.06,
+      "z": -0.1
+     },
+     {
+      "x": -0.45,
+      "y": 0.1,
+      "z": -0.02
+     },
+     {
+      "x": -0.6,
+      "y": 0.15,
+      "z": 0.0
+     }
+    ]
+   },
+   {
+    "id": "mgnA1R",
+    "color": "#ffa94d",
+    "points": [
+     {
+      "x": 0.24,
+      "y": 0.06,
+      "z": -0.1
+     },
+     {
+      "x": 0.45,
+      "y": 0.1,
+      "z": -0.02
+     },
+     {
+      "x": 0.6,
+      "y": 0.15,
+      "z": 0.0
+     }
+    ]
+   },
+   {
+    "id": "a1Wernicke",
+    "color": "#69d68c",
+    "points": [
+     {
+      "x": -0.6,
+      "y": 0.15,
+      "z": 0.0
+     },
+     {
+      "x": -0.66,
+      "y": 0.18,
+      "z": -0.15
+     },
+     {
+      "x": -0.62,
+      "y": 0.2,
+      "z": -0.3
+     }
+    ]
+   },
+   {
+    "id": "ballFlight",
+    "color": "#ff8a5b",
+    "points": [
+     {
+      "x": 0.75,
+      "y": 0.25,
+      "z": 2.3
+     },
+     {
+      "x": 0.5,
+      "y": 0.1,
+      "z": 1.9
+     },
+     {
+      "x": 0.2,
+      "y": -0.02,
+      "z": 1.5
+     }
+    ]
+   },
+   {
+    "id": "parietalMotorL",
+    "color": "#ffcf4a",
+    "points": [
+     {
+      "x": -0.4,
+      "y": 0.7,
+      "z": -0.38
+     },
+     {
+      "x": -0.44,
+      "y": 0.76,
+      "z": -0.15
+     },
+     {
+      "x": -0.4,
+      "y": 0.72,
+      "z": 0.08
+     }
+    ]
+   },
+   {
+    "id": "motorCerebellum",
+    "color": "#c08cff",
+    "points": [
+     {
+      "x": -0.4,
+      "y": 0.72,
+      "z": 0.08
+     },
+     {
+      "x": -0.2,
+      "y": 0.2,
+      "z": -0.1
+     },
+     {
+      "x": -0.05,
+      "y": -0.35,
+      "z": -0.32
+     },
+     {
+      "x": 0.25,
+      "y": -0.28,
+      "z": -0.72
+     }
+    ]
+   },
+   {
+    "id": "cerebellumMotor",
+    "color": "#c08cff",
+    "points": [
+     {
+      "x": 0.25,
+      "y": -0.28,
+      "z": -0.72
+     },
+     {
+      "x": 0.05,
+      "y": -0.1,
+      "z": -0.3
+     },
+     {
+      "x": -0.16,
+      "y": 0.12,
+      "z": 0.0
+     },
+     {
+      "x": -0.4,
+      "y": 0.72,
+      "z": 0.08
+     }
+    ]
+   },
+   {
+    "id": "motorDown",
+    "color": "#ff8a5b",
+    "points": [
+     {
+      "x": -0.4,
+      "y": 0.72,
+      "z": 0.08
+     },
+     {
+      "x": -0.2,
+      "y": 0.2,
+      "z": -0.15
+     },
+     {
+      "x": -0.05,
+      "y": -0.5,
+      "z": -0.33
+     },
+     {
+      "x": 0.03,
+      "y": -0.82,
+      "z": -0.38
+     },
+     {
+      "x": 0.05,
+      "y": -1.35,
+      "z": -0.41
+     }
+    ]
+   },
+   {
+    "id": "cordToHand",
+    "color": "#ff6f91",
+    "points": [
+     {
+      "x": 0.05,
+      "y": -1.35,
+      "z": -0.41
+     },
+     {
+      "x": 0.4,
+      "y": -1.3,
+      "z": -0.2
+     },
+     {
+      "x": 0.7,
+      "y": -1.55,
+      "z": 0.15
+     },
+     {
+      "x": 0.95,
+      "y": -2.02,
+      "z": 0.58
+     }
+    ]
+   },
+   {
+    "id": "sniff",
+    "color": "#b9f26a",
+    "points": [
+     {
+      "x": 0,
+      "y": -0.42,
+      "z": 1.6
+     },
+     {
+      "x": 0,
+      "y": -0.32,
+      "z": 1.32
+     },
+     {
+      "x": 0,
+      "y": -0.25,
+      "z": 1.0
+     },
+     {
+      "x": 0,
+      "y": -0.2,
+      "z": 0.8
+     }
+    ]
+   },
+   {
+    "id": "bulbCortexL",
+    "color": "#b9f26a",
+    "points": [
+     {
+      "x": -0.04,
+      "y": -0.2,
+      "z": 0.78
+     },
+     {
+      "x": -0.2,
+      "y": -0.2,
+      "z": 0.5
+     },
+     {
+      "x": -0.28,
+      "y": -0.18,
+      "z": 0.32
+     }
+    ]
+   },
+   {
+    "id": "bulbCortexR",
+    "color": "#b9f26a",
+    "points": [
+     {
+      "x": 0.04,
+      "y": -0.2,
+      "z": 0.78
+     },
+     {
+      "x": 0.2,
+      "y": -0.2,
+      "z": 0.5
+     },
+     {
+      "x": 0.28,
+      "y": -0.18,
+      "z": 0.32
+     }
+    ]
+   },
+   {
+    "id": "toAmygdala",
+    "color": "#ff5c7a",
+    "points": [
+     {
+      "x": -0.28,
+      "y": -0.18,
+      "z": 0.32
+     },
+     {
+      "x": -0.32,
+      "y": -0.16,
+      "z": 0.25
+     },
+     {
+      "x": -0.32,
+      "y": -0.15,
+      "z": 0.18
+     }
+    ]
+   },
+   {
+    "id": "toHippocampus",
+    "color": "#b9f26a",
+    "points": [
+     {
+      "x": -0.32,
+      "y": -0.15,
+      "z": 0.18
+     },
+     {
+      "x": -0.36,
+      "y": -0.13,
+      "z": 0.0
+     },
+     {
+      "x": -0.33,
+      "y": -0.1,
+      "z": -0.16
+     }
+    ]
+   },
+   {
+    "id": "memoryToFrontal",
+    "color": "#ff8a5b",
+    "points": [
+     {
+      "x": -0.33,
+      "y": -0.1,
+      "z": -0.16
+     },
+     {
+      "x": -0.3,
+      "y": 0.3,
+      "z": 0.1
+     },
+     {
+      "x": -0.15,
+      "y": 0.55,
+      "z": 0.62
+     }
+    ]
+   },
+   {
+    "id": "practicePath",
+    "color": "#7cf7ff",
+    "points": [
+     {
+      "x": -0.2,
+      "y": 0.25,
+      "z": -0.88
+     },
+     {
+      "x": -0.38,
+      "y": 0.62,
+      "z": -0.45
+     },
+     {
+      "x": -0.4,
+      "y": 0.72,
+      "z": 0.08
+     },
+     {
+      "x": -0.15,
+      "y": 0.55,
+      "z": 0.62
+     }
+    ]
+   },
+   {
+    "id": "practiceCerebellum",
+    "color": "#c08cff",
+    "points": [
+     {
+      "x": -0.4,
+      "y": 0.72,
+      "z": 0.08
+     },
+     {
+      "x": -0.15,
+      "y": 0.1,
+      "z": -0.2
+     },
+     {
+      "x": 0.0,
+      "y": -0.3,
+      "z": -0.4
+     },
+     {
+      "x": 0.25,
+      "y": -0.28,
+      "z": -0.72
+     }
+    ]
+   },
+   {
+    "id": "hippoCortex",
+    "color": "#b9f26a",
+    "points": [
+     {
+      "x": -0.33,
+      "y": -0.1,
+      "z": -0.16
+     },
+     {
+      "x": -0.35,
+      "y": 0.3,
+      "z": -0.2
+     },
+     {
+      "x": -0.4,
+      "y": 0.72,
+      "z": 0.08
+     }
+    ]
+   }
+  ],
+  "scenarios": [
+   {
+    "id": "see-light",
+    "title": "How do you see a light?",
+    "icon": "eye",
+    "view2d": "top",
+    "badge": "Light Tracker",
+    "intro": "Someone turns on a lamp. Let's follow the light from your eyes all the way to the back of your brain!",
+    "steps": [
+     {
+      "title": "Light enters the eye",
+      "structure": "eyeR",
+      "also": [
+       "eyeL",
+       "retina"
+      ],
+      "pathways": [],
+      "text": "Light from the lamp passes through the clear cornea and your pupil. The cornea and the lens bend the light to make a tiny upside-down picture on the retina at the back of your eye.",
+      "funFact": "The picture on your retina is upside down. Your brain flips it so you see the world the right way up!",
+      "camera": {
+       "x": 1.4,
+       "y": 0.5,
+       "z": 2.6
+      },
+      "target": {
+       "x": 0,
+       "y": -0.05,
+       "z": 1.1
+      },
+      "glow": 1
+     },
+     {
+      "title": "Rods and cones",
+      "structure": "retina",
+      "also": [],
+      "pathways": [],
+      "text": "Photoreceptors in the retina, called rods and cones, turn light into electrical signals. Rods work in dim light. Cones see color.",
+      "funFact": "Each eye has about 120 million rods but only about 6 million cones.",
+      "camera": {
+       "x": 1.2,
+       "y": 0.3,
+       "z": 2.2
+      },
+      "target": {
+       "x": 0.32,
+       "y": -0.05,
+       "z": 1.12
+      },
+      "glow": 1
+     },
+     {
+      "title": "Down the optic nerve",
+      "structure": "opticNerve",
+      "also": [],
+      "pathways": [
+       "nerveL",
+       "nerveR"
+      ],
+      "text": "The signals leave the back of each eye along the optic nerve, a cable of about a million axons.",
+      "funFact": "Where the optic nerve leaves the eye there are no rods or cones, so each eye has a small blind spot. You don't notice because your brain fills it in!",
+      "camera": {
+       "x": 0.6,
+       "y": 1.8,
+       "z": 2.2
+      },
+      "target": {
+       "x": 0,
+       "y": -0.1,
+       "z": 0.85
+      },
+      "glow": 1
+     },
+     {
+      "title": "The big crossing!",
+      "structure": "chiasm",
+      "also": [],
+      "pathways": [
+       "crossL2R",
+       "crossR2L",
+       "stayL",
+       "stayR"
+      ],
+      "text": "At the optic chiasm, fibers from the inner (nose) half of each retina cross to the other side. Fibers from the outer half stay on their own side.",
+      "funFact": "Because of this crossing, the right side of your brain sees everything to your left, and the left side sees everything to your right!",
+      "camera": {
+       "x": 0.0,
+       "y": 1.2,
+       "z": 1.6
+      },
+      "target": {
+       "x": 0,
+       "y": -0.12,
+       "z": 0.64
+      },
+      "glow": 1
+     },
+     {
+      "title": "To the relay station",
+      "structure": "lgn",
+      "also": [],
+      "pathways": [
+       "tractL",
+       "tractR"
+      ],
+      "text": "The optic tracts carry the signals to the LGN, the vision part of the thalamus. The thalamus is the brain's relay station.",
+      "funFact": "The LGN also gets lots of signals coming back from the cortex, so it doesn't just pass things along. It helps adjust what gets sent on.",
+      "camera": {
+       "x": 1.6,
+       "y": 1.6,
+       "z": 1.6
+      },
+      "target": {
+       "x": 0,
+       "y": 0.05,
+       "z": 0.15
+      },
+      "glow": 1
+     },
+     {
+      "title": "Primary visual cortex (V1)",
+      "structure": "v1",
+      "also": [],
+      "pathways": [
+       "radiationL",
+       "radiationR"
+      ],
+      "text": "Optic radiations fan out to V1 in the occipital lobe, at the very back of your head. V1 picks out edges, lines and contrast.",
+      "funFact": "Some neurons in V1 only fire for lines at one particular angle, like a tilted edge.",
+      "camera": {
+       "x": 1.6,
+       "y": 1.4,
+       "z": -2.4
+      },
+      "target": {
+       "x": 0,
+       "y": 0.15,
+       "z": -0.6
+      },
+      "glow": 1
+     },
+     {
+      "title": "Shapes, then what and where",
+      "structure": "v2",
+      "also": [
+       "temporal",
+       "parietal"
+      ],
+      "pathways": [
+       "v1v2L",
+       "v1v2R",
+       "whatL",
+       "whatR",
+       "whereL",
+       "whereR"
+      ],
+      "text": "V2 and other areas build edges into shapes. Then the signal splits. The what pathway goes to the temporal lobe (\"It's a lamp!\") and the where pathway goes to the parietal lobe (\"It's on my left!\").",
+      "funFact": "Some people with damage to the what pathway can reach out and grab an object correctly, but can't recognize what it is just by looking.",
+      "camera": {
+       "x": 2.6,
+       "y": 1.2,
+       "z": -1.2
+      },
+      "target": {
+       "x": 0,
+       "y": 0.25,
+       "z": -0.3
+      },
+      "glow": 1
+     },
+     {
+      "title": "Bonus: shrinking pupils",
+      "structure": "midbrain",
+      "also": [
+       "pupil"
+      ],
+      "pathways": [
+       "pupilIn",
+       "pupilOutL",
+       "pupilOutR"
+      ],
+      "text": "Some optic tract fibers go to the midbrain instead. In bright light, the midbrain sends a signal back to both eyes to make the pupils smaller. It's an automatic reflex.",
+      "funFact": "Shine light in one eye and both pupils shrink, because the midbrain signals both eyes.",
+      "camera": {
+       "x": 2.2,
+       "y": 0.4,
+       "z": 1.6
+      },
+      "target": {
+       "x": 0,
+       "y": -0.08,
+       "z": 0.5
+      },
+      "glow": 1
+     }
+    ],
+    "challenge": {
+     "type": "pick",
+     "prompt": "Which part relays the vision signal to V1?",
+     "answer": "lgn",
+     "options": [
+      "chiasm",
+      "lgn",
+      "cerebellum",
+      "retina"
+     ],
+     "items": [],
+     "explanation": "The LGN of the thalamus is the vision relay station. It sends signals on to V1 through the optic radiations."
+    }
+   },
+   {
+    "id": "hot-touch",
+    "title": "Touching something hot",
+    "icon": "hand",
+    "view2d": "front",
+    "badge": "Reflex Ranger",
+    "intro": "Oops, your right fingertip touches a hot pan! Watch how your body protects you before you even say \"Ouch!\"",
+    "steps": [
+     {
+      "title": "Heat sensors fire",
+      "structure": "skin",
+      "also": [],
+      "pathways": [],
+      "text": "Receptors in the skin of your fingertip detect the heat. They start sending signals right away.",
+      "funFact": "Your skin has separate sensors for warm, cold, pressure and pain.",
+      "camera": {
+       "x": 3.0,
+       "y": -0.8,
+       "z": 2.6
+      },
+      "target": {
+       "x": 0.6,
+       "y": -1.6,
+       "z": 0.2
+      },
+      "glow": 1
+     },
+     {
+      "title": "Up the sensory nerve",
+      "structure": "spinalCord",
+      "also": [],
+      "pathways": [
+       "armSensory"
+      ],
+      "text": "The signal races up a sensory nerve in your arm to your spinal cord.",
+      "funFact": "Some pain signals travel more slowly than touch signals. That's why you can feel a bump first and the ache a moment later.",
+      "camera": {
+       "x": 3.0,
+       "y": -0.6,
+       "z": 2.6
+      },
+      "target": {
+       "x": 0.4,
+       "y": -1.5,
+       "z": 0
+      },
+      "glow": 1
+     },
+     {
+      "title": "The reflex arc",
+      "structure": "muscle",
+      "also": [],
+      "pathways": [
+       "reflexLoop",
+       "armMotor"
+      ],
+      "text": "Inside the spinal cord, interneurons pass the message straight to motor neurons. These tell your arm muscles to pull your hand away. This reflex arc doesn't need to wait for your brain!",
+      "funFact": "The reflex often starts before your brain has even felt the pain.",
+      "camera": {
+       "x": 2.6,
+       "y": -1.0,
+       "z": 2.4
+      },
+      "target": {
+       "x": 0.35,
+       "y": -1.55,
+       "z": -0.1
+      },
+      "glow": 1
+     },
+     {
+      "title": "Up to the thalamus",
+      "structure": "thalamus",
+      "also": [],
+      "pathways": [
+       "painUp"
+      ],
+      "text": "At the same time, another signal crosses to the other side of the spinal cord and climbs up to the thalamus.",
+      "funFact": "Pain signals from your right hand end up on the left side of your brain.",
+      "camera": {
+       "x": 2.8,
+       "y": 0.2,
+       "z": 2.8
+      },
+      "target": {
+       "x": 0,
+       "y": -0.6,
+       "z": -0.3
+      },
+      "glow": 1
+     },
+     {
+      "title": "\"Ouch!\"",
+      "structure": "somatosensory",
+      "also": [],
+      "pathways": [
+       "thalToTouch"
+      ],
+      "text": "The thalamus relays the signal to the somatosensory cortex, the touch strip in the parietal lobe. Now you feel the heat and know exactly which finger got hurt.",
+      "funFact": "The touch strip has a map of your whole body. Fingers and lips get extra-large areas because they are so sensitive.",
+      "camera": {
+       "x": 1.6,
+       "y": 1.8,
+       "z": 2.4
+      },
+      "target": {
+       "x": -0.3,
+       "y": 0.5,
+       "z": -0.1
+      },
+      "glow": 1
+     }
+    ],
+    "challenge": {
+     "type": "order",
+     "prompt": "Put the hot-pan steps in order.",
+     "answer": "",
+     "options": [],
+     "items": [
+      "Skin receptors detect heat",
+      "Sensory nerve carries the signal to the spinal cord",
+      "Spinal reflex pulls your hand away",
+      "Signal climbs to the thalamus",
+      "Somatosensory cortex: \"Ouch!\""
+     ],
+     "explanation": "The spinal reflex moves your hand first. Feeling the pain in your cortex comes a little later."
+    }
+   },
+   {
+    "id": "hear-name",
+    "title": "Hearing your name",
+    "icon": "ear",
+    "view2d": "front",
+    "badge": "Sound Sleuth",
+    "intro": "Someone on your right calls your name. Follow the sound from your ear to the part of your brain that knows it's YOU they want!",
+    "steps": [
+     {
+      "title": "Sound waves arrive",
+      "structure": "ear",
+      "also": [],
+      "pathways": [
+       "soundIn"
+      ],
+      "text": "Sound waves travel into your ear and make your eardrum vibrate. Tiny bones pass the vibrations deeper inside.",
+      "funFact": "The three ear bones are the smallest bones in your body. The stirrup is smaller than a grain of rice.",
+      "camera": {
+       "x": 3.0,
+       "y": 0.4,
+       "z": 1.4
+      },
+      "target": {
+       "x": 0.6,
+       "y": -0.1,
+       "z": 0.05
+      },
+      "glow": 1
+     },
+     {
+      "title": "The cochlea",
+      "structure": "cochlea",
+      "also": [],
+      "pathways": [],
+      "text": "In the snail-shaped cochlea, tiny hair cells bend with the vibrations and turn them into electrical signals.",
+      "funFact": "Different spots along the cochlea respond to different pitches, from high squeaks to low rumbles.",
+      "camera": {
+       "x": 2.2,
+       "y": 0.2,
+       "z": 1.2
+      },
+      "target": {
+       "x": 0.7,
+       "y": -0.12,
+       "z": 0.05
+      },
+      "glow": 1
+     },
+     {
+      "title": "Auditory nerve to brainstem",
+      "structure": "brainstem",
+      "also": [],
+      "pathways": [
+       "auditoryNerve"
+      ],
+      "text": "The auditory nerve carries the signals into the brainstem. Several brainstem stops compare the two ears to work out where the sound came from.",
+      "funFact": "Your brain can tell which side a sound came from by the tiny difference in when it reaches each ear.",
+      "camera": {
+       "x": 2.4,
+       "y": -0.4,
+       "z": 1.8
+      },
+      "target": {
+       "x": 0.3,
+       "y": -0.3,
+       "z": -0.15
+      },
+      "glow": 1
+     },
+     {
+      "title": "Both sides, up through the midbrain",
+      "structure": "midbrain",
+      "also": [],
+      "pathways": [
+       "audUpL",
+       "audUpR"
+      ],
+      "text": "Hearing signals travel up both sides of the brainstem, through the midbrain. Many cross over, so both sides of the brain hear both ears.",
+      "funFact": "That's why damage to one side of the hearing pathway in the brain rarely makes a person deaf in one ear.",
+      "camera": {
+       "x": 2.0,
+       "y": 0.6,
+       "z": 2.2
+      },
+      "target": {
+       "x": 0,
+       "y": -0.2,
+       "z": -0.25
+      },
+      "glow": 1
+     },
+     {
+      "title": "Relay at the thalamus (MGN)",
+      "structure": "mgn",
+      "also": [],
+      "pathways": [
+       "icMgnL",
+       "icMgnR"
+      ],
+      "text": "The MGN, the hearing part of the thalamus, relays the sound signals to the cortex.",
+      "funFact": "Like the LGN for vision, the MGN is a geniculate nucleus. Geniculate means knee-shaped!",
+      "camera": {
+       "x": 1.8,
+       "y": 1.4,
+       "z": 2.0
+      },
+      "target": {
+       "x": 0,
+       "y": 0.05,
+       "z": -0.1
+      },
+      "glow": 1
+     },
+     {
+      "title": "Auditory cortex",
+      "structure": "auditoryCortex",
+      "also": [],
+      "pathways": [
+       "mgnA1L",
+       "mgnA1R"
+      ],
+      "text": "The auditory cortex in each temporal lobe sorts out pitch, loudness and the pattern of the sound.",
+      "funFact": "The auditory cortex is tucked inside the top of the temporal lobe, close to your ears.",
+      "camera": {
+       "x": -2.4,
+       "y": 0.8,
+       "z": 1.6
+      },
+      "target": {
+       "x": -0.3,
+       "y": 0.1,
+       "z": 0
+      },
+      "glow": 1
+     },
+     {
+      "title": "Wernicke's area: That's me!",
+      "structure": "wernicke",
+      "also": [],
+      "pathways": [
+       "a1Wernicke"
+      ],
+      "text": "Wernicke's area, usually on the left side, recognizes the sounds as a word: your name! Other areas help you turn to look.",
+      "funFact": "Your brain is extra good at picking out your own name, even in a noisy room.",
+      "camera": {
+       "x": -2.6,
+       "y": 1.0,
+       "z": 0.4
+      },
+      "target": {
+       "x": -0.5,
+       "y": 0.15,
+       "z": -0.15
+      },
+      "glow": 1
+     }
+    ],
+    "challenge": {
+     "type": "pick",
+     "prompt": "Which part of the ear turns vibrations into nerve signals?",
+     "answer": "cochlea",
+     "options": [
+      "ear",
+      "cochlea",
+      "mgn",
+      "wernicke"
+     ],
+     "items": [],
+     "explanation": "Hair cells in the cochlea turn vibrations into electrical signals."
+    }
+   },
+   {
+    "id": "catch-ball",
+    "title": "Catching a ball",
+    "icon": "ball",
+    "view2d": "front",
+    "badge": "Super Catcher",
+    "intro": "A friend throws you a ball. In less than a second your brain sees it, tracks it, plans a move and times it perfectly!",
+    "steps": [
+     {
+      "title": "See the ball",
+      "structure": "v1",
+      "also": [
+       "ball"
+      ],
+      "pathways": [
+       "ballFlight",
+       "nerveL",
+       "nerveR",
+       "radiationL",
+       "radiationR"
+      ],
+      "text": "Your eyes send pictures of the ball along the vision pathway to the visual cortex in the occipital lobe.",
+      "funFact": "Your eyes smoothly follow the ball, with quick little jumps to catch up when it speeds along.",
+      "camera": {
+       "x": 2.8,
+       "y": 1.2,
+       "z": 3.2
+      },
+      "target": {
+       "x": 0,
+       "y": 0,
+       "z": 0.4
+      },
+      "glow": 1
+     },
+     {
+      "title": "Where is it going?",
+      "structure": "parietal",
+      "also": [],
+      "pathways": [
+       "whereL"
+      ],
+      "text": "The where pathway into the parietal lobe tracks where the ball is and how fast it's coming.",
+      "funFact": "Your parietal lobe also keeps track of where your own hand is, so it can bring the two together.",
+      "camera": {
+       "x": -2.4,
+       "y": 1.6,
+       "z": 1.4
+      },
+      "target": {
+       "x": -0.3,
+       "y": 0.5,
+       "z": -0.3
+      },
+      "glow": 1
+     },
+     {
+      "title": "Plan the catch",
+      "structure": "motorCortex",
+      "also": [],
+      "pathways": [
+       "parietalMotorL"
+      ],
+      "text": "The motor cortex in the left frontal lobe plans the move for your right hand.",
+      "funFact": "The left motor cortex controls the right side of your body.",
+      "camera": {
+       "x": -2.0,
+       "y": 2.0,
+       "z": 1.8
+      },
+      "target": {
+       "x": -0.3,
+       "y": 0.6,
+       "z": 0
+      },
+      "glow": 1
+     },
+     {
+      "title": "Cerebellum times it",
+      "structure": "cerebellum",
+      "also": [],
+      "pathways": [
+       "motorCerebellum",
+       "cerebellumMotor"
+      ],
+      "text": "The cerebellum compares the plan with what's happening. It sends corrections back so the move is smooth and perfectly timed.",
+      "funFact": "Practice teaches your cerebellum the timing, so catching gets easier the more you play.",
+      "camera": {
+       "x": 2.4,
+       "y": 0.2,
+       "z": -2.4
+      },
+      "target": {
+       "x": 0,
+       "y": -0.1,
+       "z": -0.4
+      },
+      "glow": 1
+     },
+     {
+      "title": "Down the spinal cord",
+      "structure": "spinalCord",
+      "also": [],
+      "pathways": [
+       "motorDown"
+      ],
+      "text": "The command travels down from the motor cortex through the brainstem and spinal cord. On the way it crosses to the other side.",
+      "funFact": "The crossing happens low in the brainstem, just above the spinal cord.",
+      "camera": {
+       "x": 3.0,
+       "y": -0.4,
+       "z": 2.4
+      },
+      "target": {
+       "x": 0,
+       "y": -0.8,
+       "z": -0.3
+      },
+      "glow": 1
+     },
+     {
+      "title": "Hands close: caught!",
+      "structure": "hand",
+      "also": [],
+      "pathways": [
+       "cordToHand"
+      ],
+      "text": "Motor nerves tell the muscles in your arm and hand to move and close your fingers around the ball. Got it!",
+      "funFact": "Even while you move, your brain keeps checking and correcting, all without you thinking about it.",
+      "camera": {
+       "x": 3.0,
+       "y": -0.8,
+       "z": 2.8
+      },
+      "target": {
+       "x": 0.5,
+       "y": -1.4,
+       "z": 0.2
+      },
+      "glow": 1
+     }
+    ],
+    "challenge": {
+     "type": "pick",
+     "prompt": "Which part smooths and times the catch?",
+     "answer": "cerebellum",
+     "options": [
+      "cerebellum",
+      "olfactoryBulb",
+      "v1",
+      "thalamus"
+     ],
+     "items": [],
+     "explanation": "The cerebellum compares the plan with the movement and fine-tunes the timing."
+    }
+   },
+   {
+    "id": "smell-cookies",
+    "title": "Smelling cookies",
+    "icon": "nose",
+    "view2d": "side",
+    "badge": "Memory Sniffer",
+    "intro": "Mmm, cookies are baking. The smell makes you think of Grandma! Find out why smells can bring back memories so fast.",
+    "steps": [
+     {
+      "title": "Sniff!",
+      "structure": "nose",
+      "also": [],
+      "pathways": [
+       "sniff"
+      ],
+      "text": "Tiny smell molecules float into your nose. Receptors high up inside your nose catch them.",
+      "funFact": "Your nose has about 400 kinds of smell receptors, and they team up to detect a huge number of smells.",
+      "camera": {
+       "x": 1.2,
+       "y": 0.2,
+       "z": 2.8
+      },
+      "target": {
+       "x": 0,
+       "y": -0.25,
+       "z": 1.0
+      },
+      "glow": 1
+     },
+     {
+      "title": "Olfactory bulb",
+      "structure": "olfactoryBulb",
+      "also": [],
+      "pathways": [],
+      "text": "The signals go straight up to the olfactory bulbs, which sit just above your nose under the front of your brain.",
+      "funFact": "Smell receptor cells are replaced throughout your life, about every month or two.",
+      "camera": {
+       "x": 1.6,
+       "y": 0.4,
+       "z": 2.0
+      },
+      "target": {
+       "x": 0,
+       "y": -0.2,
+       "z": 0.7
+      },
+      "glow": 1
+     },
+     {
+      "title": "Skip the relay!",
+      "structure": "olfactoryCortex",
+      "also": [
+       "thalamus"
+      ],
+      "pathways": [
+       "bulbCortexL",
+       "bulbCortexR"
+      ],
+      "text": "Unlike sight, hearing and touch, smell signals don't need to stop at the thalamus first. They go straight to the olfactory cortex. \"Cookies!\"",
+      "funFact": "Smell is the only sense whose signals reach the cortex without a thalamus stop first.",
+      "camera": {
+       "x": -2.0,
+       "y": -0.2,
+       "z": 1.8
+      },
+      "target": {
+       "x": -0.2,
+       "y": -0.18,
+       "z": 0.3
+      },
+      "glow": 1
+     },
+     {
+      "title": "A happy feeling",
+      "structure": "amygdala",
+      "also": [],
+      "pathways": [
+       "toAmygdala"
+      ],
+      "text": "The smell area is right next to the amygdala, which adds feelings. Cozy and happy!",
+      "funFact": "Smells can change your mood before you even know what you're smelling.",
+      "camera": {
+       "x": -2.2,
+       "y": 0.0,
+       "z": 1.0
+      },
+      "target": {
+       "x": -0.3,
+       "y": -0.15,
+       "z": 0.15
+      },
+      "glow": 1
+     },
+     {
+      "title": "Grandma's kitchen!",
+      "structure": "hippocampus",
+      "also": [
+       "frontal"
+      ],
+      "pathways": [
+       "toHippocampus",
+       "memoryToFrontal"
+      ],
+      "text": "Signals reach the area around the hippocampus, which links the smell to a memory. Your frontal lobe then thinks: \"This smells like Grandma's house!\"",
+      "funFact": "Because smell is wired so closely to emotion and memory areas, a smell can bring back a memory from years ago.",
+      "camera": {
+       "x": -2.4,
+       "y": 0.6,
+       "z": 0.6
+      },
+      "target": {
+       "x": -0.2,
+       "y": 0.1,
+       "z": 0.1
+      },
+      "glow": 1
+     }
+    ],
+    "challenge": {
+     "type": "pick",
+     "prompt": "Smell is special! Which relay station can smell signals skip?",
+     "answer": "thalamus",
+     "options": [
+      "thalamus",
+      "olfactoryBulb",
+      "amygdala",
+      "nose"
+     ],
+     "items": [],
+     "explanation": "Smell signals go from the olfactory bulb straight to the cortex, without stopping at the thalamus first."
+    }
+   },
+   {
+    "id": "learn-new",
+    "title": "Learning something new",
+    "icon": "spark",
+    "view2d": "side",
+    "badge": "Practice Champ",
+    "intro": "You're learning to juggle. At first it's wobbly! Watch the brain pathway get stronger and brighter every time you practice.",
+    "steps": [
+     {
+      "title": "First try: wobbly!",
+      "structure": "occipital",
+      "also": [
+       "motorCortex"
+      ],
+      "pathways": [
+       "practicePath"
+      ],
+      "text": "Your eyes watch the balls, your parietal lobe tracks them and your motor cortex tries a move. The pathway is weak and slow.",
+      "funFact": "Even your first try changes your brain a tiny bit.",
+      "camera": {
+       "x": -2.6,
+       "y": 1.2,
+       "z": 1.0
+      },
+      "target": {
+       "x": -0.2,
+       "y": 0.4,
+       "z": -0.1
+      },
+      "glow": 0.2
+     },
+     {
+      "title": "Fire together, wire together",
+      "structure": "motorCortex",
+      "also": [
+       "cerebellum"
+      ],
+      "pathways": [
+       "practicePath",
+       "practiceCerebellum"
+      ],
+      "text": "Every time these neurons fire together, the synapses between them get a little stronger. Neurons that fire together wire together!",
+      "funFact": "Scientists call this ability to change with practice brain plasticity.",
+      "camera": {
+       "x": -2.6,
+       "y": 1.2,
+       "z": 1.0
+      },
+      "target": {
+       "x": -0.2,
+       "y": 0.3,
+       "z": -0.1
+      },
+      "glow": 0.45
+     },
+     {
+      "title": "More practice, brighter path",
+      "structure": "cerebellum",
+      "also": [],
+      "pathways": [
+       "practicePath",
+       "practiceCerebellum"
+      ],
+      "text": "Your cerebellum learns the timing. Messages travel more easily along the path, so your juggling gets smoother.",
+      "funFact": "Used pathways can also get extra myelin, which helps signals travel faster.",
+      "camera": {
+       "x": -2.4,
+       "y": 0.6,
+       "z": -1.8
+      },
+      "target": {
+       "x": 0,
+       "y": 0,
+       "z": -0.3
+      },
+      "glow": 0.75
+     },
+     {
+      "title": "Sleep saves it",
+      "structure": "hippocampus",
+      "also": [],
+      "pathways": [
+       "practicePath",
+       "practiceCerebellum",
+       "hippoCortex"
+      ],
+      "text": "While you sleep, your brain replays and strengthens what you practiced. Next day, you're better!",
+      "funFact": "A good night's sleep after practicing helps lock in new skills and memories.",
+      "camera": {
+       "x": -2.6,
+       "y": 1.0,
+       "z": 0.6
+      },
+      "target": {
+       "x": -0.2,
+       "y": 0.2,
+       "z": -0.1
+      },
+      "glow": 1.0
+     }
+    ],
+    "challenge": {
+     "type": "order",
+     "prompt": "Put these in order to learn a new skill.",
+     "answer": "",
+     "options": [],
+     "items": [
+      "Try it: a weak, wobbly pathway",
+      "Practice: neurons fire together",
+      "Synapses get stronger",
+      "Sleep helps save the skill"
+     ],
+     "explanation": "Practice makes neurons fire together, which strengthens their synapses, and sleep helps lock it in."
+    }
+   }
+  ]
+ }
 }
