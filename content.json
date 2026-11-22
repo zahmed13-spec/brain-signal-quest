@@ -46,7 +46,7 @@
    "tile": "How fast can your eyes, brain and muscles team up?",
    "goal": "In this activity you'll find out how long a signal takes to go from your eyes, through your brain, to your finger. Wait for the light to turn on, then press as fast as you can.",
    "hint": "Keep your eyes on the light and your finger ready. Pressing before it turns on doesn't count!",
-   "whatHappened": "Your eyes saw the light and sent signals to the back of your brain. Your brain decided to move, and your motor cortex sent signals down your spinal cord and nerves to your finger muscles. All of that took only a fraction of a second.",
+   "whatHappened": "Each press followed the loop shown above: eyes, brain, spinal cord, then finger muscles. Having to decide added extra brain time.",
    "realLife": "Catching a ball, braking on your bike or swatting a fly all use this same see → decide → move loop.",
    "badge": "Quick Reactor",
    "goalShort": "Press the moment the lamp turns on!"
@@ -195,27 +195,27 @@
   "loop": [
    {
     "name": "Eyes",
-    "text": "Light from the lamp hits the retina. Rods and cones turn it into electrical signals."
+    "text": "Rods and cones catch the light."
    },
    {
     "name": "Visual cortex",
-    "text": "Signals reach the occipital lobe at the back of your brain, which spots the light."
+    "text": "The back of your brain spots it."
    },
    {
     "name": "Decision",
-    "text": "Your frontal lobe connects \"light is on\" to the plan you made: press now!"
+    "text": "Your frontal lobe says: press now!"
    },
    {
     "name": "Motor cortex",
-    "text": "The motor cortex sends a command to move your finger."
+    "text": "It sends the move command."
    },
    {
     "name": "Spinal cord and nerves",
-    "text": "The command zooms down your spinal cord and along nerves to your finger muscles."
+    "text": "The command zooms to your hand."
    },
    {
     "name": "Muscles",
-    "text": "Your muscles squeeze, and your finger presses. Done!"
+    "text": "Finger muscles squeeze. Click!"
    }
   ],
   "note": "Many people score somewhere around 200–300 milliseconds on a test like this. Your device, distractions, tiredness and practice all change the score. It doesn't measure how smart you are."
