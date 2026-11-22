@@ -181,7 +181,6 @@ export function initNeuron(content) {
     const r = rules(); scaffold()?.progress();
     if (r.tipRestMs && performance.now() < tipRestUntil[i]) { shake(tips[i]); buddy.say('That dendrite needs a moment. Try another one!', 'think'); scaffold()?.wrong(); return; }
     if (resting) { shake(s.querySelector('[data-part="soma"]')); buddy.say("I'm resting after firing! Wait for the grey ring to go.", 'oops'); scaffold()?.wrong(); sound.play('oops'); return; }
-    if (firing) return;
     const inhib = i === inhibitTip;
     if (r.tipRestMs) tipRestUntil[i] = performance.now() + r.tipRestMs;
     sound.play(inhib ? 'oops' : 'bloop'); setStage(0, !narrated);
@@ -214,6 +213,8 @@ export function initNeuron(content) {
     if (r.restMs) { resting = true; restRing.classList.add('on'); later(() => { resting = false; restRing.classList.remove('on'); }, r.restMs); }
     const step = narrated ? NODE_MS : NODE_MS * 1.6;
     later(() => setStage(2, !narrated), 200);
+    // Only the spike itself blocks input; the travelling wave doesn't (only the rest ring does).
+    later(() => { firing = false; }, 300);
     // The wave: each node fires, then recovers, then rests. Never backwards (refractory).
     NODES.forEach((_, i) => {
       later(() => {
@@ -233,7 +234,7 @@ export function initNeuron(content) {
         if (!reducedMotion()) { nextRing.classList.remove('go'); void nextRing.getBoundingClientRect(); nextRing.classList.add('go'); }
         buddy.say('The next neuron fired too! The relay keeps going!', 'cheer');
       } else if (!narrated) rich(feedback, `Next neuron: ${stages[5]?.description || ''} One spike only filled it part of the way.`);
-      narrated = true; firing = false; nts.replaceChildren();
+      narrated = true; nts.replaceChildren();
       checkLevel();
     }, tEnd + 1700);
   }
