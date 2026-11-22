@@ -504,6 +504,26 @@
               "label": "Kid-friendly definition",
               "type": "text",
               "required": true
+            },
+            {
+              "name": "icon",
+              "label": "Picture in the tooltip",
+              "type": "select",
+              "required": false,
+              "options": {
+                "values": [
+                  "neuron",
+                  "brain",
+                  "eye",
+                  "ear",
+                  "nose",
+                  "hand",
+                  "spark",
+                  "bolt",
+                  "cerebellum",
+                  "spinal"
+                ]
+              }
             }
           ],
           "list": true,

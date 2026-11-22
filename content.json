@@ -501,14 +501,16 @@
     "nerve cell",
     "nerve cells"
    ],
-   "description": "A nerve cell. Neurons send and receive signals."
+   "description": "A nerve cell. Neurons send and receive signals.",
+   "icon": "neuron"
   },
   {
    "name": "Dendrite",
    "aliases": [
     "dendrites"
    ],
-   "description": "A branch of a neuron that receives messages from other cells."
+   "description": "A branch of a neuron that receives messages from other cells.",
+   "icon": "neuron"
   },
   {
    "name": "Cell body",
@@ -520,7 +522,8 @@
    "aliases": [
     "axons"
    ],
-   "description": "The long cable of a neuron that carries its electrical signal away from the cell body."
+   "description": "The long cable of a neuron that carries its electrical signal away from the cell body.",
+   "icon": "neuron"
   },
   {
    "name": "Axon terminal",
@@ -528,19 +531,22 @@
     "axon terminals",
     "axon's tips"
    ],
-   "description": "The tips at the end of an axon that release chemical messengers."
+   "description": "The tips at the end of an axon that release chemical messengers.",
+   "icon": "neuron"
   },
   {
    "name": "Myelin",
    "aliases": [],
-   "description": "A fatty coating around many axons that makes signals travel faster."
+   "description": "A fatty coating around many axons that makes signals travel faster.",
+   "icon": "neuron"
   },
   {
    "name": "Synapse",
    "aliases": [
     "synapses"
    ],
-   "description": "The tiny gap where one neuron passes a message to another cell."
+   "description": "The tiny gap where one neuron passes a message to another cell.",
+   "icon": "spark"
   },
   {
    "name": "Neurotransmitter",
@@ -549,12 +555,14 @@
     "chemical messengers",
     "chemical messenger"
    ],
-   "description": "A chemical messenger that carries a signal across a synapse."
+   "description": "A chemical messenger that carries a signal across a synapse.",
+   "icon": "spark"
   },
   {
    "name": "Action potential",
    "aliases": [],
-   "description": "The quick electrical signal that travels down an axon when a neuron fires."
+   "description": "The quick electrical signal that travels down an axon when a neuron fires.",
+   "icon": "bolt"
   },
   {
    "name": "Threshold",
@@ -568,46 +576,54 @@
    "aliases": [
     "cerebral cortex"
    ],
-   "description": "The wrinkly outer layer of the cerebrum, where a lot of thinking and sensing happens."
+   "description": "The wrinkly outer layer of the cerebrum, where a lot of thinking and sensing happens.",
+   "icon": "brain"
   },
   {
    "name": "Cerebrum",
    "aliases": [],
-   "description": "The biggest part of the brain, with a left and a right side."
+   "description": "The biggest part of the brain, with a left and a right side.",
+   "icon": "brain"
   },
   {
    "name": "Lobe",
    "aliases": [
     "lobes"
    ],
-   "description": "One of four main areas of each side of the cerebrum: frontal, parietal, temporal and occipital."
+   "description": "One of four main areas of each side of the cerebrum: frontal, parietal, temporal and occipital.",
+   "icon": "brain"
   },
   {
    "name": "Frontal lobe",
    "aliases": [],
-   "description": "The lobe behind your forehead that plans, decides and controls movement."
+   "description": "The lobe behind your forehead that plans, decides and controls movement.",
+   "icon": "brain"
   },
   {
    "name": "Parietal lobe",
    "aliases": [],
-   "description": "The lobe at the top-back that handles touch and where things are."
+   "description": "The lobe at the top-back that handles touch and where things are.",
+   "icon": "hand"
   },
   {
    "name": "Temporal lobe",
    "aliases": [
     "temporal lobes"
    ],
-   "description": "The lobe near your ears that handles hearing, language and recognizing things."
+   "description": "The lobe near your ears that handles hearing, language and recognizing things.",
+   "icon": "ear"
   },
   {
    "name": "Occipital lobe",
    "aliases": [],
-   "description": "The lobe at the back of your head that handles vision."
+   "description": "The lobe at the back of your head that handles vision.",
+   "icon": "eye"
   },
   {
    "name": "Cerebellum",
    "aliases": [],
-   "description": "The 'little brain' at the back that helps with balance and smooth, well-timed movement."
+   "description": "The 'little brain' at the back that helps with balance and smooth, well-timed movement.",
+   "icon": "cerebellum"
   },
   {
    "name": "Brainstem",
@@ -622,14 +638,16 @@
   {
    "name": "Spinal cord",
    "aliases": [],
-   "description": "A thick bundle of nerves inside your backbone that carries messages between brain and body."
+   "description": "A thick bundle of nerves inside your backbone that carries messages between brain and body.",
+   "icon": "spinal"
   },
   {
    "name": "Nerve",
    "aliases": [
     "nerves"
    ],
-   "description": "A bundle of axons that carries signals between your body and your brain or spinal cord."
+   "description": "A bundle of axons that carries signals between your body and your brain or spinal cord.",
+   "icon": "spinal"
   },
   {
    "name": "Thalamus",
@@ -651,52 +669,60 @@
    "aliases": [
     "retinas"
    ],
-   "description": "The layer at the back of the eye that senses light."
+   "description": "The layer at the back of the eye that senses light.",
+   "icon": "eye"
   },
   {
    "name": "Photoreceptor",
    "aliases": [
     "photoreceptors"
    ],
-   "description": "A light-sensing cell in the retina. Rods and cones are photoreceptors."
+   "description": "A light-sensing cell in the retina. Rods and cones are photoreceptors.",
+   "icon": "eye"
   },
   {
    "name": "Rods",
    "aliases": [
     "rod"
    ],
-   "description": "Photoreceptors that work in dim light and see in shades of gray."
+   "description": "Photoreceptors that work in dim light and see in shades of gray.",
+   "icon": "eye"
   },
   {
    "name": "Cones",
    "aliases": [
     "cone"
    ],
-   "description": "Photoreceptors that work in bright light and let you see color."
+   "description": "Photoreceptors that work in bright light and let you see color.",
+   "icon": "eye"
   },
   {
    "name": "Cornea",
    "aliases": [],
-   "description": "The clear dome at the front of the eye. It does most of the bending (focusing) of light."
+   "description": "The clear dome at the front of the eye. It does most of the bending (focusing) of light.",
+   "icon": "eye"
   },
   {
    "name": "Lens",
    "aliases": [],
-   "description": "The clear, bendy part inside the eye that fine-tunes the focus so the picture on the retina is sharp."
+   "description": "The clear, bendy part inside the eye that fine-tunes the focus so the picture on the retina is sharp.",
+   "icon": "eye"
   },
   {
    "name": "Pupil",
    "aliases": [
     "pupils"
    ],
-   "description": "The dark opening in the middle of your eye that lets light in."
+   "description": "The dark opening in the middle of your eye that lets light in.",
+   "icon": "eye"
   },
   {
    "name": "Optic nerve",
    "aliases": [
     "optic nerves"
    ],
-   "description": "The nerve that carries signals from the eye to the brain."
+   "description": "The nerve that carries signals from the eye to the brain.",
+   "icon": "eye"
   },
   {
    "name": "Optic chiasm",
@@ -737,12 +763,14 @@
   {
    "name": "Cochlea",
    "aliases": [],
-   "description": "The snail-shaped part of the inner ear that turns sound into nerve signals."
+   "description": "The snail-shaped part of the inner ear that turns sound into nerve signals.",
+   "icon": "ear"
   },
   {
    "name": "Auditory nerve",
    "aliases": [],
-   "description": "The nerve that carries sound signals from the cochlea to the brainstem."
+   "description": "The nerve that carries sound signals from the cochlea to the brainstem.",
+   "icon": "ear"
   },
   {
    "name": "MGN",
@@ -754,7 +782,8 @@
   {
    "name": "Auditory cortex",
    "aliases": [],
-   "description": "The area in the temporal lobe that processes sounds."
+   "description": "The area in the temporal lobe that processes sounds.",
+   "icon": "ear"
   },
   {
    "name": "Wernicke's area",
@@ -766,31 +795,36 @@
    "aliases": [
     "olfactory bulbs"
    ],
-   "description": "The first brain stop for smell signals, just above your nose."
+   "description": "The first brain stop for smell signals, just above your nose.",
+   "icon": "nose"
   },
   {
    "name": "Olfactory cortex",
    "aliases": [],
-   "description": "The part of the cortex that processes smells."
+   "description": "The part of the cortex that processes smells.",
+   "icon": "nose"
   },
   {
    "name": "Motor cortex",
    "aliases": [],
-   "description": "A strip at the back of the frontal lobe that starts voluntary movements."
+   "description": "A strip at the back of the frontal lobe that starts voluntary movements.",
+   "icon": "hand"
   },
   {
    "name": "Somatosensory cortex",
    "aliases": [
     "touch strip"
    ],
-   "description": "A strip at the front of the parietal lobe that feels touch, temperature and pain."
+   "description": "A strip at the front of the parietal lobe that feels touch, temperature and pain.",
+   "icon": "hand"
   },
   {
    "name": "Receptor",
    "aliases": [
     "receptors"
    ],
-   "description": "A cell or part of a cell that detects something, like heat, light or a chemical."
+   "description": "A cell or part of a cell that detects something, like heat, light or a chemical.",
+   "icon": "hand"
   },
   {
    "name": "Reflex",
@@ -798,7 +832,8 @@
     "reflexes",
     "reflex arc"
    ],
-   "description": "A fast, automatic response that happens without you deciding to do it."
+   "description": "A fast, automatic response that happens without you deciding to do it.",
+   "icon": "hand"
   },
   {
    "name": "Interneuron",

@@ -22,8 +22,8 @@
   --oops:#a24a00; --oops-bg:#ffe8d1;
   --gold:#f2a900; --gold-deep:#8a5a00;
   /* one colour per brain region (SVG, 3D, cards, buttons). Always paired with a text label. */
-  --r-cerebrum:#9aa8ff; --r-frontal:#ff8a5b; --r-parietal:#ffcf4a; --r-temporal:#69d68c; --r-occipital:#5fb4ff;
-  --r-cerebellum:#c08cff; --r-brainstem:#3fd0d4; --r-thalamus:#ff8fcf; --r-hippocampus:#b9f26a; --r-amygdala:#ff5c7a;
+  --r-cerebrum:#9aa8ff; --r-frontal:#ff8a5b; --r-parietal:#ffcf4a; --r-temporal:#69d68c; --r-occipital:#3d9df2;
+  --r-cerebellum:#e0b8ff; --r-brainstem:#2bb8bd; --r-thalamus:#ff8fcf; --r-hippocampus:#b9f26a; --r-amygdala:#ff5c7a;
   /* neuron states (ANIM-03) */
   --n-rest:#5a6fd8; --n-fire:#ffe066; --n-recover:#c08cff; --n-inhibit:#5fb4ff;
   /* activity colours */
@@ -634,3 +634,11 @@ details.more summary{cursor:pointer;font-weight:700;color:var(--accent);min-heig
   .ph-stage .ph-view{position:sticky;top:var(--s-2);z-index:2;max-height:46vh;aspect-ratio:auto;height:46vh;min-height:13rem}
   .ph-panel .ph-controls .btn-big{flex:1}
 }
+
+/* ANIM-02: view transitions (Chromium); a slide/zoom that keeps the map ⇄ stop relationship */
+::view-transition-old(root){animation:vtOut var(--dur-enter) var(--ease-in) both}
+::view-transition-new(root){animation:vtIn var(--dur-enter) var(--ease-out) both}
+html[data-vt=back]::view-transition-new(root){animation-name:vtInBack}
+@keyframes vtOut{to{opacity:0}}
+@keyframes vtIn{from{opacity:0;transform:scale(.97) translateY(.75rem)}}
+@keyframes vtInBack{from{opacity:0;transform:scale(1.03)}}

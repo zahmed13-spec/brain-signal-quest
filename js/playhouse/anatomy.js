@@ -4,8 +4,8 @@
 
 // Keep in sync with the --r-* tokens in style.css.
 export const REGION_COLORS = {
-  frontal: '#ff8a5b', parietal: '#ffcf4a', temporal: '#69d68c', occipital: '#5fb4ff', cerebellum: '#c08cff',
-  brainstem: '#3fd0d4', thalamus: '#ff8fcf', hippocampus: '#b9f26a', amygdala: '#ff5c7a', cerebrum: '#9aa8ff',
+  frontal: '#ff8a5b', parietal: '#ffcf4a', temporal: '#69d68c', occipital: '#3d9df2', cerebellum: '#e0b8ff',
+  brainstem: '#2bb8bd', thalamus: '#ff8fcf', hippocampus: '#b9f26a', amygdala: '#ff5c7a', cerebrum: '#9aa8ff',
 };
 
 // Simple ellipsoids that make up the stylised brain and head (used in 3D, and projected for 2D).

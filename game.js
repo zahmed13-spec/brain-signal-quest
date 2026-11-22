@@ -2,6 +2,7 @@
 import { $, el, icon, rich, store, prefs, sound, reader, refreshSpeakButtons, guide, scaffold, scaffoldFor, sparky, activityIcon, setNavigator,
   setChecker, init as initCore, setGlossary } from './js/core.js';
 import { clearTransient, starsRow } from './js/ui.js';
+import { reducedMotion } from './js/core.js';
 import { initBrain } from './js/brain.js';
 import { initNeuron } from './js/neuron.js';
 import { initReaction } from './js/reaction.js';
@@ -158,7 +159,12 @@ function route(initial = false) {
   const name = screen.id;
   clearTransient(); reader.stop();
   if (current && current !== name) { hooks[current]?.hide?.(); scaffoldFor(current)?.hide(); }
-  document.querySelectorAll('.screen').forEach((s) => { s.hidden = s !== screen; });
+  const swap = () => document.querySelectorAll('.screen').forEach((s) => { s.hidden = s !== screen; });
+  // ANIM-02: map ⇄ stop as a spatial zoom where the View Transitions API exists; plain fade elsewhere.
+  if (!initial && document.startViewTransition && !reducedMotion()) {
+    document.documentElement.dataset.vt = name === 'home' ? 'back' : 'forward';
+    document.startViewTransition(swap);
+  } else swap();
   current = name;
   if (name === 'home') buildMap();
   if (name === 'certificate') buildCertificate();
@@ -200,6 +206,22 @@ async function start() {
   prevVisit = store.touchVisit();
   window.addEventListener('hashchange', () => route(false));
   route(true);
+  addDrift(); prefetch3D();
+}
+
+/** ANIM-04: a few slow drifting "signal" dots behind the home screen (none under reduced motion). */
+function addDrift() {
+  if (reducedMotion()) return;
+  const layer = el('div', { class: 'drift', 'aria-hidden': 'true' });
+  for (let i = 0; i < 10; i++) { const d = el('i'); d.style.left = Math.random() * 100 + 'vw'; d.style.animationDelay = -Math.random() * 18 + 's'; d.style.animationDuration = 14 + Math.random() * 10 + 's'; layer.append(d); }
+  document.body.prepend(layer);
+}
+/** PERF-02: warm the 3D code during idle time on capable devices, never on Save-Data. */
+function prefetch3D() {
+  const c = navigator.connection; if (c?.saveData || (navigator.deviceMemory && navigator.deviceMemory < 4)) return;
+  const go = () => ['vendor/three/three.module.min.js', 'vendor/three/addons/controls/OrbitControls.js', 'js/playhouse/scene3d.js', 'js/playhouse/playhouse.js', 'playhouse.json']
+    .forEach((href) => document.head.append(el('link', { rel: href.endsWith('.json') ? 'prefetch' : 'modulepreload', href })));
+  (window.requestIdleCallback || ((f) => setTimeout(f, 2500)))(go, { timeout: 5000 });
 }
 
 start().catch((err) => { console.error(err); $('#load-error').hidden = false; });
