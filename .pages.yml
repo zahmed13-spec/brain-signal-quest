@@ -201,6 +201,47 @@
           "required": true
         },
         {
+          "name": "neuronLevels",
+          "label": "Neuron Relay levels (text only; rules stay in code)",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "id",
+              "label": "Level rule (do not change)",
+              "type": "select",
+              "required": true,
+              "options": {
+                "values": [
+                  "threshold",
+                  "timing",
+                  "teamwork",
+                  "stop",
+                  "rest"
+                ]
+              }
+            },
+            {
+              "name": "title",
+              "label": "Level title",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "goal",
+              "label": "Goal (1 short sentence)",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "explain",
+              "label": "What happened (2 short sentences)",
+              "type": "text",
+              "required": true
+            }
+          ]
+        },
+        {
           "name": "neuronNote",
           "label": "Neuron Relay note",
           "type": "text",

@@ -857,5 +857,37 @@
  "certificate": {
   "title": "Junior Neuroscientist",
   "text": "has explored the brain, fired a neuron, tested their reactions, trained their working memory, followed signals through the Brain Playhouse and beaten the Quiz Boss."
- }
+ },
+ "neuronLevels": [
+  {
+   "id": "threshold",
+   "title": "Fire!",
+   "goal": "Tap the dendrites until the cell body fills past the dashed line.",
+   "explain": "Each message adds a little charge. Past the threshold line, the neuron fires an action potential!"
+  },
+  {
+   "id": "timing",
+   "title": "Be quick!",
+   "goal": "Messages fade fast now. Send them close together!",
+   "explain": "Charge leaks away over time. Messages must arrive close together to add up."
+  },
+  {
+   "id": "teamwork",
+   "title": "Teamwork",
+   "goal": "Each dendrite needs a short rest. Use all three!",
+   "explain": "One dendrite isn't enough. Messages from many dendrites add up to reach the threshold."
+  },
+  {
+   "id": "stop",
+   "title": "Stop signals",
+   "goal": "Blue messages say \"don't fire!\" Tap only the yellow ones.",
+   "explain": "Some messages make a neuron less likely to fire. The cell body adds up the go and stop messages."
+  },
+  {
+   "id": "rest",
+   "title": "Rest time",
+   "goal": "Fire 3 times in 15 seconds. After firing, I need a short rest!",
+   "explain": "After firing, a neuron needs a tiny rest before it can fire again. That rest is why the signal only travels one way. Real neurons rest for about a thousandth of a second."
+  }
+ ]
 }

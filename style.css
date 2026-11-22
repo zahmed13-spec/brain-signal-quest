@@ -382,7 +382,7 @@ details.more summary{cursor:pointer;font-weight:700;color:var(--accent);min-heig
 .neuron-svg .tip{cursor:pointer}
 .neuron-svg .tip .tip-ring{transform-box:fill-box;transform-origin:center;animation:invite var(--dur-idle) var(--ease-inout) infinite}
 .neuron-svg .tip.inhib .tip-dot{fill:var(--n-inhibit)}
-.neuron-svg .tip:focus-visible{outline:none}
+.neuron-svg .tip:focus,.neuron-svg .tip:focus-visible{outline:none}
 .neuron-svg .tip:focus-visible .tip-dot{stroke:var(--spark);stroke-width:5}
 .neuron-svg .ap,.neuron-svg .nt{opacity:0}
 .neuron-svg .node{transition:fill var(--dur-quick) linear}
@@ -586,6 +586,10 @@ details.more summary{cursor:pointer;font-weight:700;color:var(--accent);min-heig
   .explorer{grid-template-columns:1fr}
   .scenario-picker{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:var(--s-2)}
   .scenario-card{flex:0 0 auto;scroll-snap-align:start;max-width:14rem}
+}
+@media (max-width:640px){
+  .neuron-svg{max-height:78vh;margin:auto}
+  .neuron-svg text{font-size:21px}
 }
 @media (max-width:520px){
   .topbar-inner{flex-wrap:wrap}

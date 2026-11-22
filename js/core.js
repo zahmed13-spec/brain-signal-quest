@@ -395,11 +395,12 @@ import('./ui.js').then((m) => Object.assign(uiRef, m));
  * @param {string} key  activity key
  * @param {{stars?:number, cheer?:string, summary?:string}} opts
  */
-export async function complete(key, { stars = 1, cheer = '', summary = '' } = {}) {
+export async function complete(key, { stars = 1, cheer = '', summary = '', quiet = false } = {}) {
   const s = scaffolds.get(key); const res = store.setStars(key, stars);
   if (s) { s.render(true, res.first); s.hide(); }
   const sec = s?.section; setMood(sec?.querySelector('.goal-card .sparky'), 'cheer', 2400);
   if (!res.first && !res.improved) { if (cheer) toast(cheer); return; }
+  if (quiet && !res.first) { sound.play('star' + (res.stars - 1)); toast(`${'★'.repeat(res.stars)} ${s?.activity.title || key}: ${cheer}`); return; }
   sound.play('win');
   [0, 1, 2].slice(0, res.stars).forEach((i) => setTimeout(() => sound.play('star' + i), 500 + i * 160));
   const ui = uiRef.badgeDialog ? uiRef : await import('./ui.js');
