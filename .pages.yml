@@ -158,6 +158,32 @@
               "name": "funFact",
               "label": "Did you know?",
               "type": "text"
+            },
+            {
+              "name": "job",
+              "label": "Job Match card (4 words max; outer parts only)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "jobIcon",
+              "label": "Job Match icon",
+              "type": "select",
+              "required": false,
+              "options": {
+                "values": [
+                  "brain",
+                  "neuron",
+                  "eye",
+                  "ear",
+                  "nose",
+                  "hand",
+                  "ball",
+                  "spark",
+                  "cerebellum",
+                  "spinal"
+                ]
+              }
             }
           ],
           "list": true,

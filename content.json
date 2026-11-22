@@ -98,42 +98,54 @@
    "key": "frontal",
    "inside": false,
    "description": "The frontal lobe sits behind your forehead. It helps you plan, make choices, focus and control your actions. At its back edge is the motor cortex, which starts movements you choose to make.",
-   "funFact": "The front part of the frontal lobe is one of the last brain areas to finish growing. It keeps developing into your twenties."
+   "funFact": "The front part of the frontal lobe is one of the last brain areas to finish growing. It keeps developing into your twenties.",
+   "job": "plan and decide",
+   "jobIcon": "spark"
   },
   {
    "name": "Parietal lobe",
    "key": "parietal",
    "inside": false,
    "description": "The parietal lobe is at the top and toward the back. It feels touch, temperature and pain from your body. It also keeps track of where things are around you.",
-   "funFact": "Close your eyes and touch your nose. Your parietal lobe helps you know where your hand is without looking."
+   "funFact": "Close your eyes and touch your nose. Your parietal lobe helps you know where your hand is without looking.",
+   "job": "feel touch",
+   "jobIcon": "hand"
   },
   {
    "name": "Temporal lobe",
    "key": "temporal",
    "inside": false,
    "description": "The temporal lobes are on the sides of your head, near your ears. They help you hear, understand words and recognize faces and objects.",
-   "funFact": "For most people, the part that understands words, called Wernicke's area, is in the left temporal lobe."
+   "funFact": "For most people, the part that understands words, called Wernicke's area, is in the left temporal lobe.",
+   "job": "hear and understand words",
+   "jobIcon": "ear"
   },
   {
    "name": "Occipital lobe",
    "key": "occipital",
    "inside": false,
    "description": "The occipital lobe is at the very back of your head. It is your brain's main vision center. It figures out edges, colors and movement from what your eyes send.",
-   "funFact": "Your eyes are at the front of your head, but seeing starts to make sense at the back!"
+   "funFact": "Your eyes are at the front of your head, but seeing starts to make sense at the back!",
+   "job": "see shapes and colors",
+   "jobIcon": "eye"
   },
   {
    "name": "Cerebellum",
    "key": "cerebellum",
    "inside": false,
    "description": "The cerebellum, or little brain, sits under the back of the cerebrum. It helps with balance, timing and smooth movements, like riding a bike.",
-   "funFact": "The cerebellum is only about one tenth of your brain's weight, but it holds more than half of all its neurons."
+   "funFact": "The cerebellum is only about one tenth of your brain's weight, but it holds more than half of all its neurons.",
+   "job": "balance on a bike",
+   "jobIcon": "cerebellum"
   },
   {
    "name": "Brainstem",
    "key": "brainstem",
    "inside": false,
    "description": "The brainstem connects your brain to your spinal cord. It runs automatic jobs such as breathing, heartbeat and swallowing. Messages between your brain and body travel through it.",
-   "funFact": "Your brainstem keeps you breathing even while you're fast asleep."
+   "funFact": "Your brainstem keeps you breathing even while you're fast asleep.",
+   "job": "keep you breathing",
+   "jobIcon": "spinal"
   },
   {
    "name": "Thalamus",

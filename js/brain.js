@@ -1,5 +1,9 @@
 // Brain Explorer: original SVG side view (left hemisphere, face on the left) with clickable regions.
-import { $, el, svg, rich, sound, complete, pick } from './core.js';
+import { $, el, svg, icon, rich, sound, complete, shuffled, dock, scaffoldFor } from './core.js';
+import { sparkBurst, shake, feedbackSheet } from './ui.js';
+
+const MATCH_AFTER = 4;      // regions explored before Job Match unlocks
+const MAX_MISSES = 2;       // for the badge
 
 // Artwork for each region key. Keys must match content.json "regions[].key".
 const ART = {
@@ -70,6 +74,7 @@ export function initBrain(content) {
   }
 
   function select(key, fromDiagram) {
+    if (matching) { place(key); return; }
     const r = byKey[key]; if (!r) return;
     if (Boolean(r.inside) !== peek.checked && key !== 'cerebrum') { peek.checked = Boolean(r.inside); applyPeek(); }
     active = key; seen.add(key); sound.play('blip');
@@ -88,9 +93,89 @@ export function initBrain(content) {
     if (!fromDiagram) buttons[key]?.focus();
     const total = regions.length;
     count.textContent = `Explored ${seen.size} of ${total} parts`;
-    if (seen.size === total) complete('brain', { cheer: 'You explored every part!' });
-    else if (seen.size >= 1 && !peek.checked && regions.filter((x) => !x.inside).every((x) => seen.has(x.key))) count.textContent += ' — now try Peek inside!';
+    if (seen.size === total) count.textContent += ' You explored every part!';
+    else if (!peek.checked && regions.filter((x) => !x.inside).every((x) => seen.has(x.key))) count.textContent += ' Now try Peek inside!';
+    scaffoldFor('brain')?.progress();
+    if (seen.size >= MATCH_AFTER && matchBtn.hidden && !matching) { matchBtn.hidden = false; buddy.say('Ready for a challenge? Try Job Match!', 'point', 4000); }
   }
+
+  /* ---------- CORE-03 Job Match: drag (or tap, then tap a region) each job onto its region ---------- */
+  const side = $('.explorer-side');
+  const buddy = dock(side.closest('.play-card'));
+  const matchBtn = el('button', { type: 'button', class: 'btn', hidden: true }, icon('star'), el('span', { text: 'Play Job Match' }));
+  const matchBox = el('div', { class: 'jobs-box', hidden: true });
+  side.append(matchBtn, matchBox);
+  let matching = false; let selected = null; let misses = 0; let left = 0;
+  const jobRegions = () => regions.filter((r) => r.job && art.groups[r.key] && !ART[r.key].inner);
+
+  function startMatch() {
+    matching = true; misses = 0; selected = null; matchBtn.hidden = true;
+    peek.checked = false; applyPeek(); active = null; art.svg.classList.remove('has-active');
+    Object.values(art.groups).forEach((g) => g.classList.remove('active'));
+    renderButtons(); peek.closest('.switch').hidden = true;
+    const list = shuffled(jobRegions()); left = list.length;
+    const jobs = el('div', { class: 'jobs', role: 'group', 'aria-label': 'Jobs to place' });
+    for (const r of list) {
+      const j = el('button', { type: 'button', class: 'job', 'aria-pressed': 'false', 'data-key': r.key }, icon(r.jobIcon || 'brain'), el('span', { text: r.job }));
+      j.addEventListener('click', () => { if (j.classList.contains('placed')) return; choose(j); });
+      j.addEventListener('pointerdown', (e) => dragStart(e, j));
+      jobs.append(j);
+    }
+    matchBox.replaceChildren(el('h3', { text: 'Job Match' }), el('p', { text: 'Drag each job onto its brain part. Or tap a job, then tap the part.' }), jobs);
+    matchBox.hidden = false; card.hidden = true;
+    buddy.say('Which part does each job?', 'think', 3000);
+    jobs.querySelector('.job')?.focus();
+  }
+  function choose(j) {
+    selected = j; matchBox.querySelectorAll('.job').forEach((x) => x.setAttribute('aria-pressed', String(x === j)));
+    buddy.say(`Now tap the part that helps you ${j.textContent.toLowerCase()}.`, 'point', 3000);
+  }
+  async function place(key, job = selected) {
+    if (!job) { buddy.say('First pick a job card.', 'point', 2500); return; }
+    const want = job.dataset.key; const g = art.groups[key];
+    if (key === want) {
+      job.classList.add('placed'); job.setAttribute('aria-pressed', 'false'); job.disabled = true;
+      job.querySelector('span').textContent = `${byKey[want].job} ✓ ${byKey[want].name}`;
+      g.classList.add('drop-ok'); setTimeout(() => g.classList.remove('drop-ok'), 600);
+      sound.play('good'); sparkBurst(job, 10); selected = null; left--;
+      buddy.say(`Yes! The ${byKey[want].name.toLowerCase()} helps you ${byKey[want].job.toLowerCase()}.`, 'cheer', 2500);
+      matchBox.querySelector('.job:not(.placed)')?.focus();
+      if (left === 0) finishMatch();
+    } else {
+      misses++; sound.play('oops'); shake(job); scaffoldFor('brain')?.wrong();
+      const r = byKey[want];
+      buddy.say(`Not the ${byKey[key]?.name.toLowerCase() || 'right part'}. Clue: ${r.description.split(/(?<=[.!?])\s/)[0]}`, 'oops', 5000);
+    }
+  }
+  async function finishMatch() {
+    matching = false;
+    if (misses > MAX_MISSES) {
+      await feedbackSheet({ good: false, title: 'So close!', lines: [`You placed every job with ${misses} misses. Try again with ${MAX_MISSES} or fewer to earn the badge.`], cta: 'Try again' });
+      startMatch(); return;
+    }
+    matchBox.hidden = true; card.hidden = false; matchBtn.hidden = false; peek.closest('.switch').hidden = false; matchBtn.querySelector('span').textContent = 'Play Job Match again';
+    await complete('brain', { stars: misses === 0 && seen.size === regions.length ? 3 : misses <= 1 ? 2 : 1, cheer: `Job Match with ${misses} ${misses === 1 ? 'miss' : 'misses'}!` });
+  }
+  // Pointer drag: a floating copy follows the finger; drop on any region.
+  function dragStart(e, j) {
+    if (j.classList.contains('placed') || e.button > 0) return;
+    const sx = e.clientX; const sy = e.clientY; let ghost = null; let over = null;
+    const move = (ev) => {
+      if (!ghost && Math.hypot(ev.clientX - sx, ev.clientY - sy) < 8) return;
+      if (!ghost) { ghost = j.cloneNode(true); ghost.classList.add('dragging'); document.body.append(ghost); choose(j); }
+      ghost.style.left = ev.clientX - 40 + 'px'; ghost.style.top = ev.clientY - 24 + 'px';
+      const hit = document.elementFromPoint(ev.clientX, ev.clientY)?.closest?.('.region');
+      if (over && over !== hit) over.classList.remove('drop-hover'); over = hit; if (hit) hit.classList.add('drop-hover');
+    };
+    const up = (ev) => {
+      window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up);
+      if (!ghost) return; ghost.remove(); over?.classList.remove('drop-hover');
+      const hit = document.elementFromPoint(ev.clientX, ev.clientY)?.closest?.('.region');
+      if (hit) place(hit.dataset.key, j);
+    };
+    window.addEventListener('pointermove', move); window.addEventListener('pointerup', up);
+  }
+  matchBtn.addEventListener('click', startMatch);
 
   function applyPeek() {
     art.svg.classList.toggle('peek', peek.checked);
