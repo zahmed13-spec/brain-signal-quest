@@ -1,17 +1,17 @@
 # Brain Signal Quest
 
-A free browser game about the brain for kids aged 8–12. Follow the quest map through six stops:
+A free browser game about the brain for kids aged 8–12. Follow the quest map ("Sparky's Big Delivery") through six stations:
 
-1. **Brain Explorer**: click a side-view brain to learn what the four lobes, cerebellum and brainstem do. *Peek inside* shows the thalamus, hippocampus and amygdala.
-2. **Neuron Relay**: send messages to the dendrites until the neuron passes threshold, then watch the action potential hop along the myelin and the neurotransmitters cross the synapse.
-3. **Reaction Lab**: five rounds of "press when the lamp turns on", followed by the eye → brain → muscle loop.
-4. **Memory Match**: six illustrated pairs that train working memory.
-5. **Brain Playhouse**: a 3D brain (with a 2D fallback) that shows signals travelling step by step for six everyday moments: seeing a light, touching something hot, hearing your name, catching a ball, smelling cookies, and learning something new.
-6. **Quiz Boss**: four random questions from a pool of 20. Every answer is explained.
+1. **Neuron Relay** has five levels: fire a neuron, beat the leak, team up dendrites, avoid stop signals, and respect the rest time. You watch the action potential hop along the myelin and neurotransmitters cross the synapse.
+2. **Brain Explorer** is a clickable side-view brain with *Peek inside*, plus a **Job Match** challenge.
+3. **Reaction Lab** times *see → press*, then *Brain Choice* (*see → decide → press*), and compares the two.
+4. **Memory Match** has three levels: pictures, picture + job, and word + meaning.
+5. **Brain Playhouse** shows a 3D brain (with a 2D fallback) for six everyday moments, with mystery hooks, "predict the next stop" on replays, and mini-challenges.
+6. **Quiz Boss** draws random questions; missed ones come back, and a boss energy bar drops as you answer.
 
-Players earn a star and badge per stop and can print a **Junior Neuroscientist** certificate. Sparky, an original neuron character, guides the way.
+Players earn 1–3 mastery stars per station, Playhouse badges and Brain Atlas stickers, and can print a **Junior Neuroscientist** certificate. Returning players get an optional 3-question Brain Warm-up (spaced review). Sound effects are off until the player says yes. *Options* holds the volume, a calm background hum, **Read to me** (on-device voices only) and **Scientist mode**.
 
-**Privacy:** no accounts, ads, analytics, cookies or third-party requests. Fonts and libraries are self-hosted. Only the earned stars are saved, in `localStorage` on the device. The certificate name is never stored or sent anywhere.
+**Privacy:** no accounts, ads, analytics, cookies or third-party requests. Fonts and libraries are self-hosted. Only stars, levels, stickers, review timing and settings are saved, in `localStorage` on the device. The certificate name is never stored or sent anywhere.
 
 ## Run locally
 
@@ -39,10 +39,13 @@ In Settings → Pages, choose **Deploy from a branch**, then **main** and **/(ro
 | `js/core.js` | Shared helpers: progress storage, sound (muted by default), glossary tooltips, Sparky, activity scaffolding |
 | `js/brain.js`, `neuron.js`, `reaction.js`, `memory.js`, `quiz.js` | One module per activity |
 | `js/playhouse/` | Brain Playhouse: `playhouse.js` (UI), `scene3d.js` (Three.js, loaded only when the Playhouse opens), `view2d.js` (SVG fallback), `anatomy.js` (shared shapes) |
-| `content.json` | **All learning text and data.** Edit it directly or with Pages CMS. |
+| `content.json` | **All learning text** (activities, regions, neuron levels, memory pairs, quiz, glossary, sources). Edit it directly or with Pages CMS. |
+| `playhouse.json` | Brain Playhouse structures, pathways and scenarios. It's a separate file so it only loads when the Playhouse opens. Pages CMS entry: *Brain Playhouse (3D scenarios)*. |
+| `js/ui.js`, `js/atlas.js` | UI components (feedback sheet, badge dialog, particles) and the Brain Atlas |
+| `tools/readability.py` | Dev-only reading-level check (`python3 tools/readability.py`). It isn't loaded by the game. |
 | `vendor/three/` | Three.js r170 and OrbitControls (MIT), loaded through an import map |
 | `fonts/` | Fredoka and Atkinson Hyperlegible (SIL OFL 1.1) |
-| `docs/` | Audit and design brief from the redesign |
+| `docs/` | Audit, design brief, **design system** (`DESIGN-SYSTEM.md`), accessibility test script and before/after screenshots |
 
 ## Editing content (Pages CMS or by hand)
 
@@ -56,7 +59,7 @@ Open the repository in [Pages CMS](https://pagescms.org) and choose **Learning c
 
 ### Adding a Brain Playhouse scenario
 
-The Playhouse is data-driven. The 3D code just plays whatever is in `content.json → playhouse`.
+The Playhouse is data-driven. The 3D code just plays whatever is in `playhouse.json`.
 
 1. **Coordinates:** `x` is the person's right (+) or left (−), `y` is up, and `z` is front (+) or back (−). The brain runs from about `z = −1` (back of the head) to `z = +1`. The eyes are at `z ≈ 1.25`, and the spinal cord and arm go down to `y ≈ −2`.
 2. **Structures** are glowing dots with a label: `id`, `name`, `about`, `position`, `color`, `size`, and an optional `region` (the lobe that lights up on the 3D brain). Reuse existing ones where you can.
@@ -68,7 +71,8 @@ The Playhouse is data-driven. The 3D code just plays whatever is in `content.jso
    - `text` and `funFact`
    - `camera` and `target`: where the camera sits and what it looks at
    - `glow` (optional, 0–1): how bright and thick the pathways are, as in the "learning" scenario
-5. **Challenge:** either `type: "pick"` (with `answer` and `options` as structure IDs) or `type: "order"` (with `items` in the correct order, which the game shuffles). Add an `explanation`.
+5. **Optional extras:** `hook` and `hookAnswer` (a mystery question and its answer), and on any step `predictOptions` (2–3 structure IDs, including that step's own) to ask "where does the signal go next?" on replays.
+6. **Challenge:** either `type: "pick"` (with `answer` and `options` as structure IDs) or `type: "order"` (with `items` in the correct order, which the game shuffles). Add an `explanation`.
 
 Unknown IDs are ignored instead of crashing, so a typo makes something not show up rather than break the page. Preview locally before publishing.
 
@@ -83,6 +87,10 @@ Unknown IDs are ignored instead of crashing, so a typo makes something not show 
 ## Performance
 
 Three.js (about 690 KB, about 170 KB gzipped) is only downloaded when the Playhouse opens. The 3D scene is low-poly and renders on demand when paused. It caps the pixel ratio at 2, and drops to 1 automatically if the frame rate stays under 40. Without WebGL it shows the 2D diagram.
+
+## Credits
+
+See [`CREDITS.md`](CREDITS.md) for licenses. The change history of the competitive upgrade is in [`CHANGELOG_COMPETITIVE_UPGRADE.md`](CHANGELOG_COMPETITIVE_UPGRADE.md).
 
 ## Sources and credits
 
