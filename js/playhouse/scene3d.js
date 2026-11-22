@@ -190,7 +190,7 @@ export class Scene3D {
       }
       col.needsUpdate = true;
     }
-    this.flyTo(step.camera, step.target, instant);
+    this.flyTo(step.camera, step.target, instant); this.dirty = true;
     this.renderer.domElement.setAttribute('aria-label', `3D brain showing: ${step.title}. Highlighted: ${this.structs.get(active)?.name || ''}. Drag or use arrow keys to rotate, plus and minus to zoom.`);
   }
 
@@ -216,8 +216,8 @@ export class Scene3D {
     this.tween = { t0: performance.now(), dur: 300, fromP: this.camera.position.clone(), fromT: this.controls.target.clone(), toP: this.controls.target.clone().add(off), toT: this.controls.target.clone() };
   }
   setSpeed(s) { this.speed = s; }
-  setPlaying(p) { this.playing = p; }
-  setShowAll(b) { this.showAll = b; }
+  setPlaying(p) { this.playing = p; this.dirty = true; }
+  setShowAll(b) { this.showAll = b; this.dirty = true; }
 
   bindInput(canvas) {
     let down = null; const ray = new THREE.Raycaster(); const ndc = new THREE.Vector2();
@@ -237,7 +237,7 @@ export class Scene3D {
 
   resize() {
     const w = this.container.clientWidth; const h = this.container.clientHeight; if (!w || !h) return;
-    this.renderer.setSize(w, h, false); this.camera.aspect = w / h; this.camera.updateProjectionMatrix();
+    this.renderer.setSize(w, h, false); this.camera.aspect = w / h; this.camera.updateProjectionMatrix(); this.dirty = true;
   }
   start() { this.wanted = true; if (this.running || document.hidden) return; this.running = true; this.last = performance.now(); requestAnimationFrame(this.loop); }
   stop() { this.running = false; }
@@ -250,7 +250,10 @@ export class Scene3D {
       this.camera.position.lerpVectors(this.tween.fromP, this.tween.toP, e); this.controls.target.lerpVectors(this.tween.fromT, this.tween.toT, e);
       if (k >= 1) this.tween = null;
     }
-    this.controls.update();
+    const moved = this.controls.update();
+    // Render on demand: when paused and nothing moves, skip the frame (saves battery on Chromebooks/tablets).
+    if (!this.playing && !this.tween && !moved && !this.dirty) { requestAnimationFrame(this.loop); return; }
+    this.dirty = false;
     // Pulses travel along each active pathway (about one trip every 2.5 s at 1x speed; no flashing).
     for (const a of this.pulseAssign || []) a.m.position.copy(a.curve.getPointAt((this.time * 0.4 + a.offset) % 1));
     const breathe = 1 + 0.12 * Math.sin(this.time * 2.2);
@@ -258,7 +261,12 @@ export class Scene3D {
     this.renderer.render(this.scene, this.camera);
     this.updateLabels();
     this.fps.frames++;
-    if (now - this.fps.t0 > 1000) { this.fps.value = Math.round((this.fps.frames * 1000) / (now - this.fps.t0)); this.fps.frames = 0; this.fps.t0 = now; window.__bsqFps = this.fps.value; }
+    if (now - this.fps.t0 > 1000) {
+      this.fps.value = Math.round((this.fps.frames * 1000) / (now - this.fps.t0)); this.fps.frames = 0; this.fps.t0 = now; window.__bsqFps = this.fps.value;
+      // Adaptive quality: if a slow device can't keep up for 2 seconds in a row, render fewer pixels.
+      this.slow = this.playing && this.fps.value < 40 ? (this.slow || 0) + 1 : 0;
+      if (this.slow >= 2 && this.renderer.getPixelRatio() > 1) { this.renderer.setPixelRatio(1); this.resize(); this.slow = 0; }
+    }
     requestAnimationFrame(this.loop);
   }
   updateLabels() {
