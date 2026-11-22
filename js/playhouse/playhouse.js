@@ -7,12 +7,30 @@ const STEP_MS = 7000; // reading time per step at 1x speed
 const ICON_FOR = { eye: 'eye', hand: 'hand', ear: 'ear', ball: 'ball', nose: 'nose', spark: 'spark', brain: 'brain' };
 const COLOR_FOR = { eye: 'var(--r-occipital)', hand: 'var(--r-parietal)', ear: 'var(--r-temporal)', ball: 'var(--r-cerebellum)', nose: 'var(--r-hippocampus)', spark: 'var(--glow)', brain: 'var(--r-frontal)' };
 
+/** Fill in optional fields a CMS edit may leave out, so the views can rely on them. */
+function normalize(ph) {
+  const num = (v, d) => (Number.isFinite(Number(v)) && v !== '' && v !== null ? Number(v) : d);
+  const vec = (v, d) => ({ x: num(v?.x, d.x), y: num(v?.y, d.y), z: num(v?.z, d.z) });
+  const structures = (ph.structures || []).filter((s) => s && s.id).map((s) => ({ ...s, position: vec(s.position, { x: 0, y: 0, z: 0 }), size: num(s.size, 0.06), color: s.color || '#7cf7ff', region: s.region || '' }));
+  const pathways = (ph.pathways || []).filter((p) => p && p.id && (p.points || []).length >= 2).map((p) => ({ ...p, points: p.points.map((q) => vec(q, { x: 0, y: 0, z: 0 })) }));
+  const ids = new Set(structures.map((s) => s.id)); const pids = new Set(pathways.map((p) => p.id));
+  const scenarios = (ph.scenarios || []).map((sc) => ({
+    ...sc,
+    steps: (sc.steps || []).filter((st) => ids.has(st.structure)).map((st) => ({
+      ...st, also: (st.also || []).filter((a) => ids.has(a)), pathways: (st.pathways || []).filter((a) => pids.has(a)),
+      camera: vec(st.camera, { x: 2.4, y: 1.3, z: 2.6 }), target: vec(st.target, { x: 0, y: 0, z: 0 }), glow: num(st.glow, 1),
+    })),
+    challenge: sc.challenge ? { ...sc.challenge, options: (sc.challenge.options || []).filter((o) => ids.has(o)), items: sc.challenge.items || [] } : null,
+  }));
+  return { ...ph, structures, pathways, scenarios };
+}
+
 function webglAvailable() {
   try { const c = document.createElement('canvas'); return Boolean(window.WebGLRenderingContext && (c.getContext('webgl2') || c.getContext('webgl'))); } catch { return false; }
 }
 
 export function initPlayhouse(content, root) {
-  const data = content.playhouse;
+  const data = normalize(content.playhouse);
   const structs = new Map(data.structures.map((s) => [s.id, s]));
   const scenarios = data.scenarios.filter((s) => s.steps && s.steps.length);
   const glOK = webglAvailable();
