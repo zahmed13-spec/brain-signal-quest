@@ -80,7 +80,8 @@ main{width:min(100% - 2rem,72rem);margin:auto;padding:1.25rem 0 4rem;outline:non
 .hero{display:grid;grid-template-columns:1.3fr 1fr;gap:1.5rem;align-items:center;margin:.5rem 0 1.5rem}
 .eyebrow{color:var(--spark);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:1rem;margin:0}
 .hero h1{background:linear-gradient(90deg,#fff,var(--glow));-webkit-background-clip:text;background-clip:text;color:transparent}
-.lead{font-size:1.25rem;color:#dfe6ff}
+.lead{font-size:1.25rem;color:#dfe6ff;min-height:3.2em}
+.hero .guide{min-height:9rem}
 .progress-wrap{max-width:26rem}
 .progress{height:1.1rem;border-radius:999px;background:var(--night-600);overflow:hidden;border:2px solid var(--night-400)}
 .progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--glow),var(--spark));transition:width .6s}
@@ -395,3 +396,12 @@ main{width:min(100% - 2rem,72rem);margin:auto;padding:1.25rem 0 4rem;outline:non
 .ph2d .pw.flow{stroke-dasharray:14 12;animation:flow var(--flow-dur,1.4s) linear infinite}
 .ph2d.paused .pw.flow{animation-play-state:paused}
 @keyframes flow{to{stroke-dashoffset:-26}}
+
+/* small screens: keep diagram labels readable */
+@media (max-width:640px){
+  .neuron-wrap{overflow-x:auto}
+  .neuron-svg{min-width:680px}
+  .neuron-wrap::after{content:"Swipe sideways to see the whole neuron →";display:block;color:#cfd8ff;font-size:1rem;padding:.3rem .5rem 0}
+  .brain-svg .lbl{font-size:26px;stroke-width:7px}
+  .brain-svg .orient{font-size:22px}
+}

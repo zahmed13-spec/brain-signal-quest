@@ -10,14 +10,13 @@ const hooks = {}; // per-screen show/hide hooks
 let content; let current = null;
 
 function buildMap() {
-  const map = $('#quest-map'); map.replaceChildren();
+  const map = $('#quest-map'); map.replaceChildren(); $('.map-end').hidden = false;
   content.activities.forEach((a, i) => {
     const done = store.isDone(a.key);
-    const tile = el('a', { class: 'tile' + (done ? ' done' : ''), href: '#' + a.key, style: { '--c': `var(--a-${a.key})` },
-      'aria-label': `Stop ${i + 1}: ${a.title}. ${a.tile} ${done ? 'Star earned.' : 'Not finished yet.'}` },
+    const tile = el('a', { class: 'tile' + (done ? ' done' : ''), href: '#' + a.key, style: { '--c': `var(--a-${a.key})` } },
       el('div', { class: 'tile-top' }, el('span', { class: 'tile-icon' }, icon(activityIcon(a.key))), el('span', { class: 'tile-step', text: `Stop ${i + 1}` })),
       el('h3', { text: a.title }), el('p', { text: a.tile }),
-      el('span', { class: 'tile-star' }, icon('star'), el('span', { text: done ? a.badge : 'Earn a star' })));
+      el('span', { class: 'tile-star' }, icon('star'), el('span', { text: done ? `Star earned: ${a.badge}` : 'Earn a star' })));
     map.append(el('li', {}, tile));
   });
   const n = content.activities.filter((a) => store.isDone(a.key)).length; const total = content.activities.length;

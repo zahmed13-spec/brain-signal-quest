@@ -35,7 +35,13 @@ export function initReaction(content) {
       clearTimeout(timer); sound.play('oops');
       fb.textContent = 'Too early! Your brain guessed instead of waiting for your eyes. Try that round again.';
     } else if (phase === 'ready') {
-      const ms = Math.round(performance.now() - cueTime); times.push(ms); sound.play('good');
+      const ms = Math.round(performance.now() - cueTime);
+      if (ms < 100) {
+        // Faster than the eye-brain-muscle loop can work: that was a lucky guess, not a reaction.
+        sound.play('oops'); fb.textContent = `${ms} ms is faster than signals can travel from eye to brain to finger. That was a guess! Try that round again.`;
+        phase = 'idle'; lamp.classList.remove('on'); btn.classList.remove('go'); btn.textContent = label(); return;
+      }
+      times.push(ms); sound.play('good');
       fb.textContent = `${ms} milliseconds! That's ${(ms / 1000).toFixed(2)} of a second.`;
       renderDots();
       if (times.length >= ROUNDS) {

@@ -16,12 +16,13 @@ export function initMemory(content) {
     shuffled([...deck, ...deck]).forEach((card, index) => {
       const [ic, color] = LOOK[card.key] || ['star', 'var(--spark)'];
       const label = `Card ${index + 1}`;
-      const btn = el('button', { type: 'button', class: 'card', 'aria-label': `${label}, face down` },
-        el('span', { class: 'card-inner' },
+      const name = el('span', { class: 'sr-only', text: `${label}, face down` });
+      const btn = el('button', { type: 'button', class: 'card' }, name,
+        el('span', { class: 'card-inner', 'aria-hidden': 'true' },
           el('span', { class: 'card-face card-back' }, icon('neuron')),
           el('span', { class: 'card-face card-front', style: { '--c': color } }, icon(ic), el('span', { text: card.name }))));
       const state = { btn, card, up: false, matched: false };
-      const flip = (up) => { state.up = up; btn.classList.toggle('up', up); btn.setAttribute('aria-label', `${label}, ${up ? card.name : 'face down'}${state.matched ? ', matched' : ''}`); };
+      const flip = (up) => { state.up = up; btn.classList.toggle('up', up); name.textContent = `${label}, ${up ? card.name : 'face down'}${state.matched ? ', matched' : ''}`; };
       state.flip = flip;
       btn.addEventListener('click', () => {
         if (locked || state.up || state.matched) return;
