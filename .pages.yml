@@ -363,6 +363,12 @@
               "required": true
             },
             {
+              "name": "cheer",
+              "label": "Specific cheer when right (6 words max)",
+              "type": "string",
+              "required": false
+            },
+            {
               "name": "explanation",
               "label": "Why the correct answer is right",
               "type": "text",
@@ -377,6 +383,22 @@
               "name": "other2Why",
               "label": "Why wrong answer 2 is wrong",
               "type": "text"
+            },
+            {
+              "name": "activity",
+              "label": "Used in the quick check for this stop",
+              "type": "select",
+              "required": false,
+              "options": {
+                "values": [
+                  "neuron",
+                  "brain",
+                  "reaction",
+                  "memory",
+                  "playhouse",
+                  "quiz"
+                ]
+              }
             }
           ],
           "list": true,

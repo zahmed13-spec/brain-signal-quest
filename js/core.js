@@ -328,6 +328,8 @@ export const activityIcon = (key) => ICONS[key] || 'star';
 const scaffolds = new Map();
 let activityOrder = [];
 let onNext = null; // set by game.js: navigate to a stop
+let checker = null; // CORE-08: one quick question before a first badge
+export function setChecker(fn) { checker = fn; }
 export function setNavigator(order, fn) { activityOrder = order; onNext = fn; }
 export function nextStopAfter(key) {
   const i = activityOrder.indexOf(key);
@@ -401,6 +403,7 @@ export async function complete(key, { stars = 1, cheer = '', summary = '', quiet
   const sec = s?.section; setMood(sec?.querySelector('.goal-card .sparky'), 'cheer', 2400);
   if (!res.first && !res.improved) { if (cheer) toast(cheer); return; }
   if (quiet && !res.first) { sound.play('star' + (res.stars - 1)); toast(`${'★'.repeat(res.stars)} ${s?.activity.title || key}: ${cheer}`); return; }
+  if (res.first && checker && key !== 'quiz') { try { await checker(key); } catch (e) { console.error(e); } }
   sound.play('win');
   [0, 1, 2].slice(0, res.stars).forEach((i) => setTimeout(() => sound.play('star' + i), 500 + i * 160));
   const ui = uiRef.badgeDialog ? uiRef : await import('./ui.js');

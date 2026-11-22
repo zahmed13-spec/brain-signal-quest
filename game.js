@@ -1,15 +1,16 @@
 // Brain Signal Quest: entry module. Loads content, builds the quest map, routes between screens.
 import { $, el, icon, rich, store, prefs, sound, reader, refreshSpeakButtons, guide, scaffold, scaffoldFor, sparky, activityIcon, setNavigator,
-  init as initCore, setGlossary } from './js/core.js';
+  setChecker, init as initCore, setGlossary } from './js/core.js';
 import { clearTransient, starsRow } from './js/ui.js';
 import { initBrain } from './js/brain.js';
 import { initNeuron } from './js/neuron.js';
 import { initReaction } from './js/reaction.js';
 import { initMemory } from './js/memory.js';
-import { initQuiz } from './js/quiz.js';
+import { initQuiz, makeChecker, dueQuestions } from './js/quiz.js';
 
 const hooks = {}; // per-screen show/hide hooks
-let content; let current = null; let homeGuide = null;
+let content; let current = null; let homeGuide = null; let quizApi = null; let prevVisit = 0;
+const WARMUP_AFTER_MS = 20 * 3600 * 1000;
 const order = () => content.activities.map((a) => a.key);
 const title = (key) => content.activities.find((a) => a.key === key)?.title || key;
 
@@ -42,7 +43,20 @@ function buildMap() {
   else if (next) { start.href = '#' + next; label.textContent = `Continue: ${title(next)}`; }
   else { start.href = '#certificate'; label.textContent = 'See your certificate'; }
   requestAnimationFrame(drawPath);
+  buildWarmup();
 }
+
+/** PRG-04: on a return visit, offer 3 spaced-review questions. Optional; skipping says nothing negative. */
+function buildWarmup() {
+  const box = $('#warmup'); const due = dueQuestions(content.quiz, 3);
+  const show = due.length > 0 && prevVisit > 0 && Date.now() - prevVisit >= WARMUP_AFTER_MS && !sessionStorageGet('bsq-warmup-done');
+  box.hidden = !show; if (!show) return;
+  const go2 = el('a', { class: 'btn', href: '#quiz', text: 'Start warm-up' });
+  go2.addEventListener('click', () => { sessionStorageSet('bsq-warmup-done', '1'); setTimeout(() => quizApi?.warmup(due), 0); });
+  box.replaceChildren(sparky({ size: '3.5rem', mood: 'wave' }), el('p', {}, el('strong', { text: 'Brain Warm-up! ' }), document.createTextNode(`${due.length} quick question${due.length > 1 ? 's' : ''} to wake up your memory.`)), go2);
+}
+function sessionStorageGet(k) { try { return sessionStorage.getItem(k); } catch { return null; } }
+function sessionStorageSet(k, v) { try { sessionStorage.setItem(k, v); } catch { /* ignore */ } }
 
 /** VIS-01: draw the quest path as a glowing myelinated axon connecting the stops. */
 function drawPath() {
@@ -171,7 +185,8 @@ async function start() {
   hooks.neuron = initNeuron(content);
   hooks.reaction = initReaction(content);
   initMemory(content);
-  initQuiz(content);
+  quizApi = initQuiz(content);
+  setChecker(makeChecker(content));
   buildReferences();
   $('#cert-guide').append(sparky({ mood: 'cheer' }));
   $('#cert-name').addEventListener('input', (e) => { $('#cert-name-out').textContent = e.target.value.trim() || 'A Brilliant Brain Explorer'; });
@@ -182,7 +197,7 @@ async function start() {
   $('#sound-toggle').addEventListener('click', () => { sound.toggle(); if (!sound.on) $('#opt-ambient').checked = false; syncSoundButton(); });
   store.subscribe(() => { if (current === 'home') buildMap(); });
   window.addEventListener('resize', () => { if (current === 'home') drawPath(); });
-  store.touchVisit();
+  prevVisit = store.touchVisit();
   window.addEventListener('hashchange', () => route(false));
   route(true);
 }

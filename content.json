@@ -261,7 +261,9 @@
    "other2": "Hippocampus",
    "explanation": "The cerebellum fine-tunes movement, timing and balance.",
    "other1Why": "The occipital lobe is mostly for vision.",
-   "other2Why": "The hippocampus helps make new memories."
+   "other2Why": "The hippocampus helps make new memories.",
+   "activity": "brain",
+   "cheer": "Yes! The cerebellum keeps you steady."
   },
   {
    "prompt": "Where does the electrical signal travel after a neuron fires?",
@@ -270,7 +272,9 @@
    "other2": "Back into the dendrites",
    "explanation": "The action potential travels down the axon to the axon terminals.",
    "other1Why": "The skull is bone that protects the brain. It doesn't carry signals.",
-   "other2Why": "Dendrites receive messages. The outgoing signal goes down the axon."
+   "other2Why": "Dendrites receive messages. The outgoing signal goes down the axon.",
+   "activity": "neuron",
+   "cheer": "Yes! Down the axon it zooms."
   },
   {
    "prompt": "What helps you hold a card's location in mind for a few seconds?",
@@ -279,7 +283,9 @@
    "other2": "The brainstem's breathing center",
    "explanation": "Working memory holds and uses information for a short time, like a mental sticky note.",
    "other1Why": "An axon terminal releases chemical messengers. It doesn't store a memory by itself.",
-   "other2Why": "The brainstem keeps you breathing. It doesn't hold card locations."
+   "other2Why": "The brainstem keeps you breathing. It doesn't hold card locations.",
+   "activity": "memory",
+   "cheer": "Yes! Working memory is your mental sticky note."
   },
   {
    "prompt": "Which lobe is the main vision center?",
@@ -288,7 +294,9 @@
    "other2": "Temporal lobe",
    "explanation": "The occipital lobe, at the back of the head, is where vision signals first reach the cortex.",
    "other1Why": "The frontal lobe plans and makes choices.",
-   "other2Why": "The temporal lobe helps recognize what things are, but it isn't the first stop for vision."
+   "other2Why": "The temporal lobe helps recognize what things are, but it isn't the first stop for vision.",
+   "activity": "brain",
+   "cheer": "Yes! The occipital lobe sees for you."
   },
   {
    "prompt": "At the optic chiasm, what happens to some of the optic nerve fibers?",
@@ -297,7 +305,9 @@
    "other2": "They stop and send nothing on",
    "explanation": "Fibers from the inner (nose) half of each retina cross over. That way each side of the brain sees the opposite side of the world.",
    "other1Why": "Nerve fibers stay nerve fibers. Muscles are a different kind of tissue.",
-   "other2Why": "The signals keep going to the thalamus and then to the visual cortex."
+   "other2Why": "The signals keep going to the thalamus and then to the visual cortex.",
+   "activity": "playhouse",
+   "cheer": "Yes! Half the fibers cross over."
   },
   {
    "prompt": "Which part is the brain's relay station for most senses?",
@@ -306,7 +316,9 @@
    "other2": "Amygdala",
    "explanation": "Signals for sight, hearing, touch and taste stop at the thalamus before reaching the cortex.",
    "other1Why": "The cerebellum helps with balance and smooth movement.",
-   "other2Why": "The amygdala helps with emotions like fear."
+   "other2Why": "The amygdala helps with emotions like fear.",
+   "activity": "playhouse",
+   "cheer": "Yes! The thalamus passes signals on."
   },
   {
    "prompt": "Which sense's signals don't need to stop at the thalamus before reaching the cortex?",
@@ -315,7 +327,9 @@
    "other2": "Sight",
    "explanation": "Smell signals go from the olfactory bulb straight to smell areas of the cortex, close to the amygdala and hippocampus.",
    "other1Why": "Hearing signals stop at a part of the thalamus called the MGN.",
-   "other2Why": "Vision signals stop at a part of the thalamus called the LGN."
+   "other2Why": "Vision signals stop at a part of the thalamus called the LGN.",
+   "activity": "playhouse",
+   "cheer": "Yes! Smell takes a shortcut."
   },
   {
    "prompt": "Why can a smell suddenly remind you of a person or place?",
@@ -324,7 +338,9 @@
    "other2": "Smells travel through the cerebellum",
    "explanation": "Smell signals reach the amygdala and areas right next to the hippocampus in just a step or two.",
    "other1Why": "Your nose detects smells, but memories are made and stored in the brain.",
-   "other2Why": "The cerebellum helps with movement and balance, not smell."
+   "other2Why": "The cerebellum helps with movement and balance, not smell.",
+   "activity": "playhouse",
+   "cheer": "Yes! Smell is wired close to memory."
   },
   {
    "prompt": "You touch a hot pan. What pulls your hand away so fast?",
@@ -333,7 +349,9 @@
    "other2": "Your hippocampus",
    "explanation": "The spinal cord sends a 'pull away!' signal back to your arm muscles right away, often before your brain feels the pain.",
    "other1Why": "The occipital lobe handles vision.",
-   "other2Why": "The hippocampus helps form memories, which might help you remember to be careful next time!"
+   "other2Why": "The hippocampus helps form memories, which might help you remember to be careful next time!",
+   "activity": "playhouse",
+   "cheer": "Yes! Your spinal cord acts first."
   },
   {
    "prompt": "What is myelin?",
@@ -342,7 +360,9 @@
    "other2": "A chemical messenger",
    "explanation": "Myelin wraps around many axons so signals can jump along much faster.",
    "other1Why": "Brain wrinkles are folds of cortex, not myelin.",
-   "other2Why": "Chemical messengers are called neurotransmitters."
+   "other2Why": "Chemical messengers are called neurotransmitters.",
+   "activity": "neuron",
+   "cheer": "Yes! Myelin makes signals faster."
   },
   {
    "prompt": "What crosses the tiny gap at a chemical synapse?",
@@ -351,7 +371,9 @@
    "other2": "Light",
    "explanation": "Neurotransmitters are chemical messengers. They cross the gap and attach to the next cell.",
    "other1Why": "Blood cells travel in blood vessels, not across synapses.",
-   "other2Why": "Light is detected by the eyes, but the messages between neurons are chemical."
+   "other2Why": "Light is detected by the eyes, but the messages between neurons are chemical.",
+   "activity": "neuron",
+   "cheer": "Yes! Neurotransmitters carry the message."
   },
   {
    "prompt": "In the ear, what turns sound vibrations into nerve signals?",
@@ -360,7 +382,9 @@
    "other2": "The thalamus",
    "explanation": "Tiny hair cells in the snail-shaped cochlea turn vibrations into electrical signals.",
    "other1Why": "The eardrum vibrates, but the cochlea's hair cells make the nerve signals.",
-   "other2Why": "The thalamus relays hearing signals later. It doesn't detect sound."
+   "other2Why": "The thalamus relays hearing signals later. It doesn't detect sound.",
+   "activity": "playhouse",
+   "cheer": "Yes! The cochlea's hair cells do it."
   },
   {
    "prompt": "Which area helps you understand the words you hear?",
@@ -369,7 +393,9 @@
    "other2": "The olfactory bulb",
    "explanation": "Wernicke's area, usually in the left temporal lobe, helps you understand language.",
    "other1Why": "The brainstem passes hearing signals along, but understanding words happens in the cortex.",
-   "other2Why": "The olfactory bulb handles smell."
+   "other2Why": "The olfactory bulb handles smell.",
+   "activity": "brain",
+   "cheer": "Yes! Wernicke's area understands words."
   },
   {
    "prompt": "Which part of the cortex starts movements you choose to make?",
@@ -378,7 +404,9 @@
    "other2": "Olfactory cortex",
    "explanation": "The motor cortex, at the back of the frontal lobe, sends commands to your muscles.",
    "other1Why": "The visual cortex handles what you see.",
-   "other2Why": "The olfactory cortex handles smell."
+   "other2Why": "The olfactory cortex handles smell.",
+   "activity": "reaction",
+   "cheer": "Yes! The motor cortex starts the move."
   },
   {
    "prompt": "The left side of your brain mostly controls which side of your body?",
@@ -387,7 +415,9 @@
    "other2": "Only your face",
    "explanation": "Most movement and touch pathways cross over, so each side of the brain works with the opposite side of the body.",
    "other1Why": "Most pathways cross, so it's the opposite side.",
-   "other2Why": "It works with the whole opposite side of the body, including the arm and leg."
+   "other2Why": "It works with the whole opposite side of the body, including the arm and leg.",
+   "activity": "reaction",
+   "cheer": "Yes! The pathways cross over."
   },
   {
    "prompt": "What happens to the connections between neurons when you practice something?",
@@ -396,7 +426,9 @@
    "other2": "They turn into bone",
    "explanation": "Neurons that fire together wire together. Practice strengthens the synapses you use.",
    "other1Why": "Connections you use a lot tend to get stronger, not disappear.",
-   "other2Why": "Neurons and synapses are living cells, not bone."
+   "other2Why": "Neurons and synapses are living cells, not bone.",
+   "activity": "memory",
+   "cheer": "Yes! Practice makes connections stronger."
   },
   {
    "prompt": "Which part runs breathing and heartbeat automatically?",
@@ -405,7 +437,9 @@
    "other2": "Occipital lobe",
    "explanation": "The brainstem keeps automatic jobs running, even while you sleep.",
    "other1Why": "The frontal lobe plans and decides. You don't have to think to breathe!",
-   "other2Why": "The occipital lobe is for vision."
+   "other2Why": "The occipital lobe is for vision.",
+   "activity": "brain",
+   "cheer": "Yes! The brainstem never takes a break."
   },
   {
    "prompt": "Which parts of your eye work best in dim light?",
@@ -414,7 +448,9 @@
    "other2": "The lens",
    "explanation": "Rods are very sensitive to light, so they help you see in the dark (mostly in shades of gray).",
    "other1Why": "Cones need brighter light and let you see color.",
-   "other2Why": "The lens helps focus light, but it doesn't turn light into signals."
+   "other2Why": "The lens helps focus light, but it doesn't turn light into signals.",
+   "activity": "playhouse",
+   "cheer": "Yes! Rods love dim light."
   },
   {
    "prompt": "Why do your pupils get smaller in bright light?",
@@ -423,7 +459,9 @@
    "other2": "The cerebellum decides to squint",
    "explanation": "Light signals go to the midbrain, which sends a signal back to both eyes to shrink the pupils. It happens automatically.",
    "other1Why": "It's a fast automatic reflex, not tiredness.",
-   "other2Why": "The pupil reflex runs through the midbrain, not the cerebellum."
+   "other2Why": "The pupil reflex runs through the midbrain, not the cerebellum.",
+   "activity": "playhouse",
+   "cheer": "Yes! The midbrain runs that reflex."
   },
   {
    "prompt": "After visual signals reach the occipital lobe, where does the 'what is it?' pathway go?",
@@ -432,7 +470,9 @@
    "other2": "Toward the nose",
    "explanation": "The 'what' pathway flows down into the temporal lobe to recognize objects and faces. The 'where' pathway flows up into the parietal lobe.",
    "other1Why": "The spinal cord carries body signals, not object recognition.",
-   "other2Why": "The nose detects smells. Vision pathways stay inside the brain."
+   "other2Why": "The nose detects smells. Vision pathways stay inside the brain.",
+   "activity": "playhouse",
+   "cheer": "Yes! The what pathway goes to the temporal lobe."
   }
  ],
  "glossary": [
