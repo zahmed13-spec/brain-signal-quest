@@ -8,7 +8,7 @@ import { initNeuron } from './js/neuron.js';
 import { initReaction } from './js/reaction.js';
 import { initMemory } from './js/memory.js';
 import { initQuiz, makeChecker, dueQuestions } from './js/quiz.js';
-import { loadAtlas, renderAtlas } from './js/atlas.js';
+import { renderAtlas } from './js/atlas.js';
 
 const hooks = {}; // per-screen show/hide hooks
 let content; let current = null; let homeGuide = null; let quizApi = null; let prevVisit = 0;
@@ -46,7 +46,8 @@ function buildMap() {
   else { start.href = '#certificate'; label.textContent = 'See your certificate'; }
   requestAnimationFrame(drawPath);
   buildWarmup();
-  loadAtlas(content).then((list) => { $('#atlas-link span').textContent = `Brain Atlas (${list.filter((e) => store.atlasHas(e.id)).length}/${list.length})`; });
+  // Sticker count without loading playhouse.json on the home screen (PERF-01).
+  const got = store.get().atlas.length; $('#atlas-link span').textContent = got ? `Brain Atlas (${got} sticker${got > 1 ? 's' : ''})` : 'Brain Atlas';
 }
 
 /** PRG-04: on a return visit, offer 3 spaced-review questions. Optional; skipping says nothing negative. */
@@ -211,7 +212,7 @@ async function start() {
   prevVisit = store.touchVisit();
   window.addEventListener('hashchange', () => route(false));
   route(true);
-  addDrift(); prefetch3D();
+  addDrift(); setupPrefetch();
 }
 
 /** ANIM-04: a few slow drifting "signal" dots behind the home screen (none under reduced motion). */
@@ -221,12 +222,20 @@ function addDrift() {
   for (let i = 0; i < 10; i++) { const d = el('i'); d.style.left = Math.random() * 100 + 'vw'; d.style.animationDelay = -Math.random() * 18 + 's'; d.style.animationDuration = 14 + Math.random() * 10 + 's'; layer.append(d); }
   document.body.prepend(layer);
 }
-/** PERF-02: warm the 3D code during idle time on capable devices, never on Save-Data. */
+/** PERF-02 (intent-based): warm the 3D code when the player shows interest in the Playhouse
+ * (pointer/focus on its tile) or after their first badge. Never on Save-Data or < 4 GB devices.
+ * An idle-time prefetch on first load was measured to push LCP from 3.0 s to 7.0 s on slow 4G. */
+let prefetched = false;
 function prefetch3D() {
+  if (prefetched) return; prefetched = true;
   const c = navigator.connection; if (c?.saveData || (navigator.deviceMemory && navigator.deviceMemory < 4)) return;
-  const go = () => ['vendor/three/three.module.min.js', 'vendor/three/addons/controls/OrbitControls.js', 'js/playhouse/scene3d.js', 'js/playhouse/playhouse.js', 'playhouse.json']
+  ['vendor/three/three.module.min.js', 'vendor/three/addons/controls/OrbitControls.js', 'js/playhouse/scene3d.js', 'js/playhouse/playhouse.js', 'playhouse.json']
     .forEach((href) => document.head.append(el('link', { rel: href.endsWith('.json') ? 'prefetch' : 'modulepreload', href })));
-  (window.requestIdleCallback || ((f) => setTimeout(f, 2500)))(go, { timeout: 5000 });
+}
+function setupPrefetch() {
+  const onIntent = (e) => { if (e.target.closest?.('a[href="#playhouse"]')) prefetch3D(); };
+  document.addEventListener('pointerover', onIntent); document.addEventListener('focusin', onIntent);
+  store.subscribe(() => { if (Object.values(store.get().done).some(Boolean)) prefetch3D(); });
 }
 
 start().catch((err) => { console.error(err); $('#load-error').hidden = false; });
