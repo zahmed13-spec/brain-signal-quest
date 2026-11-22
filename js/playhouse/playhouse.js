@@ -3,6 +3,7 @@
 import { el, icon, rich, sound, complete, toast, reducedMotion, shuffled, pickFresh, store as progress, prefs, dock, scaffoldFor, speakButton } from '../core.js';
 import { feedbackSheet, sparkBurst, shake, starsRow } from '../ui.js';
 import { View2D } from './view2d.js';
+import { unlockSticker, loadAtlas } from '../atlas.js';
 
 const MIN_STEP_MS = 8000; const MS_PER_WORD = 500; // EDU-05: autoplay waits for reading time
 const MYELIN_BOOST = 1.6;
@@ -186,7 +187,7 @@ export function initPlayhouse(content, root) {
         if (!predicting) return;
         predicting = false; predictTotal++;
         const right = id === step.structure;
-        if (right) { predictRight++; sound.play('good'); sparkBurst(b); buddy.say(`Yes! Next stop: ${structs.get(id).name}.`, 'cheer', 2500); }
+        if (right) { predictRight++; loadAtlas(content).then(() => unlockSticker(id)); sound.play('good'); sparkBurst(b); buddy.say(`Yes! Next stop: ${structs.get(id).name}.`, 'cheer', 2500); }
         else { sound.play('oops'); shake(b); buddy.say(`That's the ${structs.get(id).name}. The signal goes to the ${structs.get(step.structure).name} next.`, 'oops', 4000); scaffoldFor('playhouse')?.wrong(); }
         predictBox.hidden = true; view.setCandidates?.([]); pickHandler = null; res();
       };
@@ -248,7 +249,7 @@ export function initPlayhouse(content, root) {
       check.addEventListener('click', () => {
         let right = 0;
         [...list.children].forEach((li, i) => { const ok = items[i] === ch.items[i]; li.classList.toggle('right', ok); li.classList.toggle('wrong', !ok); if (ok) right++; });
-        if (right === items.length) { sparkBurst(check); win(); } else { shake(list); oops(`${right} of ${items.length} are in the right spot (green). Move the orange ones and check again!`); }
+        if (right === items.length) { sparkBurst(check); loadAtlas(content).then(() => sc.steps.forEach((st) => unlockSticker(st.structure))); win(); } else { shake(list); oops(`${right} of ${items.length} are in the right spot (green). Move the orange ones and check again!`); }
       });
       challengeBox.append(list, el('p', {}, check));
     } else {
@@ -260,7 +261,7 @@ export function initPlayhouse(content, root) {
       });
       pickHandler = (id) => {
         const b = grid.children[ch.options.indexOf(id)];
-        if (id === ch.answer) { b?.classList.add('right'); sparkBurst(b); win(); }
+        if (id === ch.answer) { b?.classList.add('right'); sparkBurst(b); loadAtlas(content).then(() => unlockSticker(id)); win(); }
         else if (ch.options.includes(id)) { b?.classList.add('wrong'); shake(b); oops(`That's the ${structs.get(id).name}: ${structs.get(id).about}`).then(() => b?.classList.remove('wrong')); }
       };
       challengeBox.append(el('p', { class: 'note', text: 'Tip: you can also click the glowing dot in the picture.' }), grid);

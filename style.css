@@ -545,7 +545,7 @@ details.more summary{cursor:pointer;font-weight:700;color:var(--accent);min-heig
 .cert-date{margin:0;font-weight:700}
 
 /* atlas */
-.atlas{display:grid;grid-template-columns:repeat(auto-fill,minmax(9rem,1fr));gap:var(--s-3)}
+.atlas{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(9rem,1fr));gap:var(--s-3)}
 .sticker{border-radius:var(--rad);border:3px solid var(--ink);background:var(--white);padding:var(--s-3);text-align:center;color:var(--ink);min-height:9rem;display:flex;flex-direction:column;align-items:center;gap:var(--s-1)}
 .sticker .dot{width:3rem;height:3rem;border-radius:50%;background:var(--c);border:3px solid var(--ink)}
 .sticker.locked{background:var(--paper-2);border-style:dashed;color:var(--ink-soft)}

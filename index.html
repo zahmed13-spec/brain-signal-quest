@@ -76,6 +76,7 @@
         <svg aria-hidden="true"><use href="#i-trophy"/></svg>
         <span>Junior Neuroscientist certificate</span>
       </a>
+      <a class="btn btn-secondary" id="atlas-link" href="#atlas"><svg aria-hidden="true"><use href="#i-book"/></svg><span>Brain Atlas</span></a>
       <button type="button" class="btn btn-ghost" id="reset-progress">Clear my stars</button>
     </div>
   </section>
@@ -200,6 +201,16 @@
         <ul class="cert-badges" id="cert-badges"></ul>
         <div class="cert-foot"><div id="cert-guide" class="cert-guide"></div><p class="cert-date" id="cert-date"></p></div>
       </div>
+    </div>
+  </section>
+
+  <!-- BRAIN ATLAS (PRG-03) -->
+  <section id="atlas" class="screen" aria-labelledby="atlas-title" hidden>
+    <div class="activity-head"><a class="back" href="#home">← Map</a><h2 id="atlas-title">Brain Atlas</h2></div>
+    <div class="play-card">
+      <p id="atlas-count" class="level-title"></p>
+      <p>Collect a sticker for every brain part you identify correctly in the games.</p>
+      <ul class="atlas" id="atlas-grid" aria-label="Stickers"></ul>
     </div>
   </section>
 

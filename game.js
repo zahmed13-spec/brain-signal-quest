@@ -8,6 +8,7 @@ import { initNeuron } from './js/neuron.js';
 import { initReaction } from './js/reaction.js';
 import { initMemory } from './js/memory.js';
 import { initQuiz, makeChecker, dueQuestions } from './js/quiz.js';
+import { loadAtlas, renderAtlas } from './js/atlas.js';
 
 const hooks = {}; // per-screen show/hide hooks
 let content; let current = null; let homeGuide = null; let quizApi = null; let prevVisit = 0;
@@ -45,6 +46,7 @@ function buildMap() {
   else { start.href = '#certificate'; label.textContent = 'See your certificate'; }
   requestAnimationFrame(drawPath);
   buildWarmup();
+  loadAtlas(content).then((list) => { $('#atlas-link span').textContent = `Brain Atlas (${list.filter((e) => store.atlasHas(e.id)).length}/${list.length})`; });
 }
 
 /** PRG-04: on a return visit, offer 3 spaced-review questions. Optional; skipping says nothing negative. */
@@ -88,7 +90,8 @@ function setupHomeGuide() {
     yes.addEventListener('click', () => done(true)); no.addEventListener('click', () => done(false));
   } else {
     const returning = content.activities.some((a) => store.isDone(a.key));
-    homeGuide = guide(g, returning ? `Welcome back! ${content.mascot.cheers[0]} Pick up where you left off.` : content.mascot.hello);
+    const next = suggestedStop(); const nextAct = content.activities.find((a) => a.key === next);
+    homeGuide = guide(g, returning && nextAct ? `Welcome back! Next station: ${nextAct.title}. ${nextAct.storyIn || ''}` : returning ? content.mascot.finish : content.mascot.hello);
   }
 }
 
@@ -119,6 +122,7 @@ function buildCertificate() {
   const total = content.activities.length; const n = content.activities.filter((a) => store.isDone(a.key)).length;
   $('#cert-status').textContent = n === total ? 'You earned every badge. Congratulations, Junior Neuroscientist!' : `You have ${n} of ${total} badges. Finish every stop on the quest map to complete your certificate. You can still print it now!`;
   $('#cert-title').textContent = content.certificate.title;
+  $('.cert-small').textContent = n === total ? 'Message delivered to Brain HQ! This certifies that' : 'This certifies that';
   rich($('#cert-text'), content.certificate.text);
   const list = $('#cert-badges'); list.replaceChildren();
   for (const a of content.activities) {
@@ -168,6 +172,7 @@ function route(initial = false) {
   current = name;
   if (name === 'home') buildMap();
   if (name === 'certificate') buildCertificate();
+  if (name === 'atlas') renderAtlas(content);
   if (name === 'playhouse') loadPlayhouse();
   hooks[name]?.show?.(); scaffoldFor(name)?.show();
   document.title = name === 'home' ? 'Brain Signal Quest' : `${screen.querySelector('h2')?.textContent || name} · Brain Signal Quest`;

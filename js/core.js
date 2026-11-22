@@ -411,7 +411,7 @@ export async function complete(key, { stars = 1, cheer = '', summary = '', quiet
   const nextTitle = activityOrder.length ? (document.getElementById(nextKey)?.querySelector('h2')?.textContent || 'next stop') : 'next stop';
   const choice = await ui.badgeDialog({
     title: res.first ? 'Badge earned!' : 'New best!', badge: s ? s.activity.badge : key, iconId: activityIcon(key), stars: res.stars,
-    summary: [cheer, summary || s?.activity.whatHappened?.split(/(?<=[.!?])\s/)[0]].filter(Boolean).join(' '),
+    summary: [cheer, summary || s?.activity.storyOut || s?.activity.whatHappened?.split(/(?<=[.!?])\s/)[0]].filter(Boolean).join(' '),
     nextLabel: `Next: ${nextTitle} →`,
   });
   if (choice === 'next' && onNext) onNext(nextKey);

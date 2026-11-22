@@ -121,6 +121,18 @@
               "label": "Badge name",
               "type": "string",
               "required": true
+            },
+            {
+              "name": "storyIn",
+              "label": "Story: Sparky's line before this station (30 words max)",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "storyOut",
+              "label": "Story: line after finishing this station",
+              "type": "string",
+              "required": false
             }
           ],
           "list": true,

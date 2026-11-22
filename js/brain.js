@@ -1,6 +1,7 @@
 // Brain Explorer: original SVG side view (left hemisphere, face on the left) with clickable regions.
 import { $, el, svg, icon, rich, sound, complete, shuffled, dock, scaffoldFor } from './core.js';
 import { sparkBurst, shake, feedbackSheet } from './ui.js';
+import { unlockSticker, loadAtlas } from './atlas.js';
 
 const MATCH_AFTER = 4;      // regions explored before Job Match unlocks
 const MAX_MISSES = 2;       // for the badge
@@ -138,6 +139,7 @@ export function initBrain(content) {
       job.querySelector('span').textContent = `${byKey[want].job} ✓ ${byKey[want].name}`;
       g.classList.add('drop-ok'); setTimeout(() => g.classList.remove('drop-ok'), 600);
       sound.play('good'); sparkBurst(job, 10); selected = null; left--;
+      loadAtlas(content).then(() => unlockSticker(want));
       buddy.say(`Yes! The ${byKey[want].name.toLowerCase()} helps you ${byKey[want].job.toLowerCase()}.`, 'cheer', 2500);
       matchBox.querySelector('.job:not(.placed)')?.focus();
       if (left === 0) finishMatch();

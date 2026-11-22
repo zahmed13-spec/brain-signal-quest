@@ -2,7 +2,7 @@
  "intro": "Follow the glowing path, play six brain games, and earn your Junior Neuroscientist certificate!",
  "mascot": {
   "name": "Sparky",
-  "hello": "Hi! I'm Sparky, a neuron. I send signals all day long. Pick a stop on the map and let's explore your brain together!",
+  "hello": "Hi! I'm Sparky, a neuron. I have an important message for Brain HQ. Help me deliver it, one station at a time!",
   "cheers": [
    "Brain power!",
    "You're on fire, in a good way!",
@@ -15,7 +15,7 @@
    "Good try. Mistakes help your synapses get stronger!",
    "Not quite. Let's look at why."
   ],
-  "finish": "You finished every stop on the quest. Your neurons are wiring together like pros!"
+  "finish": "We delivered the message! Your neurons are wiring together like pros. Play again to earn more stars."
  },
  "activities": [
   {
@@ -27,7 +27,9 @@
    "whatHappened": "The cell body got enough messages, so it fired a signal down the axon. Then chemical messengers crossed the synapse to the next neuron.",
    "realLife": "Right now, billions of neurons are doing this relay so you can read these words.",
    "badge": "Signal Sender",
-   "goalShort": "Send messages to the dendrites until I fire!"
+   "goalShort": "Send messages to the dendrites until I fire!",
+   "storyIn": "First, help me charge up and fire so the message can start its trip.",
+   "storyOut": "The message is off! Next we need a map of Brain HQ."
   },
   {
    "key": "brain",
@@ -38,7 +40,9 @@
    "whatHappened": "Each part of your brain has special jobs, but no part works alone. Parts send signals to each other all the time.",
    "realLife": "Riding a bike uses many parts at once. You see the road, keep your balance and decide where to turn.",
    "badge": "Brain Mapper",
-   "goalShort": "Tap each part of the brain to find its job."
+   "goalShort": "Tap each part of the brain to find its job.",
+   "storyIn": "Brain HQ is huge! Learn which part does which job so we don't get lost.",
+   "storyOut": "Now we know our way around Brain HQ."
   },
   {
    "key": "reaction",
@@ -49,7 +53,9 @@
    "whatHappened": "Each press used the loop above: eyes, brain, spinal cord, then finger muscles. Deciding added extra brain time.",
    "realLife": "Catching a ball or stopping your bike uses the same see, decide, move loop.",
    "badge": "Quick Reactor",
-   "goalShort": "Press the moment the lamp turns on!"
+   "goalShort": "Press the moment the lamp turns on!",
+   "storyIn": "Messages must be fast. Let's time how quickly signals zip from eye to finger.",
+   "storyOut": "Speedy! Next we must remember where everything hides."
   },
   {
    "key": "memory",
@@ -60,7 +66,9 @@
    "whatHappened": "Your brain held each card's spot in mind for a few seconds. That is working memory!",
    "realLife": "You use working memory to keep a phone number in mind or to follow a story.",
    "badge": "Memory Keeper",
-   "goalShort": "Flip two cards at a time and find every pair."
+   "goalShort": "Flip two cards at a time and find every pair.",
+   "storyIn": "Brain HQ has secret codes. Remember where each card hides!",
+   "storyOut": "Codes cracked! Now let's watch messages travel in 3D."
   },
   {
    "key": "playhouse",
@@ -71,7 +79,9 @@
    "whatHappened": "Each sense turns the world into electrical signals. Nerves carry them to relay stops, and the cortex makes sense of them.",
    "realLife": "Every time you see, hear, touch, smell or learn, signals take paths like these. It happens faster than a blink.",
    "badge": "Pathway Pro",
-   "goalShort": "Pick a moment and watch the signal travel through the brain."
+   "goalShort": "Pick a moment and watch the signal travel through the brain.",
+   "storyIn": "Ride along with signals as you see, hear, touch, smell and learn.",
+   "storyOut": "You've seen the roads the messages take!"
   },
   {
    "key": "quiz",
@@ -82,7 +92,9 @@
    "whatHappened": "Each time you remember an answer, your brain fetches a memory. Fetching it makes it easier to find next time.",
    "realLife": "Quizzing yourself is one of the best ways to learn. Scientists call it retrieval practice.",
    "badge": "Quiz Champion",
-   "goalShort": "Beat the Quiz Boss by answering brain questions!"
+   "goalShort": "Beat the Quiz Boss by answering brain questions!",
+   "storyIn": "The Quiz Boss guards the door to Brain HQ. Show what you know!",
+   "storyOut": "The door is open. Message delivered!"
   }
  ],
  "regions": [
