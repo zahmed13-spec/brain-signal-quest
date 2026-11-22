@@ -1574,7 +1574,7 @@
       "retina"
      ],
      "pathways": [],
-     "text": "Light from the lamp passes through the clear cornea and your pupil. The cornea and the lens bend the light to make a tiny upside-down picture on the retina at the back of your eye.",
+     "text": "Light goes in through the clear cornea and your pupil. The cornea and lens bend it into a tiny upside-down picture on the retina.",
      "funFact": "The picture on your retina is upside down. Your brain flips it so you see the world the right way up!",
      "camera": {
       "x": 1.4,
@@ -1593,7 +1593,7 @@
      "structure": "retina",
      "also": [],
      "pathways": [],
-     "text": "Photoreceptors in the retina, called rods and cones, turn light into electrical signals. Rods work in dim light. Cones see color.",
+     "text": "Photoreceptors called rods and cones turn light into electrical signals. Rods work in dim light, and cones see color.",
      "funFact": "Each eye has about 120 million rods but only about 6 million cones.",
      "camera": {
       "x": 1.2,
@@ -1615,7 +1615,7 @@
       "nerveL",
       "nerveR"
      ],
-     "text": "The signals leave the back of each eye along the optic nerve, a cable of about a million axons.",
+     "text": "The signals leave each eye along the optic nerve. It's a cable of about a million axons.",
      "funFact": "Where the optic nerve leaves the eye there are no rods or cones, so each eye has a small blind spot. You don't notice because your brain fills it in!",
      "camera": {
       "x": 0.6,
@@ -1640,7 +1640,7 @@
       "stayR"
      ],
      "text": "At the optic chiasm, fibers from the inner (nose) half of each retina cross to the other side. Fibers from the outer half stay on their own side.",
-     "funFact": "Because of this crossing, the right side of your brain sees everything to your left, and the left side sees everything to your right!",
+     "funFact": "Because of this crossing, the right side of your brain sees things on your left. The left side sees things on your right!",
      "camera": {
       "x": 0.0,
       "y": 1.2,
@@ -1694,7 +1694,7 @@
       "radiationR"
      ],
      "text": "Optic radiations fan out to V1 in the occipital lobe, at the very back of your head. V1 picks out edges, lines and contrast.",
-     "funFact": "Some neurons in V1 only fire for lines at one particular angle, like a tilted edge.",
+     "funFact": "Some neurons in V1 only fire for lines at one angle, like a tilted edge.",
      "camera": {
       "x": 1.6,
       "y": 1.4,
@@ -1728,7 +1728,7 @@
       "whereR"
      ],
      "text": "V2 and other areas build edges into shapes. Then the signal splits. The what pathway goes to the temporal lobe (\"It's a lamp!\") and the where pathway goes to the parietal lobe (\"It's on my left!\").",
-     "funFact": "Some people with damage to the what pathway can reach out and grab an object correctly, but can't recognize what it is just by looking.",
+     "funFact": "Some people with damage to the what path can grab an object just right. But they can't tell what it is just by looking.",
      "camera": {
       "x": 2.6,
       "y": 1.2,
@@ -1865,7 +1865,7 @@
      "pathways": [
       "painUp"
      ],
-     "text": "At the same time, another signal crosses to the other side of the spinal cord and climbs up to the thalamus.",
+     "text": "At the same time, another signal crosses to the other side of the spinal cord. Then it climbs up to the thalamus.",
      "funFact": "Pain signals from your right hand end up on the left side of your brain.",
      "camera": {
       "x": 2.8,
@@ -1891,7 +1891,7 @@
      "pathways": [
       "thalToTouch"
      ],
-     "text": "The thalamus relays the signal to the somatosensory cortex, the touch strip in the parietal lobe. Now you feel the heat and know exactly which finger got hurt.",
+     "text": "The thalamus sends the signal on to the touch strip, called the somatosensory cortex. Now you feel the heat and know which finger got hurt.",
      "funFact": "The touch strip has a map of your whole body. Fingers and lips get extra-large areas because they are so sensitive.",
      "camera": {
       "x": 1.6,
@@ -1957,8 +1957,8 @@
      "structure": "cochlea",
      "also": [],
      "pathways": [],
-     "text": "In the snail-shaped cochlea, tiny hair cells bend with the vibrations and turn them into electrical signals.",
-     "funFact": "Different spots along the cochlea respond to different pitches, from high squeaks to low rumbles.",
+     "text": "In the snail-shaped cochlea, tiny hair cells bend as the sound shakes them. They turn the shaking into electrical signals.",
+     "funFact": "Different spots in the cochlea react to different sounds, from high squeaks to low rumbles.",
      "camera": {
       "x": 2.2,
       "y": 0.2,
@@ -2006,7 +2006,7 @@
       "audUpR"
      ],
      "text": "Hearing signals travel up both sides of the brainstem, through the midbrain. Many cross over, so both sides of the brain hear both ears.",
-     "funFact": "That's why damage to one side of the hearing pathway in the brain rarely makes a person deaf in one ear.",
+     "funFact": "So if one side of the brain's hearing path is hurt, a person rarely goes deaf in one ear.",
      "camera": {
       "x": 2.0,
       "y": 0.6,
@@ -2027,7 +2027,7 @@
       "icMgnL",
       "icMgnR"
      ],
-     "text": "The MGN, the hearing part of the thalamus, relays the sound signals to the cortex.",
+     "text": "The MGN is the hearing part of the thalamus. It passes the sound signals on to the cortex.",
      "funFact": "Like the LGN for vision, the MGN is a geniculate nucleus. Geniculate means knee-shaped!",
      "camera": {
       "x": 1.8,
@@ -2054,8 +2054,8 @@
       "mgnA1L",
       "mgnA1R"
      ],
-     "text": "The auditory cortex in each temporal lobe sorts out pitch, loudness and the pattern of the sound.",
-     "funFact": "The auditory cortex is tucked inside the top of the temporal lobe, close to your ears.",
+     "text": "The auditory cortex sorts out how high, how loud and what pattern the sound has.",
+     "funFact": "The auditory cortex is tucked in the top of the temporal lobe, close to your ears.",
      "camera": {
       "x": -2.4,
       "y": 0.8,
@@ -2127,7 +2127,7 @@
       "radiationL",
       "radiationR"
      ],
-     "text": "Your eyes send pictures of the ball along the vision pathway to the visual cortex in the occipital lobe.",
+     "text": "Your eyes send signals about the ball to the back of your brain. That's the visual cortex.",
      "funFact": "Your eyes smoothly follow the ball, with quick little jumps to catch up when it speeds along.",
      "camera": {
       "x": 2.8,
@@ -2191,8 +2191,8 @@
       "motorCerebellum",
       "cerebellumMotor"
      ],
-     "text": "The cerebellum compares the plan with what's happening. It sends corrections back so the move is smooth and perfectly timed.",
-     "funFact": "Practice teaches your cerebellum the timing, so catching gets easier the more you play.",
+     "text": "The cerebellum checks the plan against what's happening. It sends quick fixes so the move is smooth and well timed.",
+     "funFact": "Practice teaches your cerebellum the timing. Catching gets easier the more you play.",
      "camera": {
       "x": 2.4,
       "y": 0.2,
@@ -2244,7 +2244,7 @@
       "cordToHand"
      ],
      "text": "Motor nerves tell the muscles in your arm and hand to move and close your fingers around the ball. Got it!",
-     "funFact": "Even while you move, your brain keeps checking and correcting, all without you thinking about it.",
+     "funFact": "While you move, your brain keeps checking and fixing the move. You don't even have to think about it.",
      "camera": {
       "x": 3.0,
       "y": -0.8,
@@ -2308,8 +2308,8 @@
      "structure": "olfactoryBulb",
      "also": [],
      "pathways": [],
-     "text": "The signals go straight up to the olfactory bulbs, which sit just above your nose under the front of your brain.",
-     "funFact": "Smell receptor cells are replaced throughout your life, about every month or two.",
+     "text": "The signals go straight up to the olfactory bulbs. They sit just above your nose, under the front of your brain.",
+     "funFact": "Your body makes new smell cells all your life, about every month or two.",
      "camera": {
       "x": 1.6,
       "y": 0.4,
@@ -2388,7 +2388,7 @@
       "memoryToFrontal"
      ],
      "text": "Signals reach the area around the hippocampus, which links the smell to a memory. Your frontal lobe then thinks: \"This smells like Grandma's house!\"",
-     "funFact": "Because smell is wired so closely to emotion and memory areas, a smell can bring back a memory from years ago.",
+     "funFact": "Smell is wired close to feeling and memory areas. That's how a smell can bring back a memory from years ago.",
      "camera": {
       "x": -2.4,
       "y": 0.6,
@@ -2459,8 +2459,8 @@
       "practicePath",
       "practiceCerebellum"
      ],
-     "text": "Every time these neurons fire together, the synapses between them get a little stronger. Neurons that fire together wire together!",
-     "funFact": "Scientists call this ability to change with practice brain plasticity.",
+     "text": "Each time these neurons fire together, the links between them get a little stronger. Neurons that fire together wire together!",
+     "funFact": "Scientists call this brain plasticity. It means your brain can change with practice.",
      "camera": {
       "x": -2.6,
       "y": 1.2,
@@ -2481,8 +2481,8 @@
       "practicePath",
       "practiceCerebellum"
      ],
-     "text": "Your cerebellum learns the timing. Messages travel more easily along the path, so your juggling gets smoother.",
-     "funFact": "Used pathways can also get extra myelin, which helps signals travel faster.",
+     "text": "Your cerebellum learns the timing. Signals travel the path more easily, so your juggling gets smoother.",
+     "funFact": "Paths you use a lot can also get extra myelin. That helps signals travel faster.",
      "camera": {
       "x": -2.4,
       "y": 0.6,

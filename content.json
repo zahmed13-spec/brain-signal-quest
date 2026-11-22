@@ -24,7 +24,7 @@
    "tile": "Fire a neuron and watch its signal race to the next cell.",
    "goal": "In this activity you'll find out how one nerve cell passes a message to the next. Send enough messages to the dendrites to make the neuron fire!",
    "hint": "One message is not enough. Keep sending until the cell body fills up past the dashed line.",
-   "whatHappened": "When the cell body got enough messages, it fired an electrical signal called an action potential. The wave raced down the axon. At the end, chemical messengers crossed the synapse and woke up the next neuron.",
+   "whatHappened": "The cell body got enough messages, so it fired a signal down the axon. Then chemical messengers crossed the synapse to the next neuron.",
    "realLife": "Right now, billions of neurons are doing this relay so you can read these words.",
    "badge": "Signal Sender",
    "goalShort": "Send messages to the dendrites until I fire!"
@@ -36,7 +36,7 @@
    "goal": "In this activity you'll find out what the main parts of your brain do. Click or tap each part. Then peek inside!",
    "hint": "Try the Peek inside switch to see three hidden parts deep in the middle.",
    "whatHappened": "Each part of your brain has special jobs, but no part works alone. Parts send signals to each other all the time.",
-   "realLife": "Riding a bike uses lots of parts at once: the occipital lobe sees the road, the cerebellum keeps balance, and the frontal lobe decides where to turn.",
+   "realLife": "Riding a bike uses many parts at once. You see the road, keep your balance and decide where to turn.",
    "badge": "Brain Mapper",
    "goalShort": "Tap each part of the brain to find its job."
   },
@@ -46,8 +46,8 @@
    "tile": "How fast can your eyes, brain and muscles team up?",
    "goal": "In this activity you'll find out how long a signal takes to go from your eyes, through your brain, to your finger. Wait for the light to turn on, then press as fast as you can.",
    "hint": "Keep your eyes on the light and your finger ready. Pressing before it turns on doesn't count!",
-   "whatHappened": "Each press followed the loop shown above: eyes, brain, spinal cord, then finger muscles. Having to decide added extra brain time.",
-   "realLife": "Catching a ball, braking on your bike or swatting a fly all use this same see → decide → move loop.",
+   "whatHappened": "Each press used the loop above: eyes, brain, spinal cord, then finger muscles. Deciding added extra brain time.",
+   "realLife": "Catching a ball or stopping your bike uses the same see, decide, move loop.",
    "badge": "Quick Reactor",
    "goalShort": "Press the moment the lamp turns on!"
   },
@@ -57,8 +57,8 @@
    "tile": "Flip cards and find the matching brain pictures.",
    "goal": "In this activity you'll use your working memory, your brain's sticky note. Flip two cards at a time and find all six pairs.",
    "hint": "Say the picture names quietly to yourself. Saying things out loud or in your head helps working memory.",
-   "whatHappened": "Your frontal and parietal lobes held each card's spot in mind for a few seconds. That is working memory. When you found a pair, you used what you remembered.",
-   "realLife": "You use working memory when you remember a phone number long enough to dial it, or keep track of a story while you read.",
+   "whatHappened": "Your brain held each card's spot in mind for a few seconds. That is working memory!",
+   "realLife": "You use working memory to keep a phone number in mind or to follow a story.",
    "badge": "Memory Keeper",
    "goalShort": "Flip two cards at a time and find every pair."
   },
@@ -68,8 +68,8 @@
    "tile": "Watch the brain see, hear, smell, touch and learn in 3D.",
    "goal": "In this activity you'll pick an everyday moment and watch signals travel through the brain, step by step.",
    "hint": "Use Step to go one stop at a time. Drag the brain to turn it around.",
-   "whatHappened": "Every sense uses a path: a sense organ turns the world into electrical signals, nerves carry them, relay stations pass them on, and the cortex makes sense of them.",
-   "realLife": "Every time you see, hear, touch, smell or learn, signals take paths like these, in less time than a blink.",
+   "whatHappened": "Each sense turns the world into electrical signals. Nerves carry them to relay stops, and the cortex makes sense of them.",
+   "realLife": "Every time you see, hear, touch, smell or learn, signals take paths like these. It happens faster than a blink.",
    "badge": "Pathway Pro",
    "goalShort": "Pick a moment and watch the signal travel through the brain."
   },
@@ -79,8 +79,8 @@
    "tile": "Four surprise questions. Can you beat the Quiz Boss?",
    "goal": "In this activity you'll check what you learned. Four questions are picked at random each time, so every game is different!",
    "hint": "If you're not sure, think about which part of the brain sits closest to that sense or job.",
-   "whatHappened": "Remembering an answer makes your brain fetch a memory. Each time you fetch it, that memory gets easier to find again.",
-   "realLife": "Testing yourself, like flashcards or quizzing a friend, is one of the best ways to study. Scientists call it retrieval practice.",
+   "whatHappened": "Each time you remember an answer, your brain fetches a memory. Fetching it makes it easier to find next time.",
+   "realLife": "Quizzing yourself is one of the best ways to learn. Scientists call it retrieval practice.",
    "badge": "Quiz Champion",
    "goalShort": "Beat the Quiz Boss by answering brain questions!"
   }
@@ -90,14 +90,14 @@
    "name": "Cerebrum",
    "key": "cerebrum",
    "inside": false,
-   "description": "The cerebrum is the biggest part of your brain. Its wrinkly outer layer, the cortex, has four lobes on each side. Together they help you think, sense, remember and move on purpose.",
+   "description": "The cerebrum is the biggest, wrinkliest part of your brain. Its four lobes on each side help you think, sense, remember and move.",
    "funFact": "The wrinkles let a big sheet of cortex fold up and fit inside your skull, like a crumpled-up piece of paper in a ball."
   },
   {
    "name": "Frontal lobe",
    "key": "frontal",
    "inside": false,
-   "description": "The frontal lobe sits behind your forehead. It helps you plan, make choices, focus and control your actions. At its back edge is the motor cortex, which starts movements you choose to make.",
+   "description": "The frontal lobe sits behind your forehead. It helps you plan, choose and focus, and its back edge starts the moves you choose.",
    "funFact": "The front part of the frontal lobe is one of the last brain areas to finish growing. It keeps developing into your twenties.",
    "job": "plan and decide",
    "jobIcon": "spark"
@@ -106,7 +106,7 @@
    "name": "Parietal lobe",
    "key": "parietal",
    "inside": false,
-   "description": "The parietal lobe is at the top and toward the back. It feels touch, temperature and pain from your body. It also keeps track of where things are around you.",
+   "description": "The parietal lobe is at the top and back of your head. It feels touch, heat and pain, and keeps track of where things are.",
    "funFact": "Close your eyes and touch your nose. Your parietal lobe helps you know where your hand is without looking.",
    "job": "feel touch",
    "jobIcon": "hand"
@@ -115,7 +115,7 @@
    "name": "Temporal lobe",
    "key": "temporal",
    "inside": false,
-   "description": "The temporal lobes are on the sides of your head, near your ears. They help you hear, understand words and recognize faces and objects.",
+   "description": "The temporal lobes are on the sides, near your ears. They help you hear, understand words and know faces and things you see.",
    "funFact": "For most people, the part that understands words, called Wernicke's area, is in the left temporal lobe.",
    "job": "hear and understand words",
    "jobIcon": "ear"
@@ -124,7 +124,7 @@
    "name": "Occipital lobe",
    "key": "occipital",
    "inside": false,
-   "description": "The occipital lobe is at the very back of your head. It is your brain's main vision center. It figures out edges, colors and movement from what your eyes send.",
+   "description": "The occipital lobe is at the back of your head. It is your brain's main vision center, finding edges, colors and movement.",
    "funFact": "Your eyes are at the front of your head, but seeing starts to make sense at the back!",
    "job": "see shapes and colors",
    "jobIcon": "eye"
@@ -133,7 +133,7 @@
    "name": "Cerebellum",
    "key": "cerebellum",
    "inside": false,
-   "description": "The cerebellum, or little brain, sits under the back of the cerebrum. It helps with balance, timing and smooth movements, like riding a bike.",
+   "description": "The cerebellum, or little brain, sits low at the back. It helps with balance, timing and smooth moves, like riding a bike.",
    "funFact": "The cerebellum is only about one tenth of your brain's weight, but it holds more than half of all its neurons.",
    "job": "balance on a bike",
    "jobIcon": "cerebellum"
@@ -142,7 +142,7 @@
    "name": "Brainstem",
    "key": "brainstem",
    "inside": false,
-   "description": "The brainstem connects your brain to your spinal cord. It runs automatic jobs such as breathing, heartbeat and swallowing. Messages between your brain and body travel through it.",
+   "description": "The brainstem joins your brain to your spinal cord. It runs jobs you don't think about, like breathing and your heartbeat.",
    "funFact": "Your brainstem keeps you breathing even while you're fast asleep.",
    "job": "keep you breathing",
    "jobIcon": "spinal"
@@ -151,21 +151,21 @@
    "name": "Thalamus",
    "key": "thalamus",
    "inside": true,
-   "description": "The thalamus is deep in the middle of your brain. It is a relay station: signals for sight, hearing, touch and taste stop here before going on to the cortex.",
+   "description": "The thalamus sits deep in the middle of your brain. It is a relay station: signals for sight, hearing, touch and taste stop here first.",
    "funFact": "Smell is the one sense whose signals don't need to stop at the thalamus before they reach the cortex."
   },
   {
    "name": "Hippocampus",
    "key": "hippocampus",
    "inside": true,
-   "description": "The hippocampus is tucked inside each temporal lobe. It helps you make new memories and remember places and routes.",
+   "description": "The hippocampus is tucked inside each temporal lobe. It helps you make new memories and remember places.",
    "funFact": "Its name comes from the Greek word for seahorse, because of its curly shape."
   },
   {
    "name": "Amygdala",
    "key": "amygdala",
    "inside": true,
-   "description": "The amygdala is a small almond-shaped part in front of the hippocampus. It helps you notice danger and feel emotions like fear. It also helps emotional moments stick in your memory.",
+   "description": "The amygdala is a small almond shape in front of the hippocampus. It helps you feel emotions like fear and remember big moments.",
    "funFact": "Amygdala comes from the Greek word for almond. You have one on each side of your brain."
   }
  ],
@@ -173,27 +173,27 @@
   {
    "name": "Dendrites",
    "part": "dendrites",
-   "description": "Branchy dendrites catch chemical messages from other neurons. Each message gives the cell a small nudge."
+   "description": "Branchy dendrites catch chemical messages from other neurons. Each message gives a small nudge."
   },
   {
    "name": "Cell body",
    "part": "soma",
-   "description": "The cell body adds up all the nudges. If they add up past a tipping point, called the threshold, the neuron fires."
+   "description": "The cell body adds up the nudges. If they pass a tipping point, called the threshold, it fires!"
   },
   {
    "name": "Axon",
    "part": "axon",
-   "description": "An electrical wave called an action potential travels down the long axon. A fatty coat called myelin helps it jump along quickly."
+   "description": "An electrical signal called an action potential zooms down the axon. A fatty coat called myelin helps it jump along fast."
   },
   {
    "name": "Axon terminals",
    "part": "terminals",
-   "description": "At the axon's tips, the signal makes tiny packets release chemical messengers called neurotransmitters."
+   "description": "At the axon's tips, tiny packets let out chemical messengers. These are called neurotransmitters."
   },
   {
    "name": "Synapse",
    "part": "synapse",
-   "description": "The neurotransmitters cross a super-tiny gap called the synapse and attach to the next neuron's dendrites."
+   "description": "The messengers cross a super-tiny gap called the synapse. They land on the next neuron's dendrites."
   },
   {
    "name": "Next neuron",
@@ -277,7 +277,7 @@
    "correct": "Cerebellum",
    "other1": "Occipital lobe",
    "other2": "Hippocampus",
-   "explanation": "The cerebellum fine-tunes movement, timing and balance.",
+   "explanation": "The cerebellum helps with balance, timing and smooth moves.",
    "other1Why": "The occipital lobe is mostly for vision.",
    "other2Why": "The hippocampus helps make new memories.",
    "activity": "brain",
@@ -288,7 +288,7 @@
    "correct": "Along the axon",
    "other1": "Around the skull",
    "other2": "Back into the dendrites",
-   "explanation": "The action potential travels down the axon to the axon terminals.",
+   "explanation": "The action potential zooms down the axon to its tips.",
    "other1Why": "The skull is bone that protects the brain. It doesn't carry signals.",
    "other2Why": "Dendrites receive messages. The outgoing signal goes down the axon.",
    "activity": "neuron",
@@ -299,7 +299,7 @@
    "correct": "Working memory",
    "other1": "An axon terminal",
    "other2": "The brainstem's breathing center",
-   "explanation": "Working memory holds and uses information for a short time, like a mental sticky note.",
+   "explanation": "Working memory holds things in mind for a short time, like a sticky note.",
    "other1Why": "An axon terminal releases chemical messengers. It doesn't store a memory by itself.",
    "other2Why": "The brainstem keeps you breathing. It doesn't hold card locations.",
    "activity": "memory",
@@ -310,7 +310,7 @@
    "correct": "Occipital lobe",
    "other1": "Frontal lobe",
    "other2": "Temporal lobe",
-   "explanation": "The occipital lobe, at the back of the head, is where vision signals first reach the cortex.",
+   "explanation": "The occipital lobe, at the back of your head, is where seeing starts in the cortex.",
    "other1Why": "The frontal lobe plans and makes choices.",
    "other2Why": "The temporal lobe helps recognize what things are, but it isn't the first stop for vision.",
    "activity": "brain",
@@ -332,7 +332,7 @@
    "correct": "Thalamus",
    "other1": "Cerebellum",
    "other2": "Amygdala",
-   "explanation": "Signals for sight, hearing, touch and taste stop at the thalamus before reaching the cortex.",
+   "explanation": "Signals for sight, hearing, touch and taste all stop at the thalamus first.",
    "other1Why": "The cerebellum helps with balance and smooth movement.",
    "other2Why": "The amygdala helps with emotions like fear.",
    "activity": "playhouse",
@@ -343,7 +343,7 @@
    "correct": "Smell",
    "other1": "Hearing",
    "other2": "Sight",
-   "explanation": "Smell signals go from the olfactory bulb straight to smell areas of the cortex, close to the amygdala and hippocampus.",
+   "explanation": "Smell signals go from the olfactory bulb straight to the smell part of the cortex. It's close to feeling and memory areas.",
    "other1Why": "Hearing signals stop at a part of the thalamus called the MGN.",
    "other2Why": "Vision signals stop at a part of the thalamus called the LGN.",
    "activity": "playhouse",
@@ -354,7 +354,7 @@
    "correct": "Smell signals reach memory and emotion areas very quickly",
    "other1": "Your nose stores memories",
    "other2": "Smells travel through the cerebellum",
-   "explanation": "Smell signals reach the amygdala and areas right next to the hippocampus in just a step or two.",
+   "explanation": "Smell signals reach feeling and memory areas in just a step or two.",
    "other1Why": "Your nose detects smells, but memories are made and stored in the brain.",
    "other2Why": "The cerebellum helps with movement and balance, not smell.",
    "activity": "playhouse",
@@ -367,7 +367,7 @@
    "other2": "Your hippocampus",
    "explanation": "The spinal cord sends a 'pull away!' signal back to your arm muscles right away, often before your brain feels the pain.",
    "other1Why": "The occipital lobe handles vision.",
-   "other2Why": "The hippocampus helps form memories, which might help you remember to be careful next time!",
+   "other2Why": "The hippocampus helps make memories. It might help you be careful next time!",
    "activity": "playhouse",
    "cheer": "Yes! Your spinal cord acts first."
   },
@@ -376,9 +376,9 @@
    "correct": "A fatty coating that speeds up signals on an axon",
    "other1": "A kind of brain wrinkle",
    "other2": "A chemical messenger",
-   "explanation": "Myelin wraps around many axons so signals can jump along much faster.",
+   "explanation": "Myelin wraps around axons so signals can jump along much faster.",
    "other1Why": "Brain wrinkles are folds of cortex, not myelin.",
-   "other2Why": "Chemical messengers are called neurotransmitters.",
+   "other2Why": "The chemical messengers are called neurotransmitters.",
    "activity": "neuron",
    "cheer": "Yes! Myelin makes signals faster."
   },
@@ -387,9 +387,9 @@
    "correct": "Neurotransmitters",
    "other1": "Blood cells",
    "other2": "Light",
-   "explanation": "Neurotransmitters are chemical messengers. They cross the gap and attach to the next cell.",
+   "explanation": "Neurotransmitters are chemical messengers. They cross the gap to the next cell.",
    "other1Why": "Blood cells travel in blood vessels, not across synapses.",
-   "other2Why": "Light is detected by the eyes, but the messages between neurons are chemical.",
+   "other2Why": "Your eyes sense light, but neurons pass chemical messages.",
    "activity": "neuron",
    "cheer": "Yes! Neurotransmitters carry the message."
   },
@@ -398,7 +398,7 @@
    "correct": "The cochlea",
    "other1": "The eardrum alone",
    "other2": "The thalamus",
-   "explanation": "Tiny hair cells in the snail-shaped cochlea turn vibrations into electrical signals.",
+   "explanation": "Tiny hair cells in the snail-shaped cochlea turn the shaking into nerve signals.",
    "other1Why": "The eardrum vibrates, but the cochlea's hair cells make the nerve signals.",
    "other2Why": "The thalamus relays hearing signals later. It doesn't detect sound.",
    "activity": "playhouse",
@@ -409,8 +409,8 @@
    "correct": "Wernicke's area",
    "other1": "The brainstem",
    "other2": "The olfactory bulb",
-   "explanation": "Wernicke's area, usually in the left temporal lobe, helps you understand language.",
-   "other1Why": "The brainstem passes hearing signals along, but understanding words happens in the cortex.",
+   "explanation": "Wernicke's area helps you understand words. In most people it's on the left side.",
+   "other1Why": "The brainstem passes sound signals along. Understanding words happens in the cortex.",
    "other2Why": "The olfactory bulb handles smell.",
    "activity": "brain",
    "cheer": "Yes! Wernicke's area understands words."
@@ -420,7 +420,7 @@
    "correct": "Motor cortex",
    "other1": "Visual cortex",
    "other2": "Olfactory cortex",
-   "explanation": "The motor cortex, at the back of the frontal lobe, sends commands to your muscles.",
+   "explanation": "The motor cortex, at the back of the frontal lobe, sends move commands to your muscles.",
    "other1Why": "The visual cortex handles what you see.",
    "other2Why": "The olfactory cortex handles smell.",
    "activity": "reaction",
@@ -431,7 +431,7 @@
    "correct": "The right side",
    "other1": "The left side",
    "other2": "Only your face",
-   "explanation": "Most movement and touch pathways cross over, so each side of the brain works with the opposite side of the body.",
+   "explanation": "Most move and touch paths cross over. Each side of your brain works with the other side of your body.",
    "other1Why": "Most pathways cross, so it's the opposite side.",
    "other2Why": "It works with the whole opposite side of the body, including the arm and leg.",
    "activity": "reaction",
@@ -442,7 +442,7 @@
    "correct": "They get stronger",
    "other1": "They disappear",
    "other2": "They turn into bone",
-   "explanation": "Neurons that fire together wire together. Practice strengthens the synapses you use.",
+   "explanation": "Neurons that fire together wire together. Practice makes the connections you use stronger.",
    "other1Why": "Connections you use a lot tend to get stronger, not disappear.",
    "other2Why": "Neurons and synapses are living cells, not bone.",
    "activity": "memory",
@@ -453,7 +453,7 @@
    "correct": "Brainstem",
    "other1": "Frontal lobe",
    "other2": "Occipital lobe",
-   "explanation": "The brainstem keeps automatic jobs running, even while you sleep.",
+   "explanation": "The brainstem keeps your breathing and heartbeat going, even while you sleep.",
    "other1Why": "The frontal lobe plans and decides. You don't have to think to breathe!",
    "other2Why": "The occipital lobe is for vision.",
    "activity": "brain",
@@ -464,7 +464,7 @@
    "correct": "Rods",
    "other1": "Cones",
    "other2": "The lens",
-   "explanation": "Rods are very sensitive to light, so they help you see in the dark (mostly in shades of gray).",
+   "explanation": "Rods work in dim light, so they help you see in the dark, mostly in gray.",
    "other1Why": "Cones need brighter light and let you see color.",
    "other2Why": "The lens helps focus light, but it doesn't turn light into signals.",
    "activity": "playhouse",
@@ -475,8 +475,8 @@
    "correct": "A reflex through the midbrain",
    "other1": "Your eyes get tired",
    "other2": "The cerebellum decides to squint",
-   "explanation": "Light signals go to the midbrain, which sends a signal back to both eyes to shrink the pupils. It happens automatically.",
-   "other1Why": "It's a fast automatic reflex, not tiredness.",
+   "explanation": "Light signals go to the midbrain. It tells both eyes to shrink their pupils, all by itself.",
+   "other1Why": "It's a fast reflex, not tiredness.",
    "other2Why": "The pupil reflex runs through the midbrain, not the cerebellum.",
    "activity": "playhouse",
    "cheer": "Yes! The midbrain runs that reflex."
@@ -486,8 +486,8 @@
    "correct": "Toward the temporal lobe",
    "other1": "Toward the spinal cord",
    "other2": "Toward the nose",
-   "explanation": "The 'what' pathway flows down into the temporal lobe to recognize objects and faces. The 'where' pathway flows up into the parietal lobe.",
-   "other1Why": "The spinal cord carries body signals, not object recognition.",
+   "explanation": "The what path goes down into the temporal lobe to know what things are. The where path goes up into the parietal lobe.",
+   "other1Why": "The spinal cord carries body signals. It doesn't figure out what things are.",
    "other2Why": "The nose detects smells. Vision pathways stay inside the brain.",
    "activity": "playhouse",
    "cheer": "Yes! The what pathway goes to the temporal lobe."
