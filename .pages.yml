@@ -318,6 +318,12 @@
               "required": true
             },
             {
+              "name": "job",
+              "label": "Job (level 2 pair, 5 words max)",
+              "type": "string",
+              "required": false
+            },
+            {
               "name": "fact",
               "label": "Fact shown on a match",
               "type": "text",
@@ -326,6 +332,52 @@
           ],
           "list": true,
           "required": true
+        },
+        {
+          "name": "memoryWords",
+          "label": "Memory Match level 3 words",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "term",
+              "label": "Brain word",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "meaning",
+              "label": "Meaning (5 words max)",
+              "type": "string",
+              "required": true
+            }
+          ]
+        },
+        {
+          "name": "memoryLevels",
+          "label": "Memory Match levels (text)",
+          "type": "object",
+          "list": true,
+          "fields": [
+            {
+              "name": "title",
+              "label": "Title",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "goal",
+              "label": "Goal (1 sentence)",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "explain",
+              "label": "What happened (1-2 sentences)",
+              "type": "text",
+              "required": true
+            }
+          ]
         },
         {
           "name": "quizPerRound",

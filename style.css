@@ -433,7 +433,7 @@ details.more summary{cursor:pointer;font-weight:700;color:var(--accent);min-heig
 .memory-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--s-3)}
 .memory-bar p{margin:0;font-weight:700}
 .cards{--cols:4;--card-w:10rem;display:grid;grid-template-columns:repeat(var(--cols),var(--card-w));justify-content:center;gap:var(--s-3);margin-top:var(--s-4);perspective:60rem}
-.card{position:relative;width:var(--card-w);aspect-ratio:4/5;border:0;padding:0;background:none;cursor:pointer;font:inherit;color:var(--ink)}
+.card{position:relative;width:var(--card-w);aspect-ratio:var(--card-ar,4/5);border:0;padding:0;background:none;cursor:pointer;font:inherit;color:var(--ink)}
 .card-inner{position:absolute;inset:0;transition:transform 450ms var(--ease-out);transform-style:preserve-3d}
 .card.up .card-inner{transform:rotateY(180deg)}
 .card-face{position:absolute;inset:0;border-radius:var(--rad);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--s-1);backface-visibility:hidden;border:3px solid var(--ink);box-shadow:var(--shadow-press);padding:var(--s-2)}
@@ -441,7 +441,7 @@ details.more summary{cursor:pointer;font-weight:700;color:var(--accent);min-heig
 .card-back svg{width:45%;height:45%}
 .card-front{transform:rotateY(180deg);background:var(--white)}
 .card-front svg{width:52%;height:46%;color:var(--c)}
-.card-front span{font:600 var(--t-xs)/1.2 var(--font-head);text-align:center}
+.card-front span{font:600 var(--t-xs)/1.2 var(--font-head);text-align:center;overflow-wrap:break-word;hyphens:manual}
 .card-front.text-only span{font-size:var(--t-xs);font-family:var(--font-body);font-weight:700}
 .card.matched .card-front{background:var(--good-bg);border-color:var(--good)}
 .card.matched .card-front::after{content:"✓";position:absolute;top:var(--s-1);right:var(--s-2);color:var(--good-text);font-weight:700;font-size:1.3rem}

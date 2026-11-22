@@ -184,7 +184,7 @@ async function start() {
   initBrain(content);
   hooks.neuron = initNeuron(content);
   hooks.reaction = initReaction(content);
-  initMemory(content);
+  hooks.memory = initMemory(content);
   quizApi = initQuiz(content);
   setChecker(makeChecker(content));
   buildReferences();

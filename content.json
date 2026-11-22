@@ -224,32 +224,38 @@
   {
    "key": "neuron",
    "name": "Neuron",
-   "fact": "A neuron is a nerve cell that sends signals. Your brain has about 86 billion of them."
+   "fact": "A neuron is a nerve cell that sends signals. Your brain has about 86 billion of them.",
+   "job": "sends signals"
   },
   {
    "key": "brain",
    "name": "Cerebrum",
-   "fact": "The cerebrum is the largest part of your brain, split into a left and a right side."
+   "fact": "The cerebrum is the largest part of your brain, split into a left and a right side.",
+   "job": "thinks and remembers"
   },
   {
    "key": "cerebellum",
    "name": "Cerebellum",
-   "fact": "The cerebellum helps you balance and move smoothly."
+   "fact": "The cerebellum helps you balance and move smoothly.",
+   "job": "balance and timing"
   },
   {
    "key": "eye",
    "name": "Eye",
-   "fact": "Your retina has rods for dim light and cones for color."
+   "fact": "Your retina has rods for dim light and cones for color.",
+   "job": "turns light into signals"
   },
   {
    "key": "ear",
    "name": "Ear",
-   "fact": "The snail-shaped cochlea in your inner ear turns sound into nerve signals."
+   "fact": "The snail-shaped cochlea in your inner ear turns sound into nerve signals.",
+   "job": "turns sound into signals"
   },
   {
    "key": "spinal",
    "name": "Spinal cord",
-   "fact": "The spinal cord carries messages between your brain and body, and handles some reflexes all by itself."
+   "fact": "The spinal cord carries messages between your brain and body, and handles some reflexes all by itself.",
+   "job": "message highway to the body"
   }
  ],
  "quizPerRound": 4,
@@ -928,6 +934,65 @@
    "title": "Rest time",
    "goal": "Fire 3 times in 15 seconds. After firing, I need a short rest!",
    "explain": "After firing, a neuron needs a tiny rest before it can fire again. That rest is why the signal only travels one way. Real neurons rest for about a thousandth of a second."
+  }
+ ],
+ "memoryWords": [
+  {
+   "term": "Synapse",
+   "meaning": "tiny gap between neurons"
+  },
+  {
+   "term": "Axon",
+   "meaning": "carries the signal away"
+  },
+  {
+   "term": "Dendrite",
+   "meaning": "catches messages"
+  },
+  {
+   "term": "Myelin",
+   "meaning": "makes signals faster"
+  },
+  {
+   "term": "Neurotransmitter",
+   "meaning": "chemical messenger"
+  },
+  {
+   "term": "Thalamus",
+   "meaning": "relay station for senses"
+  },
+  {
+   "term": "Cochlea",
+   "meaning": "inner ear part that hears"
+  },
+  {
+   "term": "Hippocampus",
+   "meaning": "helps make new memories"
+  },
+  {
+   "term": "Retina",
+   "meaning": "senses light in the eye"
+  },
+  {
+   "term": "Cerebellum",
+   "meaning": "keeps your moves smooth"
+  }
+ ],
+ "memoryLevels": [
+  {
+   "title": "Picture pairs",
+   "goal": "Find the matching pictures.",
+   "explain": "Your working memory held each card's spot for a few seconds."
+  },
+  {
+   "title": "Picture + job",
+   "goal": "Match each part to its job.",
+   "explain": "Now you used memory and brain knowledge together!"
+  },
+  {
+   "title": "Word + meaning",
+   "goal": "Match each brain word to what it means.",
+   "explain": "Fetching a word's meaning from memory makes it easier to remember next time."
   }
  ]
 }
