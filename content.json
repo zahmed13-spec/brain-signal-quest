@@ -408,7 +408,7 @@
    "other2": "The lens",
    "explanation": "Rods are very sensitive to light, so they help you see in the dark (mostly in shades of gray).",
    "other1Why": "Cones need brighter light and let you see color.",
-   "other2Why": "The lens focuses light, but it doesn't turn light into signals."
+   "other2Why": "The lens helps focus light, but it doesn't turn light into signals."
   },
   {
    "prompt": "Why do your pupils get smaller in bright light?",
@@ -611,9 +611,14 @@
    "description": "Photoreceptors that work in bright light and let you see color."
   },
   {
+   "name": "Cornea",
+   "aliases": [],
+   "description": "The clear dome at the front of the eye. It does most of the bending (focusing) of light."
+  },
+  {
    "name": "Lens",
    "aliases": [],
-   "description": "The clear part of the eye that focuses light onto the retina."
+   "description": "The clear, bendy part inside the eye that fine-tunes the focus so the picture on the retina is sharp."
   },
   {
    "name": "Pupil",
@@ -853,7 +858,7 @@
    {
     "id": "eyeL",
     "name": "Left eye",
-    "about": "Light comes in through the pupil and the lens focuses it.",
+    "about": "Light comes in through the cornea and pupil, and gets focused onto the retina.",
     "position": {
      "x": -0.32,
      "y": -0.05,
@@ -866,7 +871,7 @@
    {
     "id": "eyeR",
     "name": "Right eye",
-    "about": "Light comes in through the pupil and the lens focuses it.",
+    "about": "Light comes in through the cornea and pupil, and gets focused onto the retina.",
     "position": {
      "x": 0.32,
      "y": -0.05,
@@ -2423,7 +2428,7 @@
        "retina"
       ],
       "pathways": [],
-      "text": "Light from the lamp passes through your pupil. The lens focuses it into a tiny upside-down picture on the retina at the back of your eye.",
+      "text": "Light from the lamp passes through the clear cornea and your pupil. The cornea and the lens bend the light to make a tiny upside-down picture on the retina at the back of your eye.",
       "funFact": "The picture on your retina is upside down. Your brain flips it so you see the world the right way up!",
       "camera": {
        "x": 1.4,
