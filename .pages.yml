@@ -55,7 +55,7 @@
         },
         {
           "name": "activities",
-          "label": "Activities (quest map stops, in order)",
+          "label": "Activities (quest map stops, in path order)",
           "type": "object",
           "fields": [
             {
@@ -84,6 +84,12 @@
               "name": "tile",
               "label": "Map tile text",
               "type": "text",
+              "required": true
+            },
+            {
+              "name": "goalShort",
+              "label": "Goal in one short sentence (Sparky says this first, 15 words max)",
+              "type": "string",
               "required": true
             },
             {
@@ -408,12 +414,193 @@
             }
           ],
           "required": true
+        }
+      ]
+    },
+    {
+      "name": "playhouse_content",
+      "label": "Brain Playhouse (3D scenarios)",
+      "type": "file",
+      "path": "playhouse.json",
+      "format": "json",
+      "fields": [
+        {
+          "name": "intro",
+          "label": "Introduction",
+          "type": "text",
+          "required": true
         },
         {
-          "name": "playhouse",
-          "label": "Brain Playhouse (3D)",
+          "name": "structures",
+          "label": "Structures (glowing dots)",
           "type": "object",
           "fields": [
+            {
+              "name": "id",
+              "label": "ID (used by scenarios; no spaces)",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "name",
+              "label": "Label",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "about",
+              "label": "Short description",
+              "type": "text",
+              "required": true
+            },
+            {
+              "name": "position",
+              "label": "Position",
+              "type": "object",
+              "fields": [
+                {
+                  "name": "x",
+                  "label": "X (left \u2212 / right +)",
+                  "type": "number",
+                  "required": true
+                },
+                {
+                  "name": "y",
+                  "label": "Y (down \u2212 / up +)",
+                  "type": "number",
+                  "required": true
+                },
+                {
+                  "name": "z",
+                  "label": "Z (back \u2212 / front +)",
+                  "type": "number",
+                  "required": true
+                }
+              ],
+              "required": true
+            },
+            {
+              "name": "color",
+              "label": "Colour (hex, e.g. #ff8a5b)",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "size",
+              "label": "Dot size (about 0.05\u20130.14)",
+              "type": "number",
+              "required": true
+            },
+            {
+              "name": "region",
+              "label": "Brain area to light up (optional: frontal, parietal, temporal, occipital, cerebellum, brainstem, thalamus, hippocampus or amygdala)",
+              "type": "string"
+            }
+          ],
+          "list": true,
+          "required": true
+        },
+        {
+          "name": "pathways",
+          "label": "Pathways (glowing tubes)",
+          "type": "object",
+          "fields": [
+            {
+              "name": "id",
+              "label": "ID (used by scenarios; no spaces)",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "color",
+              "label": "Colour (hex)",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "points",
+              "label": "Points (first \u2192 last is the signal direction)",
+              "type": "object",
+              "fields": [
+                {
+                  "name": "x",
+                  "label": "X",
+                  "type": "number",
+                  "required": true
+                },
+                {
+                  "name": "y",
+                  "label": "Y",
+                  "type": "number",
+                  "required": true
+                },
+                {
+                  "name": "z",
+                  "label": "Z",
+                  "type": "number",
+                  "required": true
+                }
+              ],
+              "list": true,
+              "required": true
+            }
+          ],
+          "list": true,
+          "required": true
+        },
+        {
+          "name": "scenarios",
+          "label": "Scenarios",
+          "type": "object",
+          "fields": [
+            {
+              "name": "id",
+              "label": "ID (no spaces)",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "title",
+              "label": "Title",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "icon",
+              "label": "Card icon",
+              "type": "select",
+              "required": true,
+              "options": {
+                "values": [
+                  "eye",
+                  "hand",
+                  "ear",
+                  "ball",
+                  "nose",
+                  "spark",
+                  "brain"
+                ]
+              }
+            },
+            {
+              "name": "view2d",
+              "label": "2D fallback view",
+              "type": "select",
+              "required": true,
+              "options": {
+                "values": [
+                  "side",
+                  "top",
+                  "front"
+                ]
+              }
+            },
+            {
+              "name": "badge",
+              "label": "Badge name",
+              "type": "string",
+              "required": true
+            },
             {
               "name": "intro",
               "label": "Introduction",
@@ -421,31 +608,48 @@
               "required": true
             },
             {
-              "name": "structures",
-              "label": "Structures (glowing dots)",
+              "name": "steps",
+              "label": "Steps",
               "type": "object",
               "fields": [
                 {
-                  "name": "id",
-                  "label": "ID (used by scenarios; no spaces)",
+                  "name": "title",
+                  "label": "Step title",
                   "type": "string",
                   "required": true
                 },
                 {
-                  "name": "name",
-                  "label": "Label",
+                  "name": "structure",
+                  "label": "Highlighted structure ID",
                   "type": "string",
                   "required": true
                 },
                 {
-                  "name": "about",
-                  "label": "Short description",
+                  "name": "also",
+                  "label": "Also highlight (structure IDs)",
+                  "type": "string",
+                  "list": true
+                },
+                {
+                  "name": "pathways",
+                  "label": "Active pathway IDs",
+                  "type": "string",
+                  "list": true
+                },
+                {
+                  "name": "text",
+                  "label": "Explanation (1\u20132 sentences)",
                   "type": "text",
                   "required": true
                 },
                 {
-                  "name": "position",
-                  "label": "Position",
+                  "name": "funFact",
+                  "label": "Fun fact",
+                  "type": "text"
+                },
+                {
+                  "name": "camera",
+                  "label": "Camera position",
                   "type": "object",
                   "fields": [
                     {
@@ -470,288 +674,91 @@
                   "required": true
                 },
                 {
-                  "name": "color",
-                  "label": "Colour (hex, e.g. #ff8a5b)",
-                  "type": "string",
-                  "required": true
-                },
-                {
-                  "name": "size",
-                  "label": "Dot size (about 0.05\u20130.14)",
-                  "type": "number",
-                  "required": true
-                },
-                {
-                  "name": "region",
-                  "label": "Brain area to light up (optional: frontal, parietal, temporal, occipital, cerebellum, brainstem, thalamus, hippocampus or amygdala)",
-                  "type": "string"
-                }
-              ],
-              "list": true,
-              "required": true
-            },
-            {
-              "name": "pathways",
-              "label": "Pathways (glowing tubes)",
-              "type": "object",
-              "fields": [
-                {
-                  "name": "id",
-                  "label": "ID (used by scenarios; no spaces)",
-                  "type": "string",
-                  "required": true
-                },
-                {
-                  "name": "color",
-                  "label": "Colour (hex)",
-                  "type": "string",
-                  "required": true
-                },
-                {
-                  "name": "points",
-                  "label": "Points (first \u2192 last is the signal direction)",
+                  "name": "target",
+                  "label": "Camera looks at",
                   "type": "object",
                   "fields": [
                     {
                       "name": "x",
-                      "label": "X",
+                      "label": "X (left \u2212 / right +)",
                       "type": "number",
                       "required": true
                     },
                     {
                       "name": "y",
-                      "label": "Y",
+                      "label": "Y (down \u2212 / up +)",
                       "type": "number",
                       "required": true
                     },
                     {
                       "name": "z",
-                      "label": "Z",
+                      "label": "Z (back \u2212 / front +)",
                       "type": "number",
                       "required": true
                     }
                   ],
-                  "list": true,
                   "required": true
+                },
+                {
+                  "name": "glow",
+                  "label": "Pathway strength 0\u20131 (for learning scenarios)",
+                  "type": "number"
                 }
               ],
               "list": true,
               "required": true
             },
             {
-              "name": "scenarios",
-              "label": "Scenarios",
+              "name": "challenge",
+              "label": "Mini-challenge",
               "type": "object",
               "fields": [
                 {
-                  "name": "id",
-                  "label": "ID (no spaces)",
-                  "type": "string",
-                  "required": true
-                },
-                {
-                  "name": "title",
-                  "label": "Title",
-                  "type": "string",
-                  "required": true
-                },
-                {
-                  "name": "icon",
-                  "label": "Card icon",
+                  "name": "type",
+                  "label": "Type",
                   "type": "select",
                   "required": true,
                   "options": {
                     "values": [
-                      "eye",
-                      "hand",
-                      "ear",
-                      "ball",
-                      "nose",
-                      "spark",
-                      "brain"
+                      "pick",
+                      "order"
                     ]
                   }
                 },
                 {
-                  "name": "view2d",
-                  "label": "2D fallback view",
-                  "type": "select",
-                  "required": true,
-                  "options": {
-                    "values": [
-                      "side",
-                      "top",
-                      "front"
-                    ]
-                  }
-                },
-                {
-                  "name": "badge",
-                  "label": "Badge name",
-                  "type": "string",
-                  "required": true
-                },
-                {
-                  "name": "intro",
-                  "label": "Introduction",
+                  "name": "prompt",
+                  "label": "Question",
                   "type": "text",
                   "required": true
                 },
                 {
-                  "name": "steps",
-                  "label": "Steps",
-                  "type": "object",
-                  "fields": [
-                    {
-                      "name": "title",
-                      "label": "Step title",
-                      "type": "string",
-                      "required": true
-                    },
-                    {
-                      "name": "structure",
-                      "label": "Highlighted structure ID",
-                      "type": "string",
-                      "required": true
-                    },
-                    {
-                      "name": "also",
-                      "label": "Also highlight (structure IDs)",
-                      "type": "string",
-                      "list": true
-                    },
-                    {
-                      "name": "pathways",
-                      "label": "Active pathway IDs",
-                      "type": "string",
-                      "list": true
-                    },
-                    {
-                      "name": "text",
-                      "label": "Explanation (1\u20132 sentences)",
-                      "type": "text",
-                      "required": true
-                    },
-                    {
-                      "name": "funFact",
-                      "label": "Fun fact",
-                      "type": "text"
-                    },
-                    {
-                      "name": "camera",
-                      "label": "Camera position",
-                      "type": "object",
-                      "fields": [
-                        {
-                          "name": "x",
-                          "label": "X (left \u2212 / right +)",
-                          "type": "number",
-                          "required": true
-                        },
-                        {
-                          "name": "y",
-                          "label": "Y (down \u2212 / up +)",
-                          "type": "number",
-                          "required": true
-                        },
-                        {
-                          "name": "z",
-                          "label": "Z (back \u2212 / front +)",
-                          "type": "number",
-                          "required": true
-                        }
-                      ],
-                      "required": true
-                    },
-                    {
-                      "name": "target",
-                      "label": "Camera looks at",
-                      "type": "object",
-                      "fields": [
-                        {
-                          "name": "x",
-                          "label": "X (left \u2212 / right +)",
-                          "type": "number",
-                          "required": true
-                        },
-                        {
-                          "name": "y",
-                          "label": "Y (down \u2212 / up +)",
-                          "type": "number",
-                          "required": true
-                        },
-                        {
-                          "name": "z",
-                          "label": "Z (back \u2212 / front +)",
-                          "type": "number",
-                          "required": true
-                        }
-                      ],
-                      "required": true
-                    },
-                    {
-                      "name": "glow",
-                      "label": "Pathway strength 0\u20131 (for learning scenarios)",
-                      "type": "number"
-                    }
-                  ],
-                  "list": true,
-                  "required": true
+                  "name": "answer",
+                  "label": "Correct structure ID (pick)",
+                  "type": "string"
                 },
                 {
-                  "name": "challenge",
-                  "label": "Mini-challenge",
-                  "type": "object",
-                  "fields": [
-                    {
-                      "name": "type",
-                      "label": "Type",
-                      "type": "select",
-                      "required": true,
-                      "options": {
-                        "values": [
-                          "pick",
-                          "order"
-                        ]
-                      }
-                    },
-                    {
-                      "name": "prompt",
-                      "label": "Question",
-                      "type": "text",
-                      "required": true
-                    },
-                    {
-                      "name": "answer",
-                      "label": "Correct structure ID (pick)",
-                      "type": "string"
-                    },
-                    {
-                      "name": "options",
-                      "label": "Choices: structure IDs (pick)",
-                      "type": "string",
-                      "list": true
-                    },
-                    {
-                      "name": "items",
-                      "label": "Steps in the correct order (order)",
-                      "type": "string",
-                      "list": true
-                    },
-                    {
-                      "name": "explanation",
-                      "label": "Explanation",
-                      "type": "text",
-                      "required": true
-                    }
-                  ],
+                  "name": "options",
+                  "label": "Choices: structure IDs (pick)",
+                  "type": "string",
+                  "list": true
+                },
+                {
+                  "name": "items",
+                  "label": "Steps in the correct order (order)",
+                  "type": "string",
+                  "list": true
+                },
+                {
+                  "name": "explanation",
+                  "label": "Explanation",
+                  "type": "text",
                   "required": true
                 }
               ],
-              "list": true,
               "required": true
             }
           ],
+          "list": true,
           "required": true
         }
       ]

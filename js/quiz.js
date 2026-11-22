@@ -22,7 +22,7 @@ export function initQuiz(content) {
       again.addEventListener('click', () => { newRound(); render(true); });
       stage.append(el('div', { class: 'quiz-result' }, h, el('p', { class: 'big', text: `${score} / ${per}` }), again));
       if (moveFocus) h.focus();
-      complete('quiz', pick(content.mascot.cheers) + ` You scored ${score} out of ${per}.`);
+      complete('quiz', { cheer: `You scored ${score} out of ${per}.` });
       return;
     }
     const q = round[index];

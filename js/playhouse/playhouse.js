@@ -168,7 +168,7 @@ export function initPlayhouse(content, root) {
       if (isNew) { celebrate(); toast(`Playhouse badge: ${scenario.badge}!`); }
       refreshCards();
       const n = scenarios.filter((s) => progress.scenarioDone(s.id)).length;
-      complete('playhouse', `You've earned ${n} of ${scenarios.length} Playhouse badges. Try another moment!`);
+      complete('playhouse', { stars: Math.min(3, n), cheer: `You've earned ${n} of ${scenarios.length} Playhouse badges.` });
     };
     const oops = (msg) => { sound.play('oops'); fb.replaceChildren(el('div', { class: 'fb oops' }, el('p', {}, el('strong', { text: pick(content.mascot.tryAgain) })), rich(el('p'), msg))); };
     if (ch.type === 'order') {

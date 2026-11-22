@@ -33,6 +33,16 @@
       <button class="chip" id="sound-toggle" type="button" aria-pressed="false">
         <svg aria-hidden="true"><use href="#i-sound-off"/></svg><span>Sound off</span>
       </button>
+      <details class="options" id="options">
+        <summary class="chip"><svg aria-hidden="true"><use href="#i-gear"/></svg><span>Options</span></summary>
+        <div class="options-panel surface" role="group" aria-label="Options">
+          <label class="vol-row" for="volume">Volume <input type="range" id="volume" min="0" max="1" step="0.1"></label>
+          <label class="switch"><input type="checkbox" role="switch" id="opt-ambient"><span class="switch-ui" aria-hidden="true"></span><span>Calm background hum</span></label>
+          <label class="switch"><input type="checkbox" role="switch" id="opt-read"><span class="switch-ui" aria-hidden="true"></span><span>Read to me</span></label>
+          <p class="note" id="opt-read-note" hidden>Read to me needs a voice installed on this device. Your browser doesn't have one, so it's turned off.</p>
+          <label class="switch"><input type="checkbox" role="switch" id="opt-scientist"><span class="switch-ui" aria-hidden="true"></span><span>Scientist mode (ages 11+)</span></label>
+        </div>
+      </details>
     </nav>
   </div>
 </header>
@@ -46,17 +56,21 @@
         <p class="eyebrow">A brain science adventure</p>
         <h1 id="home-title">Brain Signal Quest</h1>
         <p class="lead" id="intro"></p>
+        <div class="hero-cta">
+          <a class="btn btn-big" id="start-btn" href="#neuron"><svg aria-hidden="true"><use href="#i-play"/></svg><span>Start your quest</span></a>
+        </div>
         <div class="progress-wrap">
-          <div class="progress" role="progressbar" aria-labelledby="progress-label" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0">
+          <div class="progress" role="progressbar" aria-labelledby="progress-label" aria-valuemin="0" aria-valuemax="18" aria-valuenow="0">
             <div class="progress-fill" id="progress-fill"></div>
           </div>
-          <p id="progress-label" class="progress-label">0 of 6 stars</p>
+          <p id="progress-label" class="progress-label">0 stars</p>
         </div>
       </div>
       <div class="guide" id="home-guide"></div>
     </div>
+    <div class="warmup" id="warmup" hidden></div>
     <h2 class="map-title">Quest map</h2>
-    <ol class="quest-map" id="quest-map"></ol>
+    <div class="map-wrap"><svg class="map-path" id="map-path" aria-hidden="true"></svg><ol class="quest-map" id="quest-map"></ol></div>
     <div class="map-end" hidden>
       <a class="btn btn-big" id="cert-link" href="#certificate">
         <svg aria-hidden="true"><use href="#i-trophy"/></svg>
@@ -238,6 +252,7 @@
   <symbol id="i-print" viewBox="0 0 24 24"><path d="M6 9V3h12v6M6 18H3v-8h18v8h-3M7 14h10v7H7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
   <symbol id="i-cerebellum" viewBox="0 0 48 48"><ellipse cx="24" cy="26" rx="20" ry="15" fill="currentColor"/><path d="M8 22c10-3 22-3 32 0M7 28c11-3 23-3 34 0M10 34c9-3 19-3 28 0" fill="none" stroke="#0d1733" stroke-width="2" opacity=".55"/></symbol>
   <symbol id="i-spinal" viewBox="0 0 48 48"><g fill="currentColor"><rect x="17" y="3" width="14" height="8" rx="3"/><rect x="17" y="14" width="14" height="8" rx="3"/><rect x="17" y="25" width="14" height="8" rx="3"/><rect x="17" y="36" width="14" height="8" rx="3"/></g><path d="M24 2v44M24 8 10 4M24 19 8 18M24 30 8 32M24 8l14-4M24 19l16-1M24 30l16 2" stroke="#0d1733" stroke-width="2.4" fill="none" opacity=".7"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zM19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.4 7.4 0 0 0-1.7-1L15 3h-4l-.3 2.6a7.4 7.4 0 0 0-1.7 1l-2.4-1-2 3.4L4.6 11a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.4 7.4 0 0 0 1.7 1L11 21h4l.3-2.6a7.4 7.4 0 0 0 1.7-1l2.4 1 2-3.4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12l5 5L20 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-up" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>

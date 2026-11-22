@@ -48,7 +48,7 @@ export function initReaction(content) {
         const avg = Math.round(times.reduce((a, b) => a + b, 0) / times.length); const best = Math.min(...times);
         fb.textContent = `All ${ROUNDS} rounds done! Your average was ${avg} ms and your best was ${best} ms. Here's what your nervous system did each time:`;
         showLoop();
-        complete('reaction', pick(content.mascot.cheers) + ' Your eyes, brain and muscles made a great team!');
+        complete('reaction', { cheer: 'Your eyes, brain and muscles made a great team!' });
       }
     }
     phase = 'idle'; lamp.classList.remove('on'); btn.classList.remove('go'); btn.textContent = label();

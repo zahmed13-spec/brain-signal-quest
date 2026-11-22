@@ -94,7 +94,7 @@ export function initNeuron(content) {
   function finish() {
     nextSoma.setAttribute('fill', '#ffe066');
     stepBtn.hidden = true; resetBtn.hidden = false; nudgeBtn.disabled = false;
-    complete('neuron', pick(content.mascot.cheers) + ' You passed the signal along!');
+    complete('neuron', { cheer: 'You passed the signal along!' });
   }
 
   function animateAlong(path, dur, onDone) {

@@ -88,7 +88,7 @@ export function initBrain(content) {
     if (!fromDiagram) buttons[key]?.focus();
     const total = regions.length;
     count.textContent = `Explored ${seen.size} of ${total} parts`;
-    if (seen.size === total) complete('brain', pick(content.mascot.cheers) + ' You explored every part!');
+    if (seen.size === total) complete('brain', { cheer: 'You explored every part!' });
     else if (seen.size >= 1 && !peek.checked && regions.filter((x) => !x.inside).every((x) => seen.has(x.key))) count.textContent += ' — now try Peek inside!';
   }
 

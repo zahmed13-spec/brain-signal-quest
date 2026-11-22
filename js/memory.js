@@ -35,7 +35,7 @@ export function initMemory(content) {
           rich(status, `Match! ${card.fact}`);
           if (pairs === total) {
             rich(status, `You found all ${total} pairs in ${turns} turns! ${card.fact}`);
-            complete('memory', pick(content.mascot.cheers) + ' Your working memory rocks!');
+            complete('memory', { cheer: 'Your working memory rocks!' });
           }
           return;
         }
