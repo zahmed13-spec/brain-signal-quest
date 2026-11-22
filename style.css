@@ -593,7 +593,17 @@ details.more summary{cursor:pointer;font-weight:700;color:var(--accent);min-heig
 }
 @media (max-width:520px){
   .topbar-inner{flex-wrap:wrap}
-  .logo span{font-size:var(--t-body)}
+  .topbar-inner{flex-wrap:nowrap}
+  .logo span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  /* ONB-04: Start button and the first stop come first on phones; Sparky's greeting follows the map */
+  #home{display:flex;flex-direction:column}
+  #home .hero{display:contents}
+  #home .hero-copy{order:1}
+  #home .warmup{order:2}
+  #home .map-title{order:3;margin-top:var(--s-3)}
+  #home .map-wrap{order:4}
+  #home .guide{order:5;margin-top:var(--s-5)}
+  #home .map-end{order:6}
   .top-actions .chip span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
   .hero{gap:var(--s-2);margin-bottom:var(--s-3)}
   .hero h1{font-size:2rem}

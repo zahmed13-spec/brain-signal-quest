@@ -91,7 +91,7 @@ function buildSVG(m) {
   <g class="nts"></g>
   <g class="msgs"></g>
   ${LABELS[m.vertical ? 'v' : 'h'].map(([t, x, y, a]) => `<text x="${x}" y="${y}" text-anchor="${a}">${t}</text>`).join('')}
-  <g class="tips">${TIPS.map((t, i) => { const [cx, cy] = P(t.x, t.y); return `<g class="tip" data-i="${i}" tabindex="0" role="button" aria-label="Dendrite ${i + 1}: send a message"><circle class="tip-ring" cx="${cx}" cy="${cy}" r="22" fill="rgba(124,247,255,.18)" stroke="#7cf7ff" stroke-width="3"/><circle class="tip-dot" cx="${cx}" cy="${cy}" r="12" fill="#ffe066" stroke="#2c2f7a" stroke-width="3"/><text class="tip-sign" x="${cx}" y="${cy + 7}" text-anchor="middle" style="font-size:20px;stroke-width:0;fill:#17203d"></text></g>`; }).join('')}</g>`;
+  <g class="tips">${TIPS.map((t, i) => { const [cx, cy] = P(t.x, t.y); return `<g class="tip" data-i="${i}" tabindex="0" role="button" aria-label="Dendrite ${i + 1}: send a message"><circle class="tip-hit" cx="${cx}" cy="${cy}" r="${m.vertical ? 33 : 36}" fill="transparent"/><circle class="tip-ring" cx="${cx}" cy="${cy}" r="22" fill="rgba(124,247,255,.18)" stroke="#7cf7ff" stroke-width="3"/><circle class="tip-dot" cx="${cx}" cy="${cy}" r="12" fill="#ffe066" stroke="#2c2f7a" stroke-width="3"/><text class="tip-sign" x="${cx}" y="${cy + 7}" text-anchor="middle" style="font-size:20px;stroke-width:0;fill:#17203d"></text></g>`; }).join('')}</g>`;
   return s;
 }
 
