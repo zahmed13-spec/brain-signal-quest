@@ -1651,7 +1651,12 @@
       "y": -0.12,
       "z": 0.64
      },
-     "glow": 1
+     "glow": 1,
+     "predictOptions": [
+      "chiasm",
+      "lgn",
+      "v1"
+     ]
     },
     {
      "title": "To the relay station",
@@ -1673,7 +1678,12 @@
       "y": 0.05,
       "z": 0.15
      },
-     "glow": 1
+     "glow": 1,
+     "predictOptions": [
+      "lgn",
+      "v1",
+      "midbrain"
+     ]
     },
     {
      "title": "Primary visual cortex (V1)",
@@ -1695,7 +1705,12 @@
       "y": 0.15,
       "z": -0.6
      },
-     "glow": 1
+     "glow": 1,
+     "predictOptions": [
+      "v1",
+      "temporal",
+      "parietal"
+     ]
     },
     {
      "title": "Shapes, then what and where",
@@ -1764,7 +1779,9 @@
     ],
     "items": [],
     "explanation": "The LGN of the thalamus is the vision relay station. It sends signals on to V1 through the optic radiations."
-   }
+   },
+   "hook": "How does a light \"switch on\" in your brain?",
+   "hookAnswer": "Your eyes turn light into signals. They cross at the optic chiasm, stop at the thalamus, and reach the back of your brain."
   },
   {
    "id": "hot-touch",
@@ -1834,7 +1851,12 @@
       "y": -1.55,
       "z": -0.1
      },
-     "glow": 1
+     "glow": 1,
+     "predictOptions": [
+      "muscle",
+      "thalamus",
+      "somatosensory"
+     ]
     },
     {
      "title": "Up to the thalamus",
@@ -1855,7 +1877,12 @@
       "y": -0.6,
       "z": -0.3
      },
-     "glow": 1
+     "glow": 1,
+     "predictOptions": [
+      "thalamus",
+      "muscle",
+      "somatosensory"
+     ]
     },
     {
      "title": "\"Ouch!\"",
@@ -1892,7 +1919,9 @@
      "Somatosensory cortex: \"Ouch!\""
     ],
     "explanation": "The spinal reflex moves your hand first. Feeling the pain in your cortex comes a little later."
-   }
+   },
+   "hook": "Why do you pull your hand back before you feel the \"ouch\"?",
+   "hookAnswer": "The pull-back reflex runs through your spinal cord. The \"ouch\" signal has a longer trip up to your brain."
   },
   {
    "id": "hear-name",
@@ -1940,7 +1969,12 @@
       "y": -0.12,
       "z": 0.05
      },
-     "glow": 1
+     "glow": 1,
+     "predictOptions": [
+      "cochlea",
+      "mgn",
+      "wernicke"
+     ]
     },
     {
      "title": "Auditory nerve to brainstem",
@@ -2005,7 +2039,12 @@
       "y": 0.05,
       "z": -0.1
      },
-     "glow": 1
+     "glow": 1,
+     "predictOptions": [
+      "mgn",
+      "wernicke",
+      "auditoryCortex"
+     ]
     },
     {
      "title": "Auditory cortex",
@@ -2063,7 +2102,9 @@
     ],
     "items": [],
     "explanation": "Hair cells in the cochlea turn vibrations into electrical signals."
-   }
+   },
+   "hook": "How do you know someone said YOUR name?",
+   "hookAnswer": "Sound signals travel through your brainstem and thalamus to the hearing area. Then Wernicke's area recognizes the word."
   },
   {
    "id": "catch-ball",
@@ -2162,7 +2203,12 @@
       "y": -0.1,
       "z": -0.4
      },
-     "glow": 1
+     "glow": 1,
+     "predictOptions": [
+      "cerebellum",
+      "spinalCord",
+      "v1"
+     ]
     },
     {
      "title": "Down the spinal cord",
@@ -2183,7 +2229,12 @@
       "y": -0.8,
       "z": -0.3
      },
-     "glow": 1
+     "glow": 1,
+     "predictOptions": [
+      "spinalCord",
+      "cerebellum",
+      "hand"
+     ]
     },
     {
      "title": "Hands close: caught!",
@@ -2219,7 +2270,9 @@
     ],
     "items": [],
     "explanation": "The cerebellum compares the plan with the movement and fine-tunes the timing."
-   }
+   },
+   "hook": "How do your hands know exactly when to close?",
+   "hookAnswer": "Your cerebellum times the move. It compares the plan with what's happening and sends quick fixes."
   },
   {
    "id": "smell-cookies",
@@ -2291,7 +2344,12 @@
       "y": -0.18,
       "z": 0.3
      },
-     "glow": 1
+     "glow": 1,
+     "predictOptions": [
+      "olfactoryCortex",
+      "thalamus",
+      "hippocampus"
+     ]
     },
     {
      "title": "A happy feeling",
@@ -2312,7 +2370,12 @@
       "y": -0.15,
       "z": 0.15
      },
-     "glow": 1
+     "glow": 1,
+     "predictOptions": [
+      "amygdala",
+      "hippocampus",
+      "frontal"
+     ]
     },
     {
      "title": "Grandma's kitchen!",
@@ -2351,7 +2414,9 @@
     ],
     "items": [],
     "explanation": "Smell signals go from the olfactory bulb straight to the cortex, without stopping at the thalamus first."
-   }
+   },
+   "hook": "Why can a smell bring back an old memory?",
+   "hookAnswer": "Smell signals skip the thalamus. They reach emotion and memory areas in just a step or two."
   },
   {
    "id": "learn-new",
@@ -2428,7 +2493,12 @@
       "y": 0,
       "z": -0.3
      },
-     "glow": 0.75
+     "glow": 0.75,
+     "predictOptions": [
+      "cerebellum",
+      "hippocampus",
+      "occipital"
+     ]
     },
     {
      "title": "Sleep saves it",
@@ -2451,7 +2521,12 @@
       "y": 0.2,
       "z": -0.1
      },
-     "glow": 1.0
+     "glow": 1.0,
+     "predictOptions": [
+      "hippocampus",
+      "cerebellum",
+      "occipital"
+     ]
     }
    ],
    "challenge": {
@@ -2466,7 +2541,9 @@
      "Sleep helps save the skill"
     ],
     "explanation": "Practice makes neurons fire together, which strengthens their synapses, and sleep helps lock it in."
-   }
+   },
+   "hook": "Why does practice make things easier?",
+   "hookAnswer": "Neurons that fire together wire together. Practice makes the pathway stronger."
   }
  ]
 }

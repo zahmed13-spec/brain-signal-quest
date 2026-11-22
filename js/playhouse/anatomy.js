@@ -22,7 +22,7 @@ export const ARM = [{ x: 0.55, y: -1.15, z: -0.3 }, { x: 0.72, y: -1.5, z: 0.05 
 /** Every structure id a scenario mentions (steps, extras and challenge options). */
 export function scenarioStructureIds(scenario) {
   const ids = new Set();
-  for (const s of scenario.steps) { ids.add(s.structure); (s.also || []).forEach((a) => ids.add(a)); }
+  for (const s of scenario.steps) { ids.add(s.structure); (s.also || []).forEach((a) => ids.add(a)); (s.predictOptions || []).forEach((a) => ids.add(a)); }
   if (scenario.challenge?.type === 'pick') (scenario.challenge.options || []).forEach((o) => ids.add(o));
   ids.delete(''); ids.delete(undefined);
   return ids;

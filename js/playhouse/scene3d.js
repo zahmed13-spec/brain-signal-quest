@@ -30,8 +30,8 @@ function regionOf(p, part) {
 }
 
 export class Scene3D {
-  constructor(container, labelsLayer, data, { onPick } = {}) {
-    this.container = container; this.labelsLayer = labelsLayer; this.data = data; this.onPick = onPick;
+  constructor(container, labelsLayer, data, { onPick, onSlow } = {}) {
+    this.container = container; this.labelsLayer = labelsLayer; this.data = data; this.onPick = onPick; this.onSlow = onSlow; this.candidates = new Set(); this.verySlow = 0;
     this.structs = new Map(data.structures.map((s) => [s.id, s]));
     this.paths = new Map(data.pathways.map((p) => [p.id, p]));
     this.speed = 1; this.playing = true; this.showAll = false; this.time = 0; this.running = false;
@@ -218,6 +218,8 @@ export class Scene3D {
   setSpeed(s) { this.speed = s; }
   setPlaying(p) { this.playing = p; this.dirty = true; }
   setShowAll(b) { this.showAll = b; this.dirty = true; }
+  /** CORE-07: highlight candidate structures with bright labels while the player predicts. */
+  setCandidates(ids) { this.candidates = new Set(ids || []); this.dirty = true; }
 
   bindInput(canvas) {
     let down = null; const ray = new THREE.Raycaster(); const ndc = new THREE.Vector2();
@@ -266,6 +268,9 @@ export class Scene3D {
       // Adaptive quality: if a slow device can't keep up for 2 seconds in a row, render fewer pixels.
       this.slow = this.playing && this.fps.value < 40 ? (this.slow || 0) + 1 : 0;
       if (this.slow >= 2 && this.renderer.getPixelRatio() > 1) { this.renderer.setPixelRatio(1); this.resize(); this.slow = 0; }
+      // PERF-03: still under 24 fps at pixel ratio 1 for 3 s → ask the controller to switch to 2D.
+      this.verySlow = this.renderer.getPixelRatio() <= 1 && this.fps.value < 24 ? this.verySlow + 1 : 0;
+      if (this.verySlow >= 3 && this.onSlow) { this.verySlow = -999; this.onSlow(); }
     }
     requestAnimationFrame(this.loop);
   }
@@ -273,11 +278,11 @@ export class Scene3D {
     const w = this.container.clientWidth; const h = this.container.clientHeight; const p = new THREE.Vector3();
     const also = new Set(this.step?.also || []);
     for (const [id, lbl] of this.labels) {
-      const isActive = this.step && id === this.step.structure; const show = isActive || also.has(id) || this.showAll;
+      const cand = this.candidates.has(id); const isActive = !this.candidates.size && this.step && id === this.step.structure; const show = cand || isActive || also.has(id) || this.showAll;
       if (!show) { lbl.style.display = 'none'; continue; }
       p.copy(this.markers.get(id).g.position).project(this.camera);
       if (p.z > 1) { lbl.style.display = 'none'; continue; }
-      lbl.style.display = ''; lbl.className = 'ph-label' + (isActive ? ' active' : also.has(id) ? '' : ' minor');
+      lbl.style.display = ''; lbl.className = 'ph-label' + (cand ? ' cand' : isActive ? ' active' : also.has(id) ? '' : ' minor');
       lbl.style.transform = `translate(${((p.x + 1) / 2) * w}px, ${((1 - p.y) / 2) * h}px) translate(-50%, -140%)`;
     }
   }

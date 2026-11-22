@@ -749,6 +749,18 @@
               "required": true
             },
             {
+              "name": "hook",
+              "label": "Mystery question shown at the start",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "hookAnswer",
+              "label": "Mystery answer shown at the last step (2 short sentences)",
+              "type": "text",
+              "required": false
+            },
+            {
               "name": "steps",
               "label": "Steps",
               "type": "object",
@@ -844,6 +856,13 @@
                   "name": "glow",
                   "label": "Pathway strength 0\u20131 (for learning scenarios)",
                   "type": "number"
+                },
+                {
+                  "name": "predictOptions",
+                  "label": "Predict-the-next-stop choices on replays (structure IDs; include this step's structure)",
+                  "type": "string",
+                  "list": true,
+                  "required": false
                 }
               ],
               "list": true,

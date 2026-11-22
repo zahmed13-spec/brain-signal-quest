@@ -1,11 +1,14 @@
-// Brain Playhouse controller: scenario picker, playback controls, step panel and mini-challenges.
-// Everything it plays comes from content.json → playhouse (structures, pathways, scenarios).
-import { el, icon, rich, sound, complete, toast, celebrate, reducedMotion, shuffled, pick, store as progress } from '../core.js';
+// Brain Playhouse controller: scenario picker, learner-paced steps, predictions, mini-challenges.
+// Everything it plays comes from playhouse.json (structures, pathways, scenarios).
+import { el, icon, rich, sound, complete, toast, reducedMotion, shuffled, pickFresh, store as progress, prefs, dock, scaffoldFor, speakButton } from '../core.js';
+import { feedbackSheet, sparkBurst, shake, starsRow } from '../ui.js';
 import { View2D } from './view2d.js';
 
-const STEP_MS = 7000; // reading time per step at 1x speed
+const MIN_STEP_MS = 8000; const MS_PER_WORD = 500; // EDU-05: autoplay waits for reading time
+const MYELIN_BOOST = 1.6;
 const ICON_FOR = { eye: 'eye', hand: 'hand', ear: 'ear', ball: 'ball', nose: 'nose', spark: 'spark', brain: 'brain' };
 const COLOR_FOR = { eye: 'var(--r-occipital)', hand: 'var(--r-parietal)', ear: 'var(--r-temporal)', ball: 'var(--r-cerebellum)', nose: 'var(--r-hippocampus)', spark: 'var(--glow)', brain: 'var(--r-frontal)' };
+const words = (t) => (t || '').split(/\s+/).filter(Boolean).length;
 
 /** Fill in optional fields a CMS edit may leave out, so the views can rely on them. */
 function normalize(ph) {
@@ -16,10 +19,12 @@ function normalize(ph) {
   const ids = new Set(structures.map((s) => s.id)); const pids = new Set(pathways.map((p) => p.id));
   const scenarios = (ph.scenarios || []).map((sc) => ({
     ...sc,
-    steps: (sc.steps || []).filter((st) => ids.has(st.structure)).map((st) => ({
-      ...st, also: (st.also || []).filter((a) => ids.has(a)), pathways: (st.pathways || []).filter((a) => pids.has(a)),
-      camera: vec(st.camera, { x: 2.4, y: 1.3, z: 2.6 }), target: vec(st.target, { x: 0, y: 0, z: 0 }), glow: num(st.glow, 1),
-    })),
+    steps: (sc.steps || []).filter((st) => ids.has(st.structure)).map((st) => {
+      const opts = (st.predictOptions || []).filter((o) => ids.has(o));
+      return { ...st, also: (st.also || []).filter((a) => ids.has(a)), pathways: (st.pathways || []).filter((a) => pids.has(a)),
+        camera: vec(st.camera, { x: 2.4, y: 1.3, z: 2.6 }), target: vec(st.target, { x: 0, y: 0, z: 0 }), glow: num(st.glow, 1),
+        predictOptions: opts.includes(st.structure) && opts.length >= 2 ? opts : [] };
+    }),
     challenge: sc.challenge ? { ...sc.challenge, options: (sc.challenge.options || []).filter((o) => ids.has(o)), items: sc.challenge.items || [] } : null,
   }));
   return { ...ph, structures, pathways, scenarios };
@@ -34,8 +39,11 @@ export function initPlayhouse(content, root) {
   const structs = new Map(data.structures.map((s) => [s.id, s]));
   const scenarios = data.scenarios.filter((s) => s.steps && s.steps.length);
   const glOK = webglAvailable();
-  let use2D = !glOK || reducedMotion();
-  let view = null; let scenario = null; let stepIndex = 0; let playing = false; let speed = 1; let timer = null; let showAll = false; let visible = false; let challengeOpen = false;
+  let use2D = !glOK || reducedMotion() || prefs.get('force2d') === true;
+  let view = null; let scenario = null; let stepIndex = 0; let playing = false; let speed = 1; let timer = null; let showAll = false; let visible = false;
+  let challengeOpen = false; let predictRight = 0; let predictTotal = 0; let predicting = false;
+  const myelinOn = () => prefs.get('myelin') === true && progress.stars('neuron') >= 3;
+  const effSpeed = () => speed * (myelinOn() ? MYELIN_BOOST : 1);
 
   root.replaceChildren();
   const intro = el('p', { class: 'ph-intro' }); rich(intro, data.intro);
@@ -50,15 +58,21 @@ export function initPlayhouse(content, root) {
   toolBtn('Tilt up', '↑', () => view.tilt(20)); toolBtn('Tilt down', '↓', () => view.tilt(-20));
   toolBtn('Zoom in', '+', () => view.zoom(0.8)); toolBtn('Zoom out', '−', () => view.zoom(1.25)); toolBtn('Reset camera', '⌂', () => view.resetView());
 
+  const hookEl = el('p', { class: 'ph-hook' });
   const stepCard = el('div', { class: 'step-card', 'aria-live': 'polite' });
-  const btn = (iconId, label, fn, cls = 'btn btn-ghost') => { const b = el('button', { type: 'button', class: cls, 'aria-label': label, title: label }, icon(iconId)); b.addEventListener('click', fn); return b; };
-  const playBtn = el('button', { type: 'button', class: 'btn' }, icon('play'), el('span', { text: 'Play' }));
+  const predictBox = el('div', { class: 'predict', hidden: true });
+  const railFill = el('div', { class: 'rail-fill' }); const railLabel = el('span', { class: 'rail-label' });
+  const rail = el('div', { class: 'rail', 'aria-hidden': 'true' }, el('div', { class: 'rail-track' }, railFill), railLabel);
+  const btn = (iconId, label, fn, cls = 'btn btn-secondary btn-icon') => { const b = el('button', { type: 'button', class: cls, 'aria-label': label, title: label }, icon(iconId)); b.addEventListener('click', fn); return b; };
+  const nextBtn = el('button', { type: 'button', class: 'btn btn-big' }, el('span', { text: 'Next' }), icon('next'));
+  nextBtn.addEventListener('click', () => goto(stepIndex + 1));
+  const playBtn = el('button', { type: 'button', class: 'btn btn-secondary' }, icon('play'), el('span', { text: 'Autoplay' }));
   playBtn.addEventListener('click', () => setPlaying(!playing));
   const controls = el('div', { class: 'ph-controls', role: 'group', 'aria-label': 'Playback' },
-    btn('restart', 'Restart', () => goto(0, true)), btn('prev', 'Step back', () => goto(stepIndex - 1)), playBtn, btn('next', 'Step forward', () => goto(stepIndex + 1)));
+    btn('prev', 'Step back', () => goto(stepIndex - 1)), nextBtn, playBtn, btn('restart', 'Restart', () => goto(0, true)));
   const speedInput = el('input', { type: 'range', min: '0.5', max: '2', step: '0.25', value: '1', id: 'ph-speed', 'aria-valuetext': '1 times' });
   const speedOut = el('output', { for: 'ph-speed', text: '1×' });
-  speedInput.addEventListener('input', () => { speed = Number(speedInput.value); speedOut.textContent = speed + '×'; speedInput.setAttribute('aria-valuetext', speed + ' times'); view?.setSpeed(speed); if (playing) schedule(); });
+  speedInput.addEventListener('input', () => { speed = Number(speedInput.value); speedOut.textContent = speed + '×'; speedInput.setAttribute('aria-valuetext', speed + ' times'); view?.setSpeed(effSpeed()); if (playing) schedule(); });
   const speedRow = el('label', { class: 'speed', for: 'ph-speed' }, el('span', { text: 'Speed' }), speedInput, speedOut);
   const sw = (label, checked, fn, disabled) => {
     const input = el('input', { type: 'checkbox', role: 'switch', disabled: disabled ? true : undefined }); input.checked = checked;
@@ -66,89 +80,133 @@ export function initPlayhouse(content, root) {
     return { label: el('label', { class: 'switch' }, input, el('span', { class: 'switch-ui', 'aria-hidden': 'true' }), el('span', { text: label })), input };
   };
   const labelsSw = sw('Show all labels', false, (v) => { showAll = v; view?.setShowAll(v); });
-  const modeSw = sw('2D diagram', use2D, (v) => { use2D = v; makeView(); }, !glOK);
-  const toggles = el('div', { class: 'ph-toggles' }, labelsSw.label, modeSw.label);
-  const dots = el('ol', { class: 'step-dots', 'aria-label': 'Steps' });
-  const panel = el('div', { class: 'ph-panel' }, stepCard, controls, speedRow, dots, toggles);
+  const modeSw = sw('2D diagram', use2D, (v) => { use2D = v; prefs.set('force2d', v); makeView(); }, !glOK);
+  const myelinSw = sw('Myelin boost (faster signals)', myelinOn(), (v) => { prefs.set('myelin', v); view?.setSpeed(effSpeed()); if (v) buddy.say('Myelin makes signals travel faster. Zoom!', 'cheer'); });
+  // CORE-09: extra controls are tucked away until asked for.
+  const more = el('details', { class: 'more ph-more-wrap' }, el('summary', { text: 'More controls' }),
+    el('div', { class: 'ph-more' }, speedRow, el('div', { class: 'ph-toggles' }, labelsSw.label, modeSw.label, myelinSw.label)));
+  more.addEventListener('toggle', () => syncTools());
+  const syncTools = () => { tools.hidden = use2D || !(more.open || Object.keys(progress.get().playhouse).length > 0); myelinSw.label.hidden = progress.stars('neuron') < 3; };
+  const panel = el('div', { class: 'ph-panel' }, hookEl, rail, stepCard, predictBox, controls, more);
   const stage = el('div', { class: 'ph-stage' }, viewBox, panel);
   const challengeBox = el('div', { class: 'challenge', hidden: true });
-  root.append(intro, picker, stage, challengeBox);
+  // EDU-04: the goal card already says what to do, so the intro only shows if no short goal exists.
+  const hasGoal = content.activities.find((a) => a.key === 'playhouse')?.goalShort;
+  root.append(hasGoal ? '' : intro, picker, stage, challengeBox);
+  const buddy = dock(root);
   if (!glOK) root.append(el('p', { class: 'note', text: 'Your browser can’t show 3D right now, so you’re seeing the 2D diagram. All the same steps are here.' }));
 
   const cards = scenarios.map((sc) => {
-    const ic = ICON_FOR[sc.icon] || 'brain';
     const b = el('button', { type: 'button', class: 'scenario-card', 'aria-pressed': 'false', style: { '--c': COLOR_FOR[sc.icon] || 'var(--glow)' } },
-      el('span', { class: 'sc-icon' }, icon(ic)), el('strong', { text: sc.title }), icon('star', 'sc-star'));
+      el('span', { class: 'sc-icon' }, icon(ICON_FOR[sc.icon] || 'brain')), el('strong', { text: sc.title }), icon('star', 'sc-star'));
     b.addEventListener('click', () => choose(sc));
     picker.append(b); return { b, sc };
   });
   function refreshCards() {
     for (const { b, sc } of cards) {
-      const done = progress.scenarioDone(sc.id);
-      b.classList.toggle('done', Boolean(done));
-      b.setAttribute('aria-label', `${sc.title}${done ? ', badge earned: ' + sc.badge : ''}`);
+      const s = progress.scenarioStars(sc.id);
+      b.classList.toggle('done', s > 0);
+      b.setAttribute('aria-label', `${sc.title}${s ? `, badge earned: ${sc.badge}, ${s} of 3 stars` : ''}`);
       b.setAttribute('aria-pressed', String(sc === scenario));
     }
   }
 
   async function makeView() {
     const wasStep = stepIndex; view?.dispose(); view = null;
-    tools.hidden = use2D;
     if (!use2D) {
       try {
         const { Scene3D } = await import('./scene3d.js');
-        view = new Scene3D(viewBox, labels, data, { onPick });
+        view = new Scene3D(viewBox, labels, data, { onPick, onSlow });
         mode.textContent = '3D view · drag to turn';
       } catch (err) {
-        console.error(err); use2D = true; modeSw.input.checked = true; tools.hidden = true;
+        console.error(err); use2D = true; modeSw.input.checked = true;
         toast('3D could not start, so here is the 2D diagram.');
       }
     }
     if (!view) { view = new View2D(viewBox, labels, data, { onPick }); mode.textContent = '2D diagram'; }
-    view.setSpeed(speed); view.setPlaying(playing); view.setShowAll(showAll);
+    syncTools();
+    view.setSpeed(effSpeed()); view.setPlaying(playing); view.setShowAll(showAll);
     if (scenario) { view.setScenario(scenario); stepIndex = wasStep; renderStep(true); }
     if (visible) view.start();
   }
+  /** PERF-03: a device that can't keep up even at pixel ratio 1 switches to the 2D diagram. */
+  function onSlow() {
+    if (use2D) return;
+    use2D = true; modeSw.input.checked = true; prefs.set('force2d', true);
+    toast('Switching to the 2D diagram for smoother play. You can switch back in More controls.');
+    makeView();
+  }
 
   function choose(sc) {
-    scenario = sc; challengeOpen = false; challengeBox.hidden = true; refreshCards();
-    view.setScenario(sc); dots.replaceChildren();
-    sc.steps.forEach((s, i) => {
-      const d = el('button', { type: 'button', text: String(i + 1), 'aria-label': `Step ${i + 1}: ${s.title}` });
-      d.addEventListener('click', () => goto(i)); dots.append(el('li', {}, d));
-    });
-    stepIndex = 0; renderStep(true); setPlaying(!reducedMotion());
-    sound.play('click');
+    scenario = sc; challengeOpen = false; challengeBox.hidden = true; predictRight = 0; predictTotal = 0; refreshCards();
+    view.setScenario(sc);
+    stepIndex = 0; setPlaying(false); renderStep(true);
+    rich(hookEl, sc.hook ? `Mystery: ${sc.hook}` : sc.intro || '');
+    buddy.say(progress.scenarioDone(sc.id) ? 'Replay time! This time, try to predict where the signal goes.' : 'Press Next to follow the signal, one stop at a time.', 'point', 4000);
+    sound.play('tick');
   }
 
   function renderStep(instant = false) {
     const step = scenario.steps[stepIndex]; const st = structs.get(step.structure);
-    view.setStep(step, { instant: instant || reducedMotion() });
+    view.setStep(step, { instant: instant || reducedMotion() }); view.setCandidates?.([]);
     stepCard.style.setProperty('--c', st?.color || 'var(--glow)');
-    const p = el('p'); rich(p, step.text);
-    const fact = el('p', { class: 'did-you-know' }, el('strong', { text: 'Fun fact: ' })); fact.append(rich(el('span'), step.funFact));
+    const p = rich(el('p'), step.text);
+    const fact = step.funFact ? el('details', { class: 'more' }, el('summary', { text: 'Did you know? +' }), rich(el('p'), step.funFact)) : '';
     stepCard.replaceChildren(
-      el('p', { class: 'step-n', text: `${scenario.title} · Step ${stepIndex + 1} of ${scenario.steps.length}` }),
-      el('h3', { text: step.title }),
-      st ? el('p', { class: 'where', text: `Lit up: ${st.name}` }) : '', p, step.funFact ? fact : '');
-    [...dots.querySelectorAll('button')].forEach((d, i) => { d.setAttribute('aria-current', i === stepIndex ? 'step' : 'false'); if (i <= stepIndex) d.classList.add('seen'); });
-    if (stepIndex === scenario.steps.length - 1) openChallenge();
+      el('div', { class: 'rail' }, el('h3', { text: step.title }), speakButton(() => `${step.title}. ${step.text}`)),
+      st ? el('p', { class: 'where', text: `Lit up: ${st.name}` }) : '', p, fact);
+    const n = scenario.steps.length; const pct = Math.round(((stepIndex + 1) / n) * 100);
+    railFill.style.width = pct + '%'; railLabel.textContent = `Step ${stepIndex + 1} of ${n} · ${pct}%`;
+    nextBtn.disabled = stepIndex >= n - 1;
+    if (stepIndex === n - 1) { openChallenge(); if (scenario.hookAnswer) rich(hookEl, `Mystery solved: ${scenario.hookAnswer}`); }
   }
-  function goto(i, restart = false) {
-    if (!scenario) return;
+  async function goto(i, restart = false) {
+    if (!scenario || predicting) return;
     const n = scenario.steps.length; i = Math.max(0, Math.min(n - 1, i));
+    scaffoldFor('playhouse')?.progress();
+    // CORE-07: on a replay, predict marked steps before they're revealed.
+    if (i === stepIndex + 1 && scenario.steps[i].predictOptions.length && progress.scenarioDone(scenario.id)) {
+      const wasPlaying = playing; setPlaying(false);
+      await predict(i);
+      if (wasPlaying) setPlaying(true);
+    }
     stepIndex = i; renderStep(); sound.play('blip');
-    if (restart) setPlaying(!reducedMotion()); else if (playing) schedule();
+    if (restart) { predictRight = 0; predictTotal = 0; }
+    if (playing) schedule();
+  }
+  function predict(i) {
+    predicting = true;
+    const step = scenario.steps[i]; const opts = shuffled(step.predictOptions);
+    view.setCandidates?.(opts);
+    predictBox.hidden = false; predictBox.replaceChildren(el('h3', { text: 'Predict: where does the signal go next?' }));
+    const grid = el('div', { class: 'pick-grid', role: 'group', 'aria-label': 'Predictions' });
+    predictBox.append(grid);
+    return new Promise((res) => {
+      const choose2 = async (id, b) => {
+        if (!predicting) return;
+        predicting = false; predictTotal++;
+        const right = id === step.structure;
+        if (right) { predictRight++; sound.play('good'); sparkBurst(b); buddy.say(`Yes! Next stop: ${structs.get(id).name}.`, 'cheer', 2500); }
+        else { sound.play('oops'); shake(b); buddy.say(`That's the ${structs.get(id).name}. The signal goes to the ${structs.get(step.structure).name} next.`, 'oops', 4000); scaffoldFor('playhouse')?.wrong(); }
+        predictBox.hidden = true; view.setCandidates?.([]); pickHandler = null; res();
+      };
+      opts.forEach((id, k) => { const b = el('button', { type: 'button', class: 'answer', 'data-key': k + 1 }, el('span', { class: 'key', 'aria-hidden': 'true', text: String(k + 1) }), el('span', { text: structs.get(id).name })); b.addEventListener('click', () => choose2(id, b)); grid.append(b); });
+      pickHandler = (id) => { if (opts.includes(id)) choose2(id, grid.children[opts.indexOf(id)]); };
+      grid.querySelector('button').focus();
+    });
   }
   function schedule() {
     clearTimeout(timer);
     if (!playing || !scenario) return;
     if (stepIndex >= scenario.steps.length - 1) { setPlaying(false); return; }
-    timer = setTimeout(() => { stepIndex++; renderStep(); schedule(); }, STEP_MS / speed);
+    const step = scenario.steps[stepIndex];
+    const ms = Math.max(MIN_STEP_MS, words(step.text) * MS_PER_WORD) / speed;
+    timer = setTimeout(() => goto(stepIndex + 1), ms);
   }
   function setPlaying(p) {
-    playing = p; view?.setPlaying(p);
-    playBtn.replaceChildren(icon(p ? 'pause' : 'play'), el('span', { text: p ? 'Pause' : 'Play' }));
+    playing = p; view?.setPlaying(true); // pulses keep flowing; only step advance is paused
+    playBtn.replaceChildren(icon(p ? 'pause' : 'play'), el('span', { text: p ? 'Pause' : 'Autoplay' }));
+    playBtn.setAttribute('aria-pressed', String(p));
     schedule();
   }
 
@@ -159,18 +217,17 @@ export function initPlayhouse(content, root) {
     if (challengeOpen) return; challengeOpen = true;
     const ch = scenario.challenge; if (!ch) return;
     challengeBox.hidden = false; challengeBox.replaceChildren();
-    const fb = el('div', { class: 'answer-feedback', role: 'status' });
     challengeBox.append(el('h3', { text: 'Mini-challenge' }), rich(el('p'), ch.prompt));
-    const win = () => {
+    const sc = scenario;
+    const win = async () => {
       sound.play('good'); pickHandler = null;
-      const isNew = progress.markScenario(scenario.id);
-      fb.replaceChildren(el('div', { class: 'fb good' }, el('p', {}, el('strong', { text: `${pick(content.mascot.cheers)} Badge: ${scenario.badge}` })), rich(el('p'), ch.explanation)));
-      if (isNew) { celebrate(); toast(`Playhouse badge: ${scenario.badge}!`); }
-      refreshCards();
+      const stars = predictTotal ? (predictRight === predictTotal ? 3 : predictRight > 0 ? 2 : 1) : 1;
+      const res = progress.setScenarioStars(sc.id, stars); refreshCards(); syncTools();
+      await feedbackSheet({ good: true, title: `${res.first ? 'Badge' : 'Nice'}: ${sc.badge}!`, lines: [ch.explanation, predictTotal ? `Predictions: ${predictRight} of ${predictTotal} right.` : 'Replay this moment to predict each stop and earn more stars.'] });
       const n = scenarios.filter((s) => progress.scenarioDone(s.id)).length;
-      complete('playhouse', { stars: Math.min(3, n), cheer: `You've earned ${n} of ${scenarios.length} Playhouse badges.` });
+      await complete('playhouse', { stars: n >= scenarios.length ? 3 : n >= 3 ? 2 : 1, cheer: `${n} of ${scenarios.length} Playhouse badges.`, quiet: n > 1 && n < 3 });
     };
-    const oops = (msg) => { sound.play('oops'); fb.replaceChildren(el('div', { class: 'fb oops' }, el('p', {}, el('strong', { text: pick(content.mascot.tryAgain) })), rich(el('p'), msg))); };
+    const oops = (msg) => { sound.play('oops'); scaffoldFor('playhouse')?.wrong(); return feedbackSheet({ good: false, title: pickFresh(content.mascot.tryAgain, 'tryAgain'), lines: [msg], cta: 'Try again' }); };
     if (ch.type === 'order') {
       let items = shuffled(ch.items);
       if (items.every((x, i) => x === ch.items[i])) items = [...ch.items].reverse();
@@ -191,21 +248,22 @@ export function initPlayhouse(content, root) {
       check.addEventListener('click', () => {
         let right = 0;
         [...list.children].forEach((li, i) => { const ok = items[i] === ch.items[i]; li.classList.toggle('right', ok); li.classList.toggle('wrong', !ok); if (ok) right++; });
-        if (right === items.length) win(); else oops(`${right} of ${items.length} are in the right spot (green). Move the orange ones and check again!`);
+        if (right === items.length) { sparkBurst(check); win(); } else { shake(list); oops(`${right} of ${items.length} are in the right spot (green). Move the orange ones and check again!`); }
       });
-      challengeBox.append(list, el('p', {}, check), fb);
+      challengeBox.append(list, el('p', {}, check));
     } else {
       const grid = el('div', { class: 'pick-grid', role: 'group', 'aria-label': 'Choices' });
-      for (const id of ch.options) {
-        const st = structs.get(id); if (!st) continue;
-        const b = el('button', { type: 'button', class: 'answer', text: st.name });
-        b.addEventListener('click', () => pickHandler(id)); grid.append(b);
-      }
+      ch.options.forEach((id, k) => {
+        const st = structs.get(id); if (!st) return;
+        const b = el('button', { type: 'button', class: 'answer', 'data-key': k + 1 }, el('span', { class: 'key', 'aria-hidden': 'true', text: String(k + 1) }), el('span', { text: st.name }));
+        b.addEventListener('click', () => pickHandler?.(id)); grid.append(b);
+      });
       pickHandler = (id) => {
-        if (id === ch.answer) { grid.querySelectorAll('button').forEach((b) => b.classList.toggle('right', b.textContent === structs.get(id).name)); win(); }
-        else if (ch.options.includes(id)) oops(`That's the ${structs.get(id).name}: ${structs.get(id).about} Try again!`);
+        const b = grid.children[ch.options.indexOf(id)];
+        if (id === ch.answer) { b?.classList.add('right'); sparkBurst(b); win(); }
+        else if (ch.options.includes(id)) { b?.classList.add('wrong'); shake(b); oops(`That's the ${structs.get(id).name}: ${structs.get(id).about}`).then(() => b?.classList.remove('wrong')); }
       };
-      challengeBox.append(el('p', { class: 'note', text: 'Tip: you can also click the glowing dot in the picture.' }), grid, fb);
+      challengeBox.append(el('p', { class: 'note', text: 'Tip: you can also click the glowing dot in the picture.' }), grid);
     }
   }
 

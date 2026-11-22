@@ -628,3 +628,9 @@ details.more summary{cursor:pointer;font-weight:700;color:var(--accent);min-heig
   .certificate{box-shadow:none}
   main{width:100%;padding:0}
 }
+
+/* Playhouse on phones (MOB-02): view stays on screen while reading steps */
+@media (max-width:760px){
+  .ph-stage .ph-view{position:sticky;top:var(--s-2);z-index:2;max-height:46vh;aspect-ratio:auto;height:46vh;min-height:13rem}
+  .ph-panel .ph-controls .btn-big{flex:1}
+}

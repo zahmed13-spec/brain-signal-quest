@@ -99,6 +99,11 @@ export class View2D {
     const st = this.structs.get(step.structure);
     this.svg.setAttribute('aria-label', `Diagram showing: ${step.title}. Highlighted: ${st ? st.name : ''}. ${VIEW_NOTE[this.view]}`);
   }
+  setCandidates(ids) {
+    const c = new Set(ids || []);
+    for (const [id, n] of this.nodeEls) if (c.size) { n.label.setAttribute('opacity', c.has(id) ? 1 : 0); n.ring.setAttribute('opacity', c.has(id) ? 1 : 0); }
+    if (!c.size && this.step) this.setStep(this.step);
+  }
   applyMotion() { this.svg.style.setProperty('--flow-dur', (1.4 / this.speed).toFixed(2) + 's'); this.svg.classList.toggle('paused', !this.playing); }
   setSpeed(s) { this.speed = s; this.applyMotion(); }
   setPlaying(p) { this.playing = p; this.applyMotion(); }
