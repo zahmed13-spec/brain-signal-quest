@@ -1,13 +1,246 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Brain Signal Quest</title><link rel="stylesheet" href="style.css"><script src="game.js" defer></script></head>
-<body><a class="skip" href="#main">Skip to activities</a><header><div class="wrap"><p class="brand">Brain Signal Quest</p><h1>Meet the brain behind you.</h1><p id="intro">Explore your brain, send a signal, and put your memory to work.</p><a class="start" href="#brain">Start exploring ↓</a></div></header>
-<nav aria-label="Activities"><div class="wrap"><a href="#brain">Brain map</a><a href="#neuron">Signal trail</a><a href="#reaction">Reaction game</a><a href="#memory">Memory match</a><a href="#quiz">Quiz</a></div></nav>
-<main id="main" class="wrap">
-<section id="brain"><div class="copy"><h2>Meet your brain</h2><p id="brain-intro"></p><div class="controls" id="regions"></div><p class="feedback" id="region-info" role="status"></p></div><div class="diagram" aria-hidden="true"><div class="cerebrum">Cerebrum</div><div class="cerebellum">Cerebellum</div><div class="brainstem">Brainstem</div></div></section>
-<section id="neuron"><h2>Follow a neuron’s signal</h2><p id="neuron-intro"></p><ol id="trail" aria-label="Signal stages"></ol><button id="signal">Start signal</button><p class="feedback" id="signal-feedback" role="status">Start a signal, then step through each part.</p><p class="note">This model slows down one common path. Real neurons can receive many messages at once, and some connections pass signals electrically.</p></section>
-<section id="reaction"><h2>Reaction time challenge</h2><p id="reaction-intro"></p><button id="react">Start round</button><p class="feedback" id="reaction-feedback" role="status">Press Start round, then wait for GO.</p><p class="note">Your eyes detect the cue, your brain processes it, and signals tell your muscles to move. Device delay, distractions, and practice can affect this score. It cannot measure intelligence or brain health.</p></section>
-<section id="memory"><h2>Memory match</h2><p id="memory-intro"></p><button id="shuffle">Shuffle cards</button><div id="cards" aria-label="Memory cards"></div><p class="feedback" id="memory-feedback" role="status"></p><p class="note">Attention helps you notice a card. Working memory helps you hold its location in mind for a short time. Forgetting is normal, and practice can help you remember.</p></section>
-<section id="quiz"><h2>Brain check</h2><p id="quiz-intro"></p><div id="question"></div><p class="feedback" id="quiz-feedback" role="status"></p><button id="next" hidden>Next question</button></section>
-<section id="references"><h2>Glossary and sources</h2><dl id="glossary"></dl><ul id="sources"></ul><p id="credits"></p></section>
-<p id="load-error" role="alert" hidden>The activities could not load. Refresh the page, or start a local web server if opening from a source download.</p><noscript>Turn on JavaScript to play the activities.</noscript>
-</main></body></html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brain Signal Quest</title>
+<meta name="description" content="A free, private brain science game for kids aged 8 to 12: explore the brain, fire a neuron, test your reactions and watch signals travel in 3D.">
+<meta name="theme-color" content="#0d1733">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/atkinson-hyperlegible-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/fredoka-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{ "imports": {
+  "three": "./vendor/three/three.module.min.js",
+  "three/addons/": "./vendor/three/addons/"
+} }
+</script>
+<script type="module" src="game.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the game</a>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="logo" href="#home" aria-label="Brain Signal Quest home: quest map">
+      <svg class="logo-mark" aria-hidden="true"><use href="#i-neuron"/></svg>
+      <span>Brain Signal Quest</span>
+    </a>
+    <nav class="top-actions" aria-label="Game tools">
+      <a class="chip" href="#home"><svg aria-hidden="true"><use href="#i-map"/></svg><span>Map</span></a>
+      <a class="chip" href="#references"><svg aria-hidden="true"><use href="#i-book"/></svg><span>Glossary</span></a>
+      <button class="chip" id="sound-toggle" type="button" aria-pressed="false">
+        <svg aria-hidden="true"><use href="#i-sound-off"/></svg><span>Sound off</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <!-- HOME: quest map -->
+  <section id="home" class="screen" aria-labelledby="home-title">
+    <div class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">A brain science adventure</p>
+        <h1 id="home-title">Brain Signal Quest</h1>
+        <p class="lead" id="intro"></p>
+        <div class="progress-wrap">
+          <div class="progress" role="progressbar" aria-labelledby="progress-label" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+          <p id="progress-label" class="progress-label">0 of 6 stars</p>
+        </div>
+      </div>
+      <div class="guide" id="home-guide"></div>
+    </div>
+    <h2 class="map-title">Quest map</h2>
+    <ol class="quest-map" id="quest-map"></ol>
+    <div class="map-end">
+      <a class="btn btn-big" id="cert-link" href="#certificate">
+        <svg aria-hidden="true"><use href="#i-trophy"/></svg>
+        <span>Junior Neuroscientist certificate</span>
+      </a>
+      <button type="button" class="btn btn-ghost" id="reset-progress">Clear my stars</button>
+    </div>
+  </section>
+
+  <!-- BRAIN EXPLORER -->
+  <section id="brain" class="screen activity" data-activity="brain" aria-labelledby="brain-title" hidden>
+    <div class="activity-head"><a class="back" href="#home">← Map</a><h2 id="brain-title"></h2></div>
+    <div class="goal-card"></div>
+    <div class="play-card">
+      <div class="explorer">
+        <figure class="brain-fig">
+          <div id="brain-svg-wrap"></div>
+          <figcaption>Left side view. The face is on the left. <span class="sr-only">Use the buttons to choose a part.</span></figcaption>
+        </figure>
+        <div class="explorer-side">
+          <label class="switch">
+            <input type="checkbox" id="peek-inside" role="switch">
+            <span class="switch-ui" aria-hidden="true"></span>
+            <span>Peek inside</span>
+          </label>
+          <div class="region-buttons" id="region-buttons" role="group" aria-label="Brain parts"></div>
+          <div class="fact-card" id="region-card" aria-live="polite"></div>
+          <p class="explored" id="explored-count" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+    <div class="learn-cards"></div>
+  </section>
+
+  <!-- NEURON RELAY -->
+  <section id="neuron" class="screen activity" data-activity="neuron" aria-labelledby="neuron-title" hidden>
+    <div class="activity-head"><a class="back" href="#home">← Map</a><h2 id="neuron-title"></h2></div>
+    <div class="goal-card"></div>
+    <div class="play-card">
+      <div id="neuron-svg-wrap" class="neuron-wrap"></div>
+      <div class="neuron-controls">
+        <button type="button" class="btn" id="nudge">
+          <svg aria-hidden="true"><use href="#i-plus"/></svg><span>Send a message to the dendrites</span>
+        </button>
+        <button type="button" class="btn btn-ghost" id="neuron-step" hidden>Next part →</button>
+        <button type="button" class="btn btn-ghost" id="neuron-reset" hidden>Fire again</button>
+      </div>
+      <ol class="stage-list" id="stage-list" aria-label="Parts of the relay"></ol>
+      <p class="feedback" id="neuron-feedback" role="status"></p>
+      <p class="note" id="neuron-note"></p>
+    </div>
+    <div class="learn-cards"></div>
+  </section>
+
+  <!-- REACTION LAB -->
+  <section id="reaction" class="screen activity" data-activity="reaction" aria-labelledby="reaction-title" hidden>
+    <div class="activity-head"><a class="back" href="#home">← Map</a><h2 id="reaction-title"></h2></div>
+    <div class="goal-card"></div>
+    <div class="play-card reaction-play">
+      <div class="lamp" id="lamp" aria-hidden="true"><div class="lamp-bulb"></div><div class="lamp-base"></div></div>
+      <button type="button" class="btn btn-huge" id="react">Start round 1</button>
+      <p class="feedback" id="reaction-feedback" role="status">Press start. Then wait for the lamp to turn on.</p>
+      <ol class="round-dots" id="round-dots" aria-label="Your times"></ol>
+      <div class="loop" id="reaction-loop" hidden>
+        <h3>Your reaction loop</h3>
+        <ol class="loop-steps" id="loop-steps"></ol>
+        <p class="note" id="reaction-note"></p>
+      </div>
+    </div>
+    <div class="learn-cards"></div>
+  </section>
+
+  <!-- MEMORY MATCH -->
+  <section id="memory" class="screen activity" data-activity="memory" aria-labelledby="memory-title" hidden>
+    <div class="activity-head"><a class="back" href="#home">← Map</a><h2 id="memory-title"></h2></div>
+    <div class="goal-card"></div>
+    <div class="play-card">
+      <div class="memory-bar">
+        <p id="memory-stats" aria-live="polite">Pairs: 0 of 6 · Turns: 0</p>
+        <button type="button" class="btn btn-ghost" id="shuffle">Shuffle and restart</button>
+      </div>
+      <div id="cards" class="cards" role="group" aria-label="Memory cards"></div>
+      <p class="feedback" id="memory-feedback" role="status"></p>
+    </div>
+    <div class="learn-cards"></div>
+  </section>
+
+  <!-- BRAIN PLAYHOUSE -->
+  <section id="playhouse" class="screen activity" data-activity="playhouse" aria-labelledby="playhouse-title" hidden>
+    <div class="activity-head"><a class="back" href="#home">← Map</a><h2 id="playhouse-title"></h2></div>
+    <div class="goal-card"></div>
+    <div class="play-card" id="playhouse-root">
+      <p class="loading">Loading the Brain Playhouse…</p>
+    </div>
+    <div class="learn-cards"></div>
+  </section>
+
+  <!-- QUIZ BOSS -->
+  <section id="quiz" class="screen activity" data-activity="quiz" aria-labelledby="quiz-title" hidden>
+    <div class="activity-head"><a class="back" href="#home">← Map</a><h2 id="quiz-title"></h2></div>
+    <div class="goal-card"></div>
+    <div class="play-card">
+      <div class="quiz-top"><p id="quiz-count" class="quiz-count"></p><ol class="quiz-pips" id="quiz-pips" aria-hidden="true"></ol></div>
+      <div id="question"></div>
+      <div class="answer-feedback" id="quiz-feedback" role="status"></div>
+      <button type="button" class="btn" id="next" hidden>Next question →</button>
+    </div>
+    <div class="learn-cards"></div>
+  </section>
+
+  <!-- CERTIFICATE -->
+  <section id="certificate" class="screen" aria-labelledby="cert-heading" hidden>
+    <div class="activity-head no-print"><a class="back" href="#home">← Map</a><h2 id="cert-heading">Your certificate</h2></div>
+    <div class="cert-setup no-print">
+      <p id="cert-status"></p>
+      <label for="cert-name">Type your first name for the certificate (optional). It stays on this page and is never saved or sent anywhere.</label>
+      <input id="cert-name" type="text" maxlength="40" autocomplete="off" spellcheck="false">
+      <button type="button" class="btn" id="print-cert"><svg aria-hidden="true"><use href="#i-print"/></svg><span>Print certificate</span></button>
+    </div>
+    <div class="certificate" id="cert-card">
+      <div class="cert-border">
+        <p class="cert-small">This certifies that</p>
+        <p class="cert-name" id="cert-name-out">A Brilliant Brain Explorer</p>
+        <p class="cert-title-pre">is a</p>
+        <p class="cert-title" id="cert-title"></p>
+        <p class="cert-text" id="cert-text"></p>
+        <ul class="cert-badges" id="cert-badges"></ul>
+        <div class="cert-foot"><div id="cert-guide" class="cert-guide"></div><p class="cert-date" id="cert-date"></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFERENCES -->
+  <section id="references" class="screen" aria-labelledby="ref-title" hidden>
+    <div class="activity-head"><a class="back" href="#home">← Map</a><h2 id="ref-title">Glossary and sources</h2></div>
+    <div class="play-card">
+      <h3>Brain words</h3>
+      <dl class="glossary" id="glossary"></dl>
+      <h3>Where these facts come from</h3>
+      <ul class="sources" id="sources"></ul>
+      <h3>Credits</h3>
+      <p id="credits"></p>
+    </div>
+  </section>
+
+  <p id="load-error" class="load-error" role="alert" hidden>The activities could not load. Refresh the page. If you opened the file directly from a download, start a local web server instead (see README).</p>
+  <noscript><p class="load-error">Turn on JavaScript to play Brain Signal Quest.</p></noscript>
+</main>
+
+<div class="celebrate" id="celebrate" aria-hidden="true"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="term-pop" id="term-pop" role="tooltip" hidden></div>
+
+<!-- Icon sprite (original artwork) -->
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-neuron" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 20 9 11M9 11l-4 1M9 11 8 6M16 26l-10 3M6 29l-2 4M22 18l-1-12M21 6l-4-2M21 6l4-3M28 26l14 12"/><path d="M33 30.5l3 2.6M38 35l3 2.6" stroke-width="6"/><path d="M42 38l3-1M42 38l1 4"/></g><circle cx="22" cy="24" r="7" fill="currentColor"/></symbol>
+  <symbol id="i-brain" viewBox="0 0 48 48"><path d="M8 26c-3-8 3-17 12-18 5-3 12-2 15 2 6 0 10 6 8 12 2 5-1 10-6 10H30l-2 6h-5l1-6H15c-5 0-8-3-7-6z" fill="currentColor"/><path d="M19 13c0 4 3 5 3 8m6-11c-1 4 2 6 6 6m-21 6c3 0 5 2 5 5m13-4c-2 2-1 5 2 6" fill="none" stroke="#0d1733" stroke-width="2.2" stroke-linecap="round" opacity=".55"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 48 48"><path d="M3 24C10 13 17 9 24 9s14 4 21 15c-7 11-14 15-21 15S10 35 3 24z" fill="currentColor"/><circle cx="24" cy="24" r="9" fill="#0d1733"/><circle cx="24" cy="24" r="4" fill="currentColor"/><circle cx="27" cy="21" r="2" fill="#fff"/></symbol>
+  <symbol id="i-ear" viewBox="0 0 48 48"><path d="M14 20c0-9 6-15 13-15s12 6 12 13c0 6-4 8-7 12-3 3-2 9-8 11-5 2-9-1-10-5" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M22 20c0-4 3-6 5-6s5 2 5 5-3 4-4 6" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></symbol>
+  <symbol id="i-nose" viewBox="0 0 48 48"><path d="M22 5c-1 10-8 20-9 27-1 5 4 8 9 7 3 2 7 2 10-1 4 0 6-4 3-7-4-5-7-14-7-26" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M38 9c3 2 3 5 0 7s-3 5 0 7M43 13c2 2 2 4 0 5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="i-hand" viewBox="0 0 48 48"><path d="M15 44c-4-4-8-11-9-16-.5-3 3-4 5-2l4 5V9c0-2 1.5-3 3-3s3 1 3 3v12V6c0-2 1.5-3 3-3s3 1 3 3v15V8c0-2 1.5-3 3-3s3 1 3 3v14-9c0-2 1.5-3 3-3s3 1 3 3v17c0 7-4 12-7 14z" fill="currentColor"/><path d="M41 3c2 2 2 4 0 6M45 6c1 1 1 2 0 3" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="i-ball" viewBox="0 0 48 48"><circle cx="24" cy="24" r="19" fill="currentColor"/><path d="M8 15c9 4 23 4 32 0M8 33c9-4 23-4 32 0M24 5v38" fill="none" stroke="#0d1733" stroke-width="2.5" opacity=".6"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 48 48"><path d="M24 3l5 14 15 1-12 9 4 15-12-8-12 8 4-15L4 18l15-1z" fill="currentColor"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 48 48"><path d="M28 3 9 27h13l-4 18 21-26H26z" fill="currentColor"/></symbol>
+  <symbol id="i-cards" viewBox="0 0 48 48"><rect x="4" y="10" width="22" height="30" rx="4" fill="currentColor" transform="rotate(-10 15 25)"/><rect x="21" y="8" width="22" height="30" rx="4" fill="currentColor" stroke="#0d1733" stroke-width="2.5" transform="rotate(8 32 23)"/><text x="32" y="29" font-size="16" font-weight="700" text-anchor="middle" fill="#0d1733" transform="rotate(8 32 23)">?</text></symbol>
+  <symbol id="i-cube" viewBox="0 0 48 48"><path d="M24 3 43 13v22L24 45 5 35V13z" fill="currentColor"/><path d="M5 13l19 10 19-10M24 23v22" fill="none" stroke="#0d1733" stroke-width="2.5" opacity=".55"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 48 48"><path d="M14 5h20v12c0 7-4 12-10 12S14 24 14 17z" fill="currentColor"/><path d="M14 9H6c0 7 3 11 9 11M34 9h8c0 7-3 11-9 11" fill="none" stroke="currentColor" stroke-width="3.5"/><path d="M21 29h6v7h-6zM14 37h20v6H14z" fill="currentColor"/></symbol>
+  <symbol id="i-star" viewBox="0 0 48 48"><path d="M24 4l6 13 14 2-10 10 3 14-13-7-13 7 3-14L4 19l14-2z" fill="currentColor"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z M9 3v15M15 6v15" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4h6a3 3 0 0 1 2 1 3 3 0 0 1 2-1h6v15h-6a2 2 0 0 0-2 2 2 2 0 0 0-2-2H4z M12 5v16" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-sound-on" viewBox="0 0 24 24"><path d="M3 9h4l5-4v14l-5-4H3z" fill="currentColor"/><path d="M16 8c2 2 2 6 0 8M19 5c4 4 4 10 0 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-sound-off" viewBox="0 0 24 24"><path d="M3 9h4l5-4v14l-5-4H3z" fill="currentColor"/><path d="M16 9l6 6M22 9l-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="currentColor"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="currentColor"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M5 4l10 8-10 8zM16 4h3v16h-3z" fill="currentColor"/></symbol>
+  <symbol id="i-prev" viewBox="0 0 24 24"><path d="M19 4 9 12l10 8zM5 4h3v16H5z" fill="currentColor"/></symbol>
+  <symbol id="i-restart" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v5h5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><path d="M6 9V3h12v6M6 18H3v-8h18v8h-3M7 14h10v7H7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-cerebellum" viewBox="0 0 48 48"><ellipse cx="24" cy="26" rx="20" ry="15" fill="currentColor"/><path d="M8 22c10-3 22-3 32 0M7 28c11-3 23-3 34 0M10 34c9-3 19-3 28 0" fill="none" stroke="#0d1733" stroke-width="2" opacity=".55"/></symbol>
+  <symbol id="i-spinal" viewBox="0 0 48 48"><g fill="currentColor"><rect x="17" y="3" width="14" height="8" rx="3"/><rect x="17" y="14" width="14" height="8" rx="3"/><rect x="17" y="25" width="14" height="8" rx="3"/><rect x="17" y="36" width="14" height="8" rx="3"/></g><path d="M24 2v44M24 8 10 4M24 19 8 18M24 30 8 32M24 8l14-4M24 19l16-1M24 30l16 2" stroke="#0d1733" stroke-width="2.4" fill="none" opacity=".7"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12l5 5L20 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+</body>
+</html>
